@@ -1,0 +1,12 @@
+{
+  "accuracy": 0.75,
+  "macro_f1": 0.571953781512605,
+  "false_corrections": 1,
+  "count": 24,
+  "configuration": {
+    "threshold": 0.97,
+    "minimum_similarity": 0.35,
+    "limit": 3
+  },
+  "caveat": "Repeated 24-example science challenge, not independent evidence of generalization. Sources refreshed with improved extraction; not a controlled same-source ablation."
+}

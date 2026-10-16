@@ -1,0 +1,11 @@
+{
+  "accuracy": 0.9166666666666666,
+  "macro_f1": 0.9153439153439153,
+  "false_corrections": 0,
+  "count": 12,
+  "configuration": {
+    "threshold": 0.97,
+    "minimum_similarity": 0.35,
+    "limit": 3
+  }
+}

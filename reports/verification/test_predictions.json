@@ -1,0 +1,1118 @@
+[
+  {
+    "claim": "Jupiter is the largest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "conflicting_evidence",
+    "seconds": 1.837898708996363,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "It's the largest planet in our solar system – if it were a hollow shell, 1,000 Earths could fit inside.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.404293757523566,
+        "nli_scores": {
+          "contradiction": 0.0023169920314103365,
+          "entailment": 0.9802645444869995,
+          "neutral": 0.017418399453163147
+        }
+      },
+      {
+        "text": "This gives Jupiter the largest ocean in the solar system – an ocean made of hydrogen instead of water.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.26923496228097593,
+        "nli_scores": {
+          "contradiction": 0.0004395281430333853,
+          "entailment": 0.9801706075668335,
+          "neutral": 0.019389789551496506
+        }
+      },
+      {
+        "text": "Ganymede is the largest moon in the solar system (even bigger than the planet Mercury).",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.18138842641168998,
+        "nli_scores": {
+          "contradiction": 0.977505624294281,
+          "entailment": 0.002290671691298485,
+          "neutral": 0.02020367793738842
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Jupiter is the smallest planet in our solar system.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.0394483339987346,
+    "correction": "It's the largest planet in our solar system – if it were a hollow shell, 1,000 Earths could fit inside.",
+    "evidence": [
+      {
+        "text": "It's the largest planet in our solar system – if it were a hollow shell, 1,000 Earths could fit inside.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.3171591497297828,
+        "nli_scores": {
+          "contradiction": 0.9990730285644531,
+          "entailment": 0.0003541529586073011,
+          "neutral": 0.0005727836396545172
+        }
+      },
+      {
+        "text": "Jupiter has the shortest day in the solar system.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.15934935143071177,
+        "nli_scores": {
+          "contradiction": 0.0010681984713301063,
+          "entailment": 0.0013161281822249293,
+          "neutral": 0.9976156949996948
+        }
+      },
+      {
+        "text": "Jupiter's magnetic field also causes some of the solar system's most spectacular aurorae at the planet's poles.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.1502316436849098,
+        "nli_scores": {
+          "contradiction": 0.006079414393752813,
+          "entailment": 6.403247243724763e-05,
+          "neutral": 0.9938564896583557
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Jupiter is a gas giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.027600333000009414,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "As a gas giant, Jupiter doesn’t have a true surface.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.4947211866875472,
+        "nli_scores": {
+          "contradiction": 0.0003415762912482023,
+          "entailment": 0.9932634234428406,
+          "neutral": 0.006395022384822369
+        }
+      },
+      {
+        "text": "Gravity pulled swirling gas and dust together to form this gas giant.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.4633432399355729,
+        "nli_scores": {
+          "contradiction": 0.0006683305255137384,
+          "entailment": 0.9806717038154602,
+          "neutral": 0.018659990280866623
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Jupiter has a solid surface.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.02802033299667528,
+    "correction": "As a gas giant, Jupiter doesn’t have a true surface.",
+    "evidence": [
+      {
+        "text": "As a gas giant, Jupiter doesn’t have a true surface.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.18029096959594962,
+        "nli_scores": {
+          "contradiction": 0.9947124719619751,
+          "entailment": 0.00233763107098639,
+          "neutral": 0.0029499433003365993
+        }
+      },
+      {
+        "text": "With no solid surface to slow them down, Jupiter's spots can persist for many years.",
+        "source": {
+          "id": "fdb9ae0fde061b9f",
+          "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+          "requested_url": "https://science.nasa.gov/jupiter/facts/",
+          "title": "Jupiter Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.48669676713753235,
+        "nli_scores": {
+          "contradiction": 0.990206778049469,
+          "entailment": 0.005748414900153875,
+          "neutral": 0.004044794477522373
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Mercury is the closest planet to the Sun.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.038902125001186505,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.18209299034613977,
+        "nli_scores": {
+          "contradiction": 0.0004415379953570664,
+          "entailment": 0.9901940226554871,
+          "neutral": 0.009364410303533077
+        }
+      },
+      {
+        "text": "But when Mercury is moving fastest in its elliptical orbit around the Sun (and it is closest to the Sun), each rotation is not accompanied by sunrise and sunset like it is on most other planets.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2600626853184448,
+        "nli_scores": {
+          "contradiction": 0.0006447230116464198,
+          "entailment": 0.002615381497889757,
+          "neutral": 0.99673992395401
+        }
+      },
+      {
+        "text": "But Mercury is the fastest planet, zipping around the Sun every 88 Earth days.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.1525251793291743,
+        "nli_scores": {
+          "contradiction": 0.0809902474284172,
+          "entailment": 0.0036334285978227854,
+          "neutral": 0.9153763651847839
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Mercury is the farthest planet from the Sun.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.08959558400238166,
+    "correction": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+    "evidence": [
+      {
+        "text": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.29156524084330465,
+        "nli_scores": {
+          "contradiction": 0.9994778037071228,
+          "entailment": 0.0003007016784977168,
+          "neutral": 0.00022144161630421877
+        }
+      },
+      {
+        "text": "But Mercury is the fastest planet, zipping around the Sun every 88 Earth days.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.24422159557731538,
+        "nli_scores": {
+          "contradiction": 0.9867266416549683,
+          "entailment": 0.000576509686652571,
+          "neutral": 0.012696865946054459
+        }
+      },
+      {
+        "text": "Mercury is the second densest planet, after Earth.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.1756854437800486,
+        "nli_scores": {
+          "contradiction": 0.26799529790878296,
+          "entailment": 0.003654482774436474,
+          "neutral": 0.7283502817153931
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Mercury is the smallest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.030442834002315067,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Mercury is the smallest planet in our solar system and nearest to the Sun.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.7820002625100084,
+        "nli_scores": {
+          "contradiction": 0.0005122887087054551,
+          "entailment": 0.9858812093734741,
+          "neutral": 0.01360645703971386
+        }
+      },
+      {
+        "text": "Despite its proximity to the Sun, Mercury is not the hottest planet in our solar system – that title belongs to nearby Venus, thanks to its dense atmosphere.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.15629863606419936,
+        "nli_scores": {
+          "contradiction": 0.013640685006976128,
+          "entailment": 0.0004494350287131965,
+          "neutral": 0.9859098196029663
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Mercury has a moon.",
+    "expected": "refuted_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.029773333000775892,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Mercury's surface resembles that of Earth's Moon, scarred by many impact craters resulting from collisions with meteoroids and comets.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.22235324767227677,
+        "nli_scores": {
+          "contradiction": 0.0011130019556730986,
+          "entailment": 0.9935459494590759,
+          "neutral": 0.005341005977243185
+        }
+      },
+      {
+        "text": "It's only slightly larger than Earth's Moon.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.34377978917188384,
+        "nli_scores": {
+          "contradiction": 0.0011793109588325024,
+          "entailment": 0.9909573793411255,
+          "neutral": 0.007863286882638931
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Venus is the hottest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.04961412500415463,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Venus is the hottest planet in our solar system, with surface temperatures about 872 degrees Fahrenheit (467 Celsius).",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.5174964283725667,
+        "nli_scores": {
+          "contradiction": 0.00023131688067223877,
+          "entailment": 0.9928135275840759,
+          "neutral": 0.006955278571695089
+        }
+      },
+      {
+        "text": "It's the hottest planet in our solar system, and is sometimes called Earth's twin.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.5292457283487405,
+        "nli_scores": {
+          "contradiction": 0.001626406330615282,
+          "entailment": 0.9788087010383606,
+          "neutral": 0.019564872607588768
+        }
+      },
+      {
+        "text": "Its thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system with surface temperatures hot enough to melt lead — about 872 degrees Fahrenheit (467 Celsius).",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2517737008963307,
+        "nli_scores": {
+          "contradiction": 0.0012378823012113571,
+          "entailment": 0.9841602444648743,
+          "neutral": 0.014601927250623703
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Venus is the coldest planet in our solar system.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.05310566599655431,
+    "correction": "Venus is the hottest planet in our solar system, with surface temperatures about 872 degrees Fahrenheit (467 Celsius).",
+    "evidence": [
+      {
+        "text": "Venus is the hottest planet in our solar system, with surface temperatures about 872 degrees Fahrenheit (467 Celsius).",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.32377325982875854,
+        "nli_scores": {
+          "contradiction": 0.9995229244232178,
+          "entailment": 0.00014692691911477596,
+          "neutral": 0.0003302298136986792
+        }
+      },
+      {
+        "text": "It's the hottest planet in our solar system, and is sometimes called Earth's twin.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.42510149691627813,
+        "nli_scores": {
+          "contradiction": 0.9991973042488098,
+          "entailment": 0.0001818770106183365,
+          "neutral": 0.0006208693375810981
+        }
+      },
+      {
+        "text": "Its thick atmosphere traps heat in a runaway greenhouse effect, making it the hottest planet in our solar system with surface temperatures hot enough to melt lead — about 872 degrees Fahrenheit (467 Celsius).",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.20223002549140215,
+        "nli_scores": {
+          "contradiction": 0.9991845488548279,
+          "entailment": 0.0002405102422926575,
+          "neutral": 0.0005749191041104496
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Venus has a thick atmosphere.",
+    "expected": "supported_by_sources",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.03622558300412493,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Venus’ atmosphere is one of extremes.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.6502432135748746,
+        "nli_scores": {
+          "contradiction": 0.001109543489292264,
+          "entailment": 0.06809224933385849,
+          "neutral": 0.9307981729507446
+        }
+      },
+      {
+        "text": "Astrobiologists note that ring-shaped linkages of sulfur atoms, known to exist in Venus’ atmosphere, could provide microbes with a kind of coating that would protect them from sulfuric acid.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.21567443198973632,
+        "nli_scores": {
+          "contradiction": 0.0003973925777245313,
+          "entailment": 0.0033131621312350035,
+          "neutral": 0.9962894916534424
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Venus has a thin atmosphere.",
+    "expected": "refuted_by_sources",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.033358832995872945,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Venus’ atmosphere is one of extremes.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.6502432135748746,
+        "nli_scores": {
+          "contradiction": 0.05106643587350845,
+          "entailment": 0.032120224088430405,
+          "neutral": 0.916813313961029
+        }
+      },
+      {
+        "text": "Astrobiologists note that ring-shaped linkages of sulfur atoms, known to exist in Venus’ atmosphere, could provide microbes with a kind of coating that would protect them from sulfuric acid.",
+        "source": {
+          "id": "fd53c2ba622118d8",
+          "url": "https://science.nasa.gov/venus/venus-facts/",
+          "requested_url": "https://science.nasa.gov/venus/facts/",
+          "title": "Venus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.21567443198973632,
+        "nli_scores": {
+          "contradiction": 0.002209228929132223,
+          "entailment": 0.001625807723030448,
+          "neutral": 0.9961650371551514
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Saturn is a gas giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.042603667003277224,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "As a gas giant, Saturn doesn’t have a true surface.",
+        "source": {
+          "id": "510540b0548ed56f",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "requested_url": "https://science.nasa.gov/saturn/facts/",
+          "title": "Saturn: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.477803610012579,
+        "nli_scores": {
+          "contradiction": 0.0003312536282464862,
+          "entailment": 0.9911656975746155,
+          "neutral": 0.00850303377956152
+        }
+      },
+      {
+        "text": "Like fellow gas giant Jupiter, Saturn is a massive ball made mostly of hydrogen and helium.",
+        "source": {
+          "id": "510540b0548ed56f",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "requested_url": "https://science.nasa.gov/saturn/facts/",
+          "title": "Saturn: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.36806522526034924,
+        "nli_scores": {
+          "contradiction": 0.0007616456132382154,
+          "entailment": 0.9846895933151245,
+          "neutral": 0.014548834413290024
+        }
+      },
+      {
+        "text": "Saturn took shape when the rest of the solar system formed about 4.5 billion years ago when gravity pulled swirling gas and dust in to become this gas giant.",
+        "source": {
+          "id": "510540b0548ed56f",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "requested_url": "https://science.nasa.gov/saturn/facts/",
+          "title": "Saturn: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.32611330772327224,
+        "nli_scores": {
+          "contradiction": 0.0017530021723359823,
+          "entailment": 0.9843824505805969,
+          "neutral": 0.013864473439753056
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Saturn is a rocky planet.",
+    "expected": "refuted_by_sources",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.030988874998001847,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "At Saturn's center is a dense core of metals like iron and nickel surrounded by rocky material and other compounds solidified by intense pressure and heat.",
+        "source": {
+          "id": "510540b0548ed56f",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "requested_url": "https://science.nasa.gov/saturn/facts/",
+          "title": "Saturn: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.17722651265576925,
+        "nli_scores": {
+          "contradiction": 0.36990711092948914,
+          "entailment": 0.02838188409805298,
+          "neutral": 0.601711094379425
+        }
+      },
+      {
+        "text": "Saturn is the sixth planet from the Sun, and the second-largest planet in our solar system.",
+        "source": {
+          "id": "510540b0548ed56f",
+          "url": "https://science.nasa.gov/saturn/facts/",
+          "requested_url": "https://science.nasa.gov/saturn/facts/",
+          "title": "Saturn: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.14123816028534664,
+        "nli_scores": {
+          "contradiction": 0.0006446512416005135,
+          "entailment": 0.0003740701067727059,
+          "neutral": 0.9989812970161438
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Neptune is an ice giant.",
+    "expected": "supported_by_sources",
+    "predicted": "conflicting_evidence",
+    "seconds": 0.04800183300540084,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Neptune is one of two ice giants in the outer solar system (the other is Uranus).",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.3403385701897877,
+        "nli_scores": {
+          "contradiction": 0.0003892498498316854,
+          "entailment": 0.996044933795929,
+          "neutral": 0.0035658699925988913
+        }
+      },
+      {
+        "text": "Dark, cold, and whipped by supersonic winds, ice giant Neptune is more than 30 times as far from the Sun as Earth.",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.26454957322210815,
+        "nli_scores": {
+          "contradiction": 0.00015462811279576272,
+          "entailment": 0.9976451992988586,
+          "neutral": 0.0022001476027071476
+        }
+      },
+      {
+        "text": "More than 200 years later, the ice giant became the first planet located through mathematical predictions rather than through regular observations of the sky.",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.24671562648887954,
+        "nli_scores": {
+          "contradiction": 0.0015425344463437796,
+          "entailment": 0.9929331541061401,
+          "neutral": 0.005524289328604937
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Neptune is the closest planet to the Sun.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.04983466599514941,
+    "correction": "Neptune is the eighth and most distant planet in our solar system.",
+    "evidence": [
+      {
+        "text": "Neptune is the eighth and most distant planet in our solar system.",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.17086163156864853,
+        "nli_scores": {
+          "contradiction": 0.999406099319458,
+          "entailment": 0.0002366438857279718,
+          "neutral": 0.00035731616662815213
+        }
+      },
+      {
+        "text": "Sometimes Neptune is even farther from the Sun than dwarf planet Pluto.",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2919994154222322,
+        "nli_scores": {
+          "contradiction": 0.9975455403327942,
+          "entailment": 0.0003645936958491802,
+          "neutral": 0.0020898764487355947
+        }
+      },
+      {
+        "text": "Neptune is so far from the Sun that high noon on the big blue planet would seem like dim twilight to us.",
+        "source": {
+          "id": "545361ef2c53b5a6",
+          "url": "https://science.nasa.gov/neptune/neptune-facts/",
+          "requested_url": "https://science.nasa.gov/neptune/facts/",
+          "title": "Neptune: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2030572102447833,
+        "nli_scores": {
+          "contradiction": 0.993697464466095,
+          "entailment": 0.00036776711931452155,
+          "neutral": 0.00593479024246335
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Uranus is an ice giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.043267875000310596,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Uranus is one of two ice giants in the outer solar system (the other is Neptune).",
+        "source": {
+          "id": "d11e5224f4040692",
+          "url": "https://science.nasa.gov/uranus/facts/",
+          "requested_url": "https://science.nasa.gov/uranus/facts/",
+          "title": "Uranus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:54.052393+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.3301420618846559,
+        "nli_scores": {
+          "contradiction": 0.0005022780387662351,
+          "entailment": 0.995105504989624,
+          "neutral": 0.00439218757674098
+        }
+      },
+      {
+        "text": "As an ice giant, Uranus doesn’t have a true surface.",
+        "source": {
+          "id": "d11e5224f4040692",
+          "url": "https://science.nasa.gov/uranus/facts/",
+          "requested_url": "https://science.nasa.gov/uranus/facts/",
+          "title": "Uranus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:54.052393+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.39432381359931973,
+        "nli_scores": {
+          "contradiction": 0.00043962220661342144,
+          "entailment": 0.99176424741745,
+          "neutral": 0.007796169724315405
+        }
+      },
+      {
+        "text": "The ice giant is surrounded by 13 faint rings and 28 small moons.",
+        "source": {
+          "id": "d11e5224f4040692",
+          "url": "https://science.nasa.gov/uranus/facts/",
+          "requested_url": "https://science.nasa.gov/uranus/facts/",
+          "title": "Uranus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:54.052393+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.29590719171839647,
+        "nli_scores": {
+          "contradiction": 0.0006296897772699594,
+          "entailment": 0.994202196598053,
+          "neutral": 0.0051680500619113445
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Uranus is a rocky planet.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.026156625004659873,
+    "correction": "Most (80% or more) of the planet's mass is made up of a hot dense fluid of \"icy\" materials – water, methane, and ammonia – above a small rocky core.",
+    "evidence": [
+      {
+        "text": "Most (80% or more) of the planet's mass is made up of a hot dense fluid of \"icy\" materials – water, methane, and ammonia – above a small rocky core.",
+        "source": {
+          "id": "d11e5224f4040692",
+          "url": "https://science.nasa.gov/uranus/facts/",
+          "requested_url": "https://science.nasa.gov/uranus/facts/",
+          "title": "Uranus: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:54.052393+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.22026696711117535,
+        "nli_scores": {
+          "contradiction": 0.9944157600402832,
+          "entailment": 0.0010484462836757302,
+          "neutral": 0.004535800311714411
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "An unknown senator resigned this morning.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005698458000551909,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "A local shop secretly sold counterfeit shoes yesterday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005630207997455727,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "A private bank will open a new branch next Monday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005592417001025751,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "A village school has cancelled tomorrow's classes.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005663249998178799,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "A new restaurant in this neighborhood served 300 customers yesterday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005618750001303852,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "An unnamed startup will announce a merger next week.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005587459003436379,
+    "correction": null,
+    "evidence": []
+  }
+]

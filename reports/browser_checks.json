@@ -1,0 +1,10 @@
+{
+  "source_correction": "passed",
+  "negation_abstention": "passed",
+  "mobile_horizontal_overflow": false,
+  "archive_lookup": "passed",
+  "nli_source_correction": "passed",
+  "scientific_source_verification": "passed",
+  "sensitivity_mode": "passed",
+  "javascript_errors": []
+}

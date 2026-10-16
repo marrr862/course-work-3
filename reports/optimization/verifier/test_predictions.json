@@ -1,0 +1,146 @@
+[
+  {
+    "claim": "Jupiter is the largest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "conflicting_evidence",
+    "correction": null
+  },
+  {
+    "claim": "Jupiter is the smallest planet in our solar system.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "It's the largest planet in our solar system – if it were a hollow shell, 1,000 Earths could fit inside."
+  },
+  {
+    "claim": "Jupiter is a gas giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Jupiter has a solid surface.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "As a gas giant, Jupiter doesn’t have a true surface."
+  },
+  {
+    "claim": "Mercury is the closest planet to the Sun.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Mercury is the farthest planet from the Sun.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "Mercury is the smallest planet in our solar system and nearest to the Sun."
+  },
+  {
+    "claim": "Mercury is the smallest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Mercury has a moon.",
+    "expected": "refuted_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Venus is the hottest planet in our solar system.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Venus is the coldest planet in our solar system.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "Venus is the hottest planet in our solar system, with surface temperatures about 872 degrees Fahrenheit (467 Celsius)."
+  },
+  {
+    "claim": "Venus has a thick atmosphere.",
+    "expected": "supported_by_sources",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "Venus has a thin atmosphere.",
+    "expected": "refuted_by_sources",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "Saturn is a gas giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Saturn is a rocky planet.",
+    "expected": "refuted_by_sources",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "Neptune is an ice giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Neptune is the closest planet to the Sun.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "Neptune is the eighth and most distant planet in our solar system."
+  },
+  {
+    "claim": "Uranus is an ice giant.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "correction": null
+  },
+  {
+    "claim": "Uranus is a rocky planet.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "correction": "Most (80% or more) of the planet's mass is made up of a hot dense fluid of \"icy\" materials – water, methane, and ammonia – above a small rocky core."
+  },
+  {
+    "claim": "An unknown senator resigned this morning.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "A local shop secretly sold counterfeit shoes yesterday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "A private bank will open a new branch next Monday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "A village school has cancelled tomorrow's classes.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "A new restaurant in this neighborhood served 300 customers yesterday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  },
+  {
+    "claim": "An unnamed startup will announce a merger next week.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "correction": null
+  }
+]

@@ -1,0 +1,11 @@
+task,model,accuracy,macro_f1,macro_precision,macro_recall
+6-class,stage1_neural_ensemble,0.2631,0.2638,0.2641,0.2661
+6-class,lr_text,0.2528,0.2493,0.2474,0.2539
+6-class,stack_neural+text (w=1.0),0.2631,0.2638,0.2641,0.2661
+6-class,lr_text+metadata,0.2599,0.2603,0.2585,0.2748
+6-class,stack_neural+text+metadata (w=0.6),0.2797,0.2833,0.2809,0.292
+binary,stage1_neural_ensemble,0.6474,0.6321,0.6407,0.6317
+binary,lr_text,0.6307,0.627,0.6268,0.6282
+binary,stack_neural+text (w=0.5),0.6418,0.6322,0.6346,0.6315
+binary,lr_text+metadata,0.6474,0.6389,0.6405,0.6383
+binary,stack_neural+text+metadata (w=0.8),0.6601,0.6454,0.6544,0.6446

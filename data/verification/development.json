@@ -1,0 +1,14 @@
+[
+ {"claim":"The Sun is a star.","expected":"supported_by_sources"},
+ {"claim":"The Sun is a planet.","expected":"refuted_by_sources"},
+ {"claim":"Earth takes about 365.25 days to orbit the Sun.","expected":"supported_by_sources"},
+ {"claim":"Earth completes an orbit around the Sun in 30 days.","expected":"refuted_by_sources"},
+ {"claim":"Mars has two moons.","expected":"supported_by_sources"},
+ {"claim":"Mars has no moons.","expected":"refuted_by_sources"},
+ {"claim":"The Moon has no atmosphere at all.","expected":"refuted_by_sources"},
+ {"claim":"The Moon is Earth's only natural satellite.","expected":"supported_by_sources"},
+ {"claim":"The mayor of a small village secretly bought a new car yesterday.","expected":"insufficient_evidence"},
+ {"claim":"A cafe in Boston will close next Tuesday.","expected":"insufficient_evidence"},
+ {"claim":"An unnamed company has doubled its profits this morning.","expected":"insufficient_evidence"},
+ {"claim":"Earth is the largest planet in the solar system.","expected":"refuted_by_sources"}
+]

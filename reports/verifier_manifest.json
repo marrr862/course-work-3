@@ -1,0 +1,68 @@
+{
+  "model_id": "cross-encoder/nli-deberta-v3-small",
+  "revision": "fa2804872c3b4bd748f38c0185cc85775361e735",
+  "training": "Pretrained by model authors on SNLI and MultiNLI; not trained on user LIAR or FakeNewsNet by this project.",
+  "model_sha256": "ebc79588dd73ccfb6a3f6078519cfbf512c5305384c5ea1845bc71cd32216e86",
+  "source_snapshots": [
+    {
+      "url": "https://science.nasa.gov/earth/facts/",
+      "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+      "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+      "title": "Facts About Earth"
+    },
+    {
+      "url": "https://science.nasa.gov/sun/facts/",
+      "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+      "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+      "title": "Sun: Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/moon/facts/",
+      "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+      "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+      "title": "Moon Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/mars/facts/",
+      "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+      "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+      "title": "Mars: Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+      "retrieved_at": "2026-09-29T11:09:49.012269+00:00",
+      "sha256": "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+      "title": "Jupiter Facts"
+    },
+    {
+      "url": "https://science.nasa.gov/venus/venus-facts/",
+      "retrieved_at": "2026-09-29T11:09:50.770852+00:00",
+      "sha256": "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+      "title": "Venus: Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/mercury/facts/",
+      "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+      "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+      "title": "Mercury: Facts"
+    },
+    {
+      "url": "https://science.nasa.gov/saturn/facts/",
+      "retrieved_at": "2026-09-29T11:09:53.476426+00:00",
+      "sha256": "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+      "title": "Saturn: Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/uranus/facts/",
+      "retrieved_at": "2026-09-29T11:09:54.052393+00:00",
+      "sha256": "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe",
+      "title": "Uranus: Facts - NASA Science"
+    },
+    {
+      "url": "https://science.nasa.gov/neptune/neptune-facts/",
+      "retrieved_at": "2026-09-29T11:09:56.175906+00:00",
+      "sha256": "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+      "title": "Neptune: Facts - NASA Science"
+    }
+  ]
+}

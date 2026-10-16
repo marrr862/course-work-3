@@ -1,0 +1,134 @@
+liar VALID original 0.2576 0.2596
+liar VALID previous_search 0.2647 0.2666
+liar encoding train 10212
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12203.77it/s]
+liar encoding valid 1277
+liar VALID semantic_w1.0_C0.1_None 0.249 0.1952
+liar VALID semantic_w1.0_C0.1_balanced 0.2302 0.2288
+liar VALID semantic_w1.0_C1.0_None 0.2475 0.2356
+liar VALID semantic_w1.0_C1.0_balanced 0.2334 0.2343
+liar VALID semantic_w1.0_C10.0_None 0.2334 0.2277
+liar VALID semantic_w1.0_C10.0_balanced 0.2396 0.2412
+liar VALID combined_w0.5_C0.1_None 0.2498 0.189
+liar VALID combined_w0.5_C0.1_balanced 0.2428 0.2425
+liar VALID combined_w0.5_C1.0_None 0.2584 0.2509
+liar VALID combined_w0.5_C1.0_balanced 0.2545 0.2591
+liar VALID combined_w0.5_C10.0_None 0.2545 0.2511
+liar VALID combined_w0.5_C10.0_balanced 0.2529 0.255
+liar VALID combined_w1.0_C0.1_None 0.2498 0.2079
+liar VALID combined_w1.0_C0.1_balanced 0.2498 0.25
+liar VALID combined_w1.0_C1.0_None 0.2545 0.2501
+liar VALID combined_w1.0_C1.0_balanced 0.2623 0.2644
+liar VALID combined_w1.0_C10.0_None 0.2561 0.2535
+liar VALID combined_w1.0_C10.0_balanced 0.2561 0.2579
+liar VALID combined_w2.0_C0.1_None 0.2545 0.2346
+liar VALID combined_w2.0_C0.1_balanced 0.2459 0.2467
+liar VALID combined_w2.0_C1.0_None 0.2553 0.2497
+liar VALID combined_w2.0_C1.0_balanced 0.2584 0.2593
+liar VALID combined_w2.0_C10.0_None 0.2506 0.2478
+liar VALID combined_w2.0_C10.0_balanced 0.2537 0.2537
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9773.17it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: /Users/macbook/Desktop/FakeNewsNet-master/practical/models/sentence_minilm
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+liar epoch 1 rows 0 loss 1.7926
+liar epoch 1 rows 3200 loss 1.805
+liar epoch 1 rows 6400 loss 1.7819
+liar epoch 1 rows 9600 loss 1.7525
+liar EPOCH RESULT {"epoch": 1, "accuracy": 0.26076742364917777, "balanced_accuracy": 0.23719148216532873, "macro_precision": 0.22898967279632088, "macro_recall": 0.23719148216532873, "macro_f1": 0.20053774263077007, "weighted_f1": 0.21078838711352577, "seconds": 86.02957095799502, "mean_loss": 1.7742991283535958}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 18.65it/s]
+liar epoch 2 rows 0 loss 1.6722
+liar epoch 2 rows 3200 loss 1.6395
+liar epoch 2 rows 6400 loss 1.6446
+liar epoch 2 rows 9600 loss 1.6745
+liar EPOCH RESULT {"epoch": 2, "accuracy": 0.2717306186374315, "balanced_accuracy": 0.2740697856868953, "macro_precision": 0.2672888969802937, "macro_recall": 0.2740697856868953, "macro_f1": 0.26497528476820675, "weighted_f1": 0.26411325004546904, "seconds": 81.89598950000072, "mean_loss": 1.716429838910699}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 21.46it/s]
+liar epoch 3 rows 0 loss 1.6925
+liar epoch 3 rows 3200 loss 1.6234
+liar epoch 3 rows 6400 loss 1.6445
+liar epoch 3 rows 9600 loss 1.6704
+liar EPOCH RESULT {"epoch": 3, "accuracy": 0.26468285043069695, "balanced_accuracy": 0.2672681271149206, "macro_precision": 0.2689965356262006, "macro_recall": 0.2672681271149206, "macro_f1": 0.2621593640472043, "weighted_f1": 0.2608447277175003, "seconds": 94.08890520800196, "mean_loss": 1.662431938201189}
+liar epoch 4 rows 0 loss 1.7012
+liar epoch 4 rows 3200 loss 1.5038
+liar epoch 4 rows 6400 loss 1.6948
+liar epoch 4 rows 9600 loss 1.5613
+liar EPOCH RESULT {"epoch": 4, "accuracy": 0.26468285043069695, "balanced_accuracy": 0.2730024801364757, "macro_precision": 0.26475812971081375, "macro_recall": 0.2730024801364757, "macro_f1": 0.2638351143579393, "weighted_f1": 0.2604773453752592, "seconds": 94.48327529200469, "mean_loss": 1.6130968250334263}
+liar VALID finetuned_minilm 0.2717 0.265
+liar VALID ensemble_neural_0.25 0.2749 0.2763
+liar VALID ensemble_neural_0.5 0.2756 0.2777
+liar VALID ensemble_neural_0.75 0.2686 0.2719
+liar SELECTED {'name': 'ensemble_neural_0.5', 'accuracy': 0.27564604541895066, 'balanced_accuracy': 0.2816244453725814, 'macro_precision': 0.276811011324755, 'macro_recall': 0.2816244453725814, 'macro_f1': 0.27767893745263345, 'weighted_f1': 0.27487340012562755}
+fakenewsnet VALID original 0.82 0.7688
+fakenewsnet VALID previous_search 0.8314 0.7787
+fakenewsnet encoding train 15111
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 11063.65it/s]
+fakenewsnet encoding valid 3238
+fakenewsnet VALID semantic_w1.0_C0.1_None 0.8162 0.674
+fakenewsnet VALID semantic_w1.0_C0.1_balanced 0.7372 0.6916
+fakenewsnet VALID semantic_w1.0_C1.0_None 0.8249 0.7238
+fakenewsnet VALID semantic_w1.0_C1.0_balanced 0.7483 0.7018
+fakenewsnet VALID semantic_w1.0_C10.0_None 0.8196 0.7243
+fakenewsnet VALID semantic_w1.0_C10.0_balanced 0.7529 0.7073
+fakenewsnet VALID combined_w0.5_C0.1_None 0.815 0.6561
+fakenewsnet VALID combined_w0.5_C0.1_balanced 0.8057 0.7561
+fakenewsnet VALID combined_w0.5_C1.0_None 0.8592 0.7806
+fakenewsnet VALID combined_w0.5_C1.0_balanced 0.8301 0.7825
+fakenewsnet VALID combined_w0.5_C10.0_None 0.8561 0.7915
+fakenewsnet VALID combined_w0.5_C10.0_balanced 0.8351 0.7809
+fakenewsnet VALID combined_w1.0_C0.1_None 0.8342 0.7159
+fakenewsnet VALID combined_w1.0_C0.1_balanced 0.7934 0.7471
+fakenewsnet VALID combined_w1.0_C1.0_None 0.8564 0.7804
+fakenewsnet VALID combined_w1.0_C1.0_balanced 0.824 0.775
+fakenewsnet VALID combined_w1.0_C10.0_None 0.8487 0.7816
+fakenewsnet VALID combined_w1.0_C10.0_balanced 0.8354 0.7807
+fakenewsnet VALID combined_w2.0_C0.1_None 0.8382 0.7377
+fakenewsnet VALID combined_w2.0_C0.1_balanced 0.7807 0.7334
+fakenewsnet VALID combined_w2.0_C1.0_None 0.8555 0.7817
+fakenewsnet VALID combined_w2.0_C1.0_balanced 0.8162 0.7668
+fakenewsnet VALID combined_w2.0_C10.0_None 0.849 0.7822
+fakenewsnet VALID combined_w2.0_C10.0_balanced 0.8305 0.775
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10487.80it/s]
+[transformers] [1mBertForSequenceClassification LOAD REPORT[0m from: /Users/macbook/Desktop/FakeNewsNet-master/practical/models/sentence_minilm
+Key               | Status  | 
+------------------+---------+-
+classifier.bias   | MISSING | 
+classifier.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+fakenewsnet epoch 1 rows 0 loss 0.6921
+fakenewsnet epoch 1 rows 3200 loss 0.6328
+fakenewsnet epoch 1 rows 6400 loss 0.5421
+fakenewsnet epoch 1 rows 9600 loss 0.5604
+fakenewsnet epoch 1 rows 12800 loss 0.577
+fakenewsnet EPOCH RESULT {"epoch": 1, "accuracy": 0.8035824583075973, "balanced_accuracy": 0.7926236752575355, "macro_precision": 0.7429138384640752, "macro_recall": 0.7926236752575355, "macro_f1": 0.7584218179668265, "weighted_f1": 0.8126145863757513, "seconds": 150.4354624999978, "mean_loss": 0.5480789515420196}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 22.84it/s]
+fakenewsnet epoch 2 rows 0 loss 0.5215
+fakenewsnet epoch 2 rows 3200 loss 0.6706
+fakenewsnet epoch 2 rows 6400 loss 0.6264
+fakenewsnet epoch 2 rows 9600 loss 0.3628
+fakenewsnet epoch 2 rows 12800 loss 0.2563
+fakenewsnet EPOCH RESULT {"epoch": 2, "accuracy": 0.8455836936380482, "balanced_accuracy": 0.8022981257187842, "macro_precision": 0.7872548771576837, "macro_recall": 0.8022981257187842, "macro_f1": 0.7941963105334879, "weighted_f1": 0.8475528022613378, "seconds": 216.24934554100037, "mean_loss": 0.41008525124374956}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00, 12.75it/s]
+fakenewsnet epoch 3 rows 0 loss 0.4435
+fakenewsnet epoch 3 rows 3200 loss 0.6276
+fakenewsnet epoch 3 rows 6400 loss 0.525
+fakenewsnet epoch 3 rows 9600 loss 0.3816
+fakenewsnet epoch 3 rows 12800 loss 0.2457
+fakenewsnet EPOCH RESULT {"epoch": 3, "accuracy": 0.8480543545398395, "balanced_accuracy": 0.7903308743496031, "macro_precision": 0.7923921312557931, "macro_recall": 0.7903308743496031, "macro_f1": 0.7913512239204746, "weighted_f1": 0.8477856193236339, "seconds": 294.2800371659978, "mean_loss": 0.3522873206603603}
+fakenewsnet epoch 4 rows 0 loss 0.2067
+fakenewsnet epoch 4 rows 3200 loss 0.121
+fakenewsnet epoch 4 rows 6400 loss 0.1491
+fakenewsnet epoch 4 rows 9600 loss 0.2647
+fakenewsnet epoch 4 rows 12800 loss 0.2153
+fakenewsnet EPOCH RESULT {"epoch": 4, "accuracy": 0.8449660284126004, "balanced_accuracy": 0.7966292903227827, "macro_precision": 0.7868073316605768, "macro_recall": 0.7966292903227827, "macro_f1": 0.7914731462708869, "weighted_f1": 0.8462707328550811, "seconds": 285.94718291699974, "mean_loss": 0.31288136667857464}
+fakenewsnet VALID finetuned_minilm 0.8456 0.7942
+fakenewsnet VALID ensemble_neural_0.25 0.861 0.7991
+fakenewsnet VALID ensemble_neural_0.5 0.8616 0.8044
+fakenewsnet VALID ensemble_neural_0.75 0.8561 0.8027
+fakenewsnet SELECTED {'name': 'ensemble_neural_0.5', 'accuracy': 0.8616429894996912, 'balanced_accuracy': 0.7948924623126071, 'macro_precision': 0.8156807496519816, 'macro_recall': 0.7948924623126071, 'macro_f1': 0.8043699781797782, 'weighted_f1': 0.8592893041029825}

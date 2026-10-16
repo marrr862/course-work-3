@@ -1,0 +1,5 @@
+Archive hash verified; independent extraction complete.
+Archived project tests passed.
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+Archived notebook Run All passed.
+{"archive_sha256": "08c1d59537da49ee7829bbb72de2edfc6b780333b9f6439772f7e0bd246e625b", "independent_directory": true, "tests": "60 passed", "notebook_code_cells_executed": 7, "notebook_errors": 0, "seconds": 29.92, "environment": "Existing tested Mac Python environment; no claim of fresh OS or Colab validation", "status": "passed"}

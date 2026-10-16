@@ -1,0 +1,16 @@
+{
+  "dataset": "fakenewsnet",
+  "selected_model": "logistic_regression",
+  "selection": "highest validation macro-F1; no train+valid refit",
+  "test_rows": 3239,
+  "accuracy": 0.8237110219203457,
+  "balanced_accuracy": 0.7791185280273856,
+  "macro_precision": 0.7591471804591419,
+  "macro_recall": 0.7791185280273856,
+  "macro_f1": 0.7679280325174729,
+  "weighted_f1": 0.826977909838776,
+  "macro_f1_95pct_bootstrap_ci": [
+    0.7498421005091674,
+    0.784809786249805
+  ]
+}

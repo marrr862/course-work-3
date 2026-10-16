@@ -1,0 +1,35 @@
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 5894.39it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 16564.93it/s]
+holdout_scored.json 1 / 300
+holdout_scored.json 11 / 300
+holdout_scored.json 21 / 300
+holdout_scored.json 31 / 300
+holdout_scored.json 41 / 300
+holdout_scored.json 51 / 300
+holdout_scored.json 61 / 300
+holdout_scored.json 71 / 300
+holdout_scored.json 81 / 300
+holdout_scored.json 91 / 300
+holdout_scored.json 101 / 300
+holdout_scored.json 111 / 300
+holdout_scored.json 121 / 300
+holdout_scored.json 131 / 300
+holdout_scored.json 141 / 300
+holdout_scored.json 151 / 300
+holdout_scored.json 161 / 300
+holdout_scored.json 171 / 300
+holdout_scored.json 181 / 300
+holdout_scored.json 191 / 300
+holdout_scored.json 201 / 300
+holdout_scored.json 211 / 300
+holdout_scored.json 221 / 300
+holdout_scored.json 231 / 300
+holdout_scored.json 241 / 300
+holdout_scored.json 251 / 300
+holdout_scored.json 261 / 300
+holdout_scored.json 271 / 300
+holdout_scored.json 281 / 300
+holdout_scored.json 291 / 300
+FINAL HOLDOUT {"count": 300, "accuracy": 0.5633333333333334, "macro_f1_three_gold_classes": 0.5406835897401935, "decisive_count": 103, "coverage": 0.3433333333333333, "accuracy_on_decisive": 0.7087378640776699, "refutation_precision": 0.6190476190476191, "evidence_document_recall_at_k": 0.7925531914893617, "retrieval_evaluable_claims": 188, "configuration": {"weight": 1.0, "limit": 3, "threshold": 0.8, "minimum_similarity": 0.3}, "classification_report": {"conflicting_evidence": {"precision": 0.0, "recall": 0.0, "f1-score": 0.0, "support": 0.0}, "insufficient_evidence": {"precision": 0.4897959183673469, "recall": 0.8571428571428571, "f1-score": 0.6233766233766234, "support": 112.0}, "refuted_by_sources": {"precision": 0.6190476190476191, "recall": 0.40625, "f1-score": 0.49056603773584906, "support": 64.0}, "supported_by_sources": {"precision": 0.7704918032786885, "recall": 0.3790322580645161, "f1-score": 0.5081081081081081, "support": 124.0}, "accuracy": 0.5633333333333334, "macro avg": {"precision": 0.46983383517341365, "recall": 0.4106062788018433, "f1-score": 0.4055126923051452, "support": 300.0}, "weighted avg": {"precision": 0.6333905802758262, "recall": 0.5633333333333334, "f1-score": 0.5473993787956052, "support": 300.0}}, "split": "official SciFact dev, reserved as project final holdout", "selection_sha256": "510db55d11dbf7600dcfbcd788cfe167b6b11682c377a1e540bf0b17b957ba88"}

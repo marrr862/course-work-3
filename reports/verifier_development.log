@@ -1,0 +1,34 @@
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 19475.06it/s]
+The Sun is a star. supported_by_sources -> supported_by_sources
+The Sun is a planet. refuted_by_sources -> insufficient_evidence
+Earth takes about 365.25 days to orbit the Sun. supported_by_sources -> supported_by_sources
+Earth completes an orbit around the Sun in 30 days. refuted_by_sources -> refuted_by_sources
+Mars has two moons. supported_by_sources -> supported_by_sources
+Mars has no moons. refuted_by_sources -> refuted_by_sources
+The Moon has no atmosphere at all. refuted_by_sources -> refuted_by_sources
+The Moon is Earth's only natural satellite. supported_by_sources -> supported_by_sources
+The mayor of a small village secretly bought a new car yesterday. insufficient_evidence -> insufficient_evidence
+A cafe in Boston will close next Tuesday. insufficient_evidence -> insufficient_evidence
+An unnamed company has doubled its profits this morning. insufficient_evidence -> insufficient_evidence
+Earth is the largest planet in the solar system. refuted_by_sources -> refuted_by_sources
+{
+  "split": "development",
+  "count": 12,
+  "accuracy": 0.9166666666666666,
+  "macro_f1": 0.9153439153439153,
+  "corrections_proposed": 4,
+  "correct_refutation_precision": 1.0,
+  "verbatim_source_integrity": 1.0,
+  "threshold": 0.92,
+  "minimum_retrieval_similarity": 0.14,
+  "query_sha256": "6e85a551360d9e4af010ede5240cfce92aa1be4df2e40268dfe55da45fd06b35",
+  "confusion_labels": [
+    "supported_by_sources",
+    "refuted_by_sources",
+    "insufficient_evidence",
+    "conflicting_evidence"
+  ],
+  "limitations": "Small manually authored English science/unknown-claim challenge; not a broad news benchmark. Verbatim integrity measures provenance, not semantic correctness. Pretrained NLI model was not trained here."
+}

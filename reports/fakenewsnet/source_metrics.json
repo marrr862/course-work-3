@@ -1,0 +1,18 @@
+{
+  "gossipcop": {
+    "accuracy": 0.8295601552393272,
+    "balanced_accuracy": 0.7861553147865997,
+    "macro_precision": 0.7610964601062703,
+    "macro_recall": 0.7861553147865997,
+    "macro_f1": 0.7718588846191057,
+    "weighted_f1": 0.8334563825159339
+  },
+  "politifact": {
+    "accuracy": 0.7006802721088435,
+    "balanced_accuracy": 0.6825396825396826,
+    "macro_precision": 0.6973039215686274,
+    "macro_recall": 0.6825396825396826,
+    "macro_f1": 0.684795321637427,
+    "weighted_f1": 0.6949039264828738
+  }
+}

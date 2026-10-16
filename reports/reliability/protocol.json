@@ -1,0 +1,18 @@
+{
+  "version": "reliability-v1",
+  "seed": 2026,
+  "goals": [
+    "reduce fake-news false negatives through validation-selected operating modes",
+    "evaluate evidence retrieval and verification on a new external benchmark",
+    "preserve short factual source sentences and passage context",
+    "report abstention coverage and precision"
+  ],
+  "classifier_selection": "Existing trained ensemble fixed; select balanced macro-F1 threshold and high-recall threshold (validation recall >=0.80, maximize precision) on original validation only. Test follow-up evaluation after thresholds frozen.",
+  "scifact_selection": "Use 150 stratified claims from official train for tuning. Do not use official dev labels in selection. Freeze retrieval/NLI parameters before evaluating all 300 official dev claims. This is a new-to-project benchmark, not a private blind test and not official SciFact leaderboard metrics.",
+  "retrieval": "TF-IDF plus frozen MiniLM embeddings over the full scientific abstract corpus; score up to three retrieved full abstracts with frozen NLI; no gold evidence IDs passed to retrieval",
+  "limits": "English only; science benchmark does not establish general news accuracy; unknown pretrained-corpus overlap; no fabricated corrections; evidence quotes always attributed",
+  "development_extension": {
+    "reason": "Frozen general NLI achieved only 49.33% accuracy and 43.28% macro-F1 on the 150 tuning claims; official dev was not evaluated.",
+    "action": "Adapt DeBERTa on remaining 659 official train claims, selecting epoch using only the 150 tuning claims; compare adapted and original tuning pipelines before final official dev evaluation."
+  }
+}

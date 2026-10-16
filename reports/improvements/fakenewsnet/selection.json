@@ -1,0 +1,7 @@
+{
+  "selected": "word_char_lr_4_balanced",
+  "criterion": "validation macro-F1 only",
+  "split_manifest_sha256": "0a0a96ef56561f9209faa166665e97b6b88ddb212e1a7cab4c36ae8bbcb8289a",
+  "candidates": 9,
+  "warning": "Original test was already reported; follow-up test comparison is not a new blind benchmark."
+}

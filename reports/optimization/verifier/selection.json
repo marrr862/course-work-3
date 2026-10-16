@@ -1,0 +1,16 @@
+{
+  "selected": {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.85,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  "selection": "development only; minimize false corrections then maximize macro-F1; original wins ties",
+  "limitation": "Only 12 manually authored development cases; high risk of selection overfitting. Old test is a follow-up diagnostic."
+}

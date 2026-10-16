@@ -1,0 +1,25 @@
+{
+  "selected": "word_lr_4_balanced",
+  "baseline": {
+    "accuracy": 0.24960380348652933,
+    "balanced_accuracy": 0.2558127192443869,
+    "macro_precision": 0.24717195390628457,
+    "macro_recall": 0.2558127192443869,
+    "macro_f1": 0.24900650015270961,
+    "weighted_f1": 0.2499757157403745
+  },
+  "candidate": {
+    "accuracy": 0.2480190174326466,
+    "balanced_accuracy": 0.252701658733892,
+    "macro_precision": 0.24646075729819472,
+    "macro_recall": 0.252701658733892,
+    "macro_f1": 0.24842878917491992,
+    "weighted_f1": 0.24788830160106956
+  },
+  "test_rows": 1262,
+  "evaluation": "Previously reported held-out split; selection used validation only.",
+  "paired_accuracy_difference_95pct_bootstrap_ci": [
+    -0.012678288431061807,
+    0.009508716323296355
+  ]
+}

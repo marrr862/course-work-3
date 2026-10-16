@@ -1,0 +1,109 @@
+{
+  "verification_status": "archived_claim_match",
+  "dataset": "liar",
+  "model_prediction": "half-true",
+  "prediction_status": "statistical_prediction",
+  "seen_in_training": true,
+  "warning": "A text classifier prediction is not a factual verdict. English only. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.",
+  "evidence": {
+    "status": "archived_claim_match",
+    "verdict": "half-true",
+    "correction": "Democratic U. S.  Senate candidate Jim Barksdale that women in Georgia only earn 82 cents for every dollar earned by a man. But the statement is missing substantial context needed to fully grasp a very complex issue. When asked for clarification, Barksdale's campaign issued a statement that veered into the equal-pay-for-equal-work argument, something the study behind the statement did not attempt to address.",
+    "correction_type": "archived_explanation_not_rewritten_claim",
+    "sources": [
+      {
+        "id": "13077.json",
+        "claim": "In Georgia, women earn 82 cents for every dollar earned by men.",
+        "verdict": "half-true",
+        "explanation": "Democratic U. S.  Senate candidate Jim Barksdale that women in Georgia only earn 82 cents for every dollar earned by a man. But the statement is missing substantial context needed to fully grasp a very complex issue. When asked for clarification, Barksdale's campaign issued a statement that veered into the equal-pay-for-equal-work argument, something the study behind the statement did not attempt to address.",
+        "speaker": "jim-barksdale",
+        "context": "On his campaign website",
+        "subject": "jobs,women",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L56",
+        "source_type": "archived_extracted_justification",
+        "split": "train"
+      }
+    ],
+    "archive_candidates": [
+      {
+        "id": "13077.json",
+        "claim": "In Georgia, women earn 82 cents for every dollar earned by men.",
+        "verdict": "half-true",
+        "explanation": "Democratic U. S.  Senate candidate Jim Barksdale that women in Georgia only earn 82 cents for every dollar earned by a man. But the statement is missing substantial context needed to fully grasp a very complex issue. When asked for clarification, Barksdale's campaign issued a statement that veered into the equal-pay-for-equal-work argument, something the study behind the statement did not attempt to address.",
+        "speaker": "jim-barksdale",
+        "context": "On his campaign website",
+        "subject": "jobs,women",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L56",
+        "source_type": "archived_extracted_justification",
+        "split": "train",
+        "similarity": 1.0,
+        "match_type": "exact"
+      },
+      {
+        "id": "7664.json",
+        "claim": "Women make 77 cents for every dollar earned by men.",
+        "verdict": "half-true",
+        "explanation": "The chain email says Obama \"wants the U. S.  to sign on to the U. N. s International Criminal Court. \"While the Obama administration has been more willing to engage with the court than the Bush administration, which was strongly opposed to cooperating, Obama has made no sign that he wants to become a full-blown member of the court. Even if he did, doing so would require 67 votes in the Senate, making it essentially a nonstarter.",
+        "speaker": "gina-raimondo",
+        "context": "a tweet promoting Equal Pay Day",
+        "subject": "economy,income,poverty,wealth,women,workers",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L9445",
+        "source_type": "archived_extracted_justification",
+        "split": "train",
+        "similarity": 0.64126,
+        "match_type": "related_only"
+      },
+      {
+        "id": "6148.json",
+        "claim": "Women earn only 77 cents for every dollar earned by men in the same position.",
+        "verdict": "barely-true",
+        "explanation": "Brown said Shaheen \"voted to pave the way for a new national energy tax. \"The two votes she took did mirror those of some lawmakers who favor a carbon tax, but thats not the same thing as saying she voted to \"pave the way for a new national energy tax. \"These werent procedural votes to commence a debate on, or tee up a final vote on, an actual carbon-tax bill. We don't see how either vote would have brought a carbon tax any closer to fruition.",
+        "speaker": "david-cicilline",
+        "context": "a news release",
+        "subject": "income,jobs,poverty,women,workers",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L3613",
+        "source_type": "archived_extracted_justification",
+        "split": "train",
+        "similarity": 0.61299,
+        "match_type": "related_only"
+      },
+      {
+        "id": "7691.json",
+        "claim": "Women in Ohio earn on average 77 cents for every dollar earned by a man.",
+        "verdict": "mostly-true",
+        "explanation": "For example, an October study by the American Association of University Women, which advocates for equality for women and girls, analyzed mens and womens salaries a year after graduation from college. It found a wage gap in almost all occupations, but concluded it was a smaller 6. 6 percent when qualifiers like education, training, age, and parental status were taken into account. That gap could be attributed to gender discrimination and women ability to negotiate salaries, the report found . An AAAU researcher noted the wage gap can grow as careers progress. Fudge is right that theres a gap in pay between men and women, though the size of that gap depends on the statistics one consults.",
+        "speaker": "marcia-fudge",
+        "context": "a Facebook posting",
+        "subject": "jobs,women,workers",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L1008",
+        "source_type": "archived_extracted_justification",
+        "split": "train",
+        "similarity": 0.51121,
+        "match_type": "related_only"
+      },
+      {
+        "id": "9072.json",
+        "claim": "Women are still paid 82 cents for every dollar a man earns in Texas.",
+        "verdict": "mostly-true",
+        "explanation": "Haas said in states with comprehensive background checks for handguns, \"49 percent fewer women are shot and killed. \"She supports that statement by pointing to figures examining a narrower group of female firearms victims -- those killed in domestic violence situations. But figures examining the broader group of victims she cited in her statement -- women in general -- show 38 percent fewer women were shot and killed in the states with private-sale background checks on handgun sales. Thats not quite high as the figure she cited, but it still represents a lower rate of gun homicides of women in states with comprehensive background checks. But experts cautioned against reading too much into that correlation. They noted that there may be other factors beyond background checks that led to that result.",
+        "speaker": "wendy-davis",
+        "context": "a tweet",
+        "subject": "economy,women,workers",
+        "publisher": "PolitiFact via LIAR-PLUS research archive",
+        "url": "https://github.com/Tariq60/LIAR-PLUS/blob/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv#L5781",
+        "source_type": "archived_extracted_justification",
+        "split": "train",
+        "similarity": 0.41638,
+        "match_type": "related_only"
+      }
+    ],
+    "online_status": "not_needed",
+    "method": "exact match to a LIAR-PLUS training claim; returns the archived rating and extracted explanation",
+    "caveat": "Historical assessment tied to the displayed speaker and context. This is an archived excerpt, not current verification or an independently generated corrected sentence."
+  }
+}

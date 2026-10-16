@@ -1,0 +1,28 @@
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 7356.36it/s]
+Jupiter is the largest planet in our solar system. conflicting_evidence
+Jupiter is the smallest planet in our solar system. refuted_by_sources
+Jupiter is a gas giant. supported_by_sources
+Jupiter has a solid surface. refuted_by_sources
+Mercury is the closest planet to the Sun. supported_by_sources
+Mercury is the farthest planet from the Sun. refuted_by_sources
+Mercury is the smallest planet in our solar system. supported_by_sources
+Mercury has a moon. supported_by_sources
+Venus is the hottest planet in our solar system. insufficient_evidence
+Venus is the coldest planet in our solar system. insufficient_evidence
+Venus has a thick atmosphere. insufficient_evidence
+Venus has a thin atmosphere. insufficient_evidence
+Saturn is a gas giant. supported_by_sources
+Saturn is a rocky planet. insufficient_evidence
+Neptune is an ice giant. conflicting_evidence
+Neptune is the closest planet to the Sun. refuted_by_sources
+Uranus is an ice giant. supported_by_sources
+Uranus is a rocky planet. refuted_by_sources
+An unknown senator resigned this morning. insufficient_evidence
+A local shop secretly sold counterfeit shoes yesterday. insufficient_evidence
+A private bank will open a new branch next Monday. insufficient_evidence
+A village school has cancelled tomorrow's classes. insufficient_evidence
+A new restaurant in this neighborhood served 300 customers yesterday. insufficient_evidence
+An unnamed startup will announce a merger next week. insufficient_evidence
+{'accuracy': 0.6666666666666666, 'count': 24, 'false_corrections': 0, 'note': 'Regression on previously seen toy test with refreshed source snapshots; not new independent accuracy evidence.'}

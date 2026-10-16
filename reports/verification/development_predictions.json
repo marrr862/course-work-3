@@ -1,0 +1,611 @@
+[
+  {
+    "claim": "The Sun is a star.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 2.364734041999327,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "The Sun is the only star in our solar system.",
+        "source": {
+          "id": "3c409e8cc1b65255",
+          "url": "https://science.nasa.gov/sun/facts/",
+          "requested_url": "https://science.nasa.gov/sun/facts/",
+          "title": "Sun: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.7452170987337955,
+        "nli_scores": {
+          "contradiction": 0.0007502586813643575,
+          "entailment": 0.9896358847618103,
+          "neutral": 0.00961385853588581
+        }
+      },
+      {
+        "text": "And many solar systems have more than one star.",
+        "source": {
+          "id": "3c409e8cc1b65255",
+          "url": "https://science.nasa.gov/sun/facts/",
+          "requested_url": "https://science.nasa.gov/sun/facts/",
+          "title": "Sun: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.1765700996457396,
+        "nli_scores": {
+          "contradiction": 0.08756674081087112,
+          "entailment": 0.5205343961715698,
+          "neutral": 0.39189887046813965
+        }
+      },
+      {
+        "text": "Star type : G2 V, yellow dwarf main-sequence star",
+        "source": {
+          "id": "3c409e8cc1b65255",
+          "url": "https://science.nasa.gov/sun/facts/",
+          "requested_url": "https://science.nasa.gov/sun/facts/",
+          "title": "Sun: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.15529733507201549,
+        "nli_scores": {
+          "contradiction": 0.0023342755157500505,
+          "entailment": 0.9645841121673584,
+          "neutral": 0.033081602305173874
+        }
+      }
+    ]
+  },
+  {
+    "claim": "The Sun is a planet.",
+    "expected": "refuted_by_sources",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.0661369579975144,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Without the Sun’s energy, life as we know it could not exist on our home planet.",
+        "source": {
+          "id": "3c409e8cc1b65255",
+          "url": "https://science.nasa.gov/sun/facts/",
+          "requested_url": "https://science.nasa.gov/sun/facts/",
+          "title": "Sun: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2632648983823298,
+        "nli_scores": {
+          "contradiction": 0.06344927847385406,
+          "entailment": 0.15968765318393707,
+          "neutral": 0.7768630981445312
+        }
+      },
+      {
+        "text": "The morning Sun appears to rise briefly, set, and rise again from some parts of the planet's surface.",
+        "source": {
+          "id": "14ee5dbf61197563",
+          "url": "https://science.nasa.gov/mercury/facts/",
+          "requested_url": "https://science.nasa.gov/mercury/facts/",
+          "title": "Mercury: Facts",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:52.253599+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.1996304311307104,
+        "nli_scores": {
+          "contradiction": 0.0010622956324368715,
+          "entailment": 0.9088650345802307,
+          "neutral": 0.0900726392865181
+        }
+      },
+      {
+        "text": "The Sun is about 100 times wider than Earth and about 10 times wider than Jupiter, the biggest planet.",
+        "source": {
+          "id": "3c409e8cc1b65255",
+          "url": "https://science.nasa.gov/sun/facts/",
+          "requested_url": "https://science.nasa.gov/sun/facts/",
+          "title": "Sun: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:45.370995+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.18767306112237436,
+        "nli_scores": {
+          "contradiction": 0.028392892330884933,
+          "entailment": 0.9130492210388184,
+          "neutral": 0.058557793498039246
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Earth takes about 365.25 days to orbit the Sun.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.04677966600138461,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "It takes 365.25 days to complete one trip around the Sun.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.6903311905337961,
+        "nli_scores": {
+          "contradiction": 0.0005218886653892696,
+          "entailment": 0.9812955260276794,
+          "neutral": 0.01818258687853813
+        }
+      },
+      {
+        "text": "Some asteroids will be in a long “dance” with Earth as both orbit the Sun.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.17942708049022893,
+        "nli_scores": {
+          "contradiction": 0.0007713131490163505,
+          "entailment": 8.375247853109613e-05,
+          "neutral": 0.9991449117660522
+        }
+      },
+      {
+        "text": "Like Earth, Mars has distinct seasons, but they last longer than seasons here on Earth since Mars takes longer to orbit the Sun (because it's farther away).",
+        "source": {
+          "id": "800804528a5885f7",
+          "url": "https://science.nasa.gov/mars/facts/",
+          "requested_url": "https://science.nasa.gov/mars/facts/",
+          "title": "Mars: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.15096349008773943,
+        "nli_scores": {
+          "contradiction": 0.0032909007277339697,
+          "entailment": 0.0001327707286691293,
+          "neutral": 0.9965762495994568
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Earth completes an orbit around the Sun in 30 days.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.08783700000640238,
+    "correction": "As Earth orbits the Sun, it completes one rotation every 23.9 hours.",
+    "evidence": [
+      {
+        "text": "As Earth orbits the Sun, it completes one rotation every 23.9 hours.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.20731014183622473,
+        "nli_scores": {
+          "contradiction": 0.9937307834625244,
+          "entailment": 0.00041321993921883404,
+          "neutral": 0.005855998490005732
+        }
+      },
+      {
+        "text": "Some asteroids will be in a long “dance” with Earth as both orbit the Sun.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.24874975351087422,
+        "nli_scores": {
+          "contradiction": 0.0014925601426512003,
+          "entailment": 5.19406603416428e-05,
+          "neutral": 0.9984555244445801
+        }
+      },
+      {
+        "text": "They are typically trapped by Earth's gravity for a few months or years before returning to an orbit around the Sun.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.19416915415024524,
+        "nli_scores": {
+          "contradiction": 0.9819616675376892,
+          "entailment": 9.022215817822143e-05,
+          "neutral": 0.01794809103012085
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "Mars has two moons.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.03248920899932273,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "Mars has two small moons, Phobos and Deimos , that may be captured asteroids.",
+        "source": {
+          "id": "800804528a5885f7",
+          "url": "https://science.nasa.gov/mars/facts/",
+          "requested_url": "https://science.nasa.gov/mars/facts/",
+          "title": "Mars: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2900609634556526,
+        "nli_scores": {
+          "contradiction": 0.0004059128405060619,
+          "entailment": 0.9953187108039856,
+          "neutral": 0.00427534943446517
+        }
+      },
+      {
+        "text": "The moons get their names from the horses that pulled the chariot of the Greek god of war, Ares (whose Roman counterpart is Mars).",
+        "source": {
+          "id": "800804528a5885f7",
+          "url": "https://science.nasa.gov/mars/facts/",
+          "requested_url": "https://science.nasa.gov/mars/facts/",
+          "title": "Mars: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.20921133958508376,
+        "nli_scores": {
+          "contradiction": 0.01356931310147047,
+          "entailment": 0.18395152688026428,
+          "neutral": 0.8024792075157166
+        }
+      }
+    ]
+  },
+  {
+    "claim": "Mars has no moons.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.030460292000498157,
+    "correction": "Mars has two small moons, Phobos and Deimos , that may be captured asteroids.",
+    "evidence": [
+      {
+        "text": "Mars has two small moons, Phobos and Deimos , that may be captured asteroids.",
+        "source": {
+          "id": "800804528a5885f7",
+          "url": "https://science.nasa.gov/mars/facts/",
+          "requested_url": "https://science.nasa.gov/mars/facts/",
+          "title": "Mars: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2900609634556526,
+        "nli_scores": {
+          "contradiction": 0.9998714923858643,
+          "entailment": 3.9122194721130654e-05,
+          "neutral": 8.93696051207371e-05
+        }
+      },
+      {
+        "text": "The moons get their names from the horses that pulled the chariot of the Greek god of war, Ares (whose Roman counterpart is Mars).",
+        "source": {
+          "id": "800804528a5885f7",
+          "url": "https://science.nasa.gov/mars/facts/",
+          "requested_url": "https://science.nasa.gov/mars/facts/",
+          "title": "Mars: Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:47.622417+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.20921133958508376,
+        "nli_scores": {
+          "contradiction": 0.999474823474884,
+          "entailment": 6.90368251525797e-05,
+          "neutral": 0.0004561924724839628
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "The Moon has no atmosphere at all.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.04427824999584118,
+    "correction": "The Moon has a very thin and tenuous atmosphere called an exosphere.",
+    "evidence": [
+      {
+        "text": "The Moon has a very thin and tenuous atmosphere called an exosphere.",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.31504577197784345,
+        "nli_scores": {
+          "contradiction": 0.999723494052887,
+          "entailment": 8.961633284343407e-05,
+          "neutral": 0.00018691635341383517
+        }
+      },
+      {
+        "text": "The Moon has a very thin and weak atmosphere .",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.4912988428018954,
+        "nli_scores": {
+          "contradiction": 0.9986244440078735,
+          "entailment": 0.0003436828264966607,
+          "neutral": 0.0010318753775209188
+        }
+      },
+      {
+        "text": "The Moon's weak atmosphere and its lack of liquid water cannot support life as we know it.",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2272321645025201,
+        "nli_scores": {
+          "contradiction": 0.9993343949317932,
+          "entailment": 7.636541704414412e-05,
+          "neutral": 0.0005892663029953837
+        }
+      }
+    ],
+    "extractive_integrity": true
+  },
+  {
+    "claim": "The Moon is Earth's only natural satellite.",
+    "expected": "supported_by_sources",
+    "predicted": "supported_by_sources",
+    "seconds": 0.03678133300127229,
+    "correction": null,
+    "evidence": [
+      {
+        "text": "The Moon is Earth's only natural satellite.",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 1.0,
+        "nli_scores": {
+          "contradiction": 0.00034004796179942787,
+          "entailment": 0.9940105080604553,
+          "neutral": 0.0056493403390049934
+        }
+      },
+      {
+        "text": "The resulting debris from both Earth and the impactor accumulated to form our natural satellite 239,000 miles (384,000 kilometers) away.",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.2524898322977846,
+        "nli_scores": {
+          "contradiction": 0.006975260563194752,
+          "entailment": 0.00046573879080824554,
+          "neutral": 0.9925589561462402
+        }
+      },
+      {
+        "text": "During a \"full moon,\" the hemisphere of the Moon we can see from Earth is fully illuminated by the Sun.",
+        "source": {
+          "id": "a9162fb8ffa4bf5f",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "requested_url": "https://science.nasa.gov/moon/facts/",
+          "title": "Moon Facts - NASA Science",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:46.988747+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.17589161812184373,
+        "nli_scores": {
+          "contradiction": 0.0033178699668496847,
+          "entailment": 0.00014897943765390664,
+          "neutral": 0.9965331554412842
+        }
+      }
+    ]
+  },
+  {
+    "claim": "The mayor of a small village secretly bought a new car yesterday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005721290996007156,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "A cafe in Boston will close next Tuesday.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005530583002837375,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "An unnamed company has doubled its profits this morning.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "seconds": 0.005439250002382323,
+    "correction": null,
+    "evidence": []
+  },
+  {
+    "claim": "Earth is the largest planet in the solar system.",
+    "expected": "refuted_by_sources",
+    "predicted": "refuted_by_sources",
+    "seconds": 0.050863999997091014,
+    "correction": "While Earth is only the fifth largest planet in the solar system, it is the only planet in our solar system with liquid water on the surface.",
+    "evidence": [
+      {
+        "text": "While Earth is only the fifth largest planet in the solar system, it is the only planet in our solar system with liquid water on the surface.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.5990190089604857,
+        "nli_scores": {
+          "contradiction": 0.9973220229148865,
+          "entailment": 0.0014374912716448307,
+          "neutral": 0.0012405150337144732
+        }
+      },
+      {
+        "text": "Earth is the only planet in our solar system with only one moon.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.44198174066526497,
+        "nli_scores": {
+          "contradiction": 0.0008290928672067821,
+          "entailment": 0.0003340339462738484,
+          "neutral": 0.9988369345664978
+        }
+      },
+      {
+        "text": "Earth – our home planet – is the third planet from the Sun, and the fifth largest planet.",
+        "source": {
+          "id": "948b0047f59cfbcf",
+          "url": "https://science.nasa.gov/earth/facts/",
+          "requested_url": "https://science.nasa.gov/earth/facts/",
+          "title": "Facts About Earth",
+          "publisher": "science.nasa.gov",
+          "retrieved_at": "2026-09-29T11:09:44.810127+00:00",
+          "delivery": "cached_snapshot",
+          "sha256": "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+          "source_type": "primary_agency"
+        },
+        "similarity": 0.3956961142002098,
+        "nli_scores": {
+          "contradiction": 0.9672064781188965,
+          "entailment": 0.011036446318030357,
+          "neutral": 0.021757060661911964
+        }
+      }
+    ],
+    "extractive_integrity": true
+  }
+]

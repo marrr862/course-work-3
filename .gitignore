@@ -1,0 +1,24 @@
+# environments and caches
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+.env
+*.log.tmp
+
+# large build outputs
+deliverables/Final_Practical_Code.tar.gz
+deliverables/Final_Practical_Code.manifest.json
+reports/optimization/*/*_embeddings.npy
+
+# large trained models (rebuild with the commands in README.md)
+models/*
+!models/active_models.json
+!models/liar.joblib
+!models/fakenewsnet.joblib
+!models/liar_v2.joblib
+!models/fakenewsnet_v2.joblib
+
+# local backups
+deliverables/versions/

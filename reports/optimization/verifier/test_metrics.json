@@ -1,0 +1,12 @@
+{
+  "config": {
+    "ranking": "lexical",
+    "threshold": 0.85,
+    "limit": 3
+  },
+  "count": 24,
+  "accuracy": 0.7916666666666666,
+  "macro_f1": 0.6058823529411765,
+  "wrong_corrections": 0,
+  "corrections": 6
+}

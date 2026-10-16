@@ -1,0 +1,6 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8054.99it/s]
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 6124.25it/s]
+SELECTED {'accuracy': 0.9166666666666666, 'macro_f1': 0.9153439153439153, 'false_corrections': 0, 'count': 12, 'configuration': {'threshold': 0.97, 'minimum_similarity': 0.35, 'limit': 3}}
+TEST {'accuracy': 0.75, 'macro_f1': 0.571953781512605, 'false_corrections': 1, 'count': 24, 'configuration': {'threshold': 0.97, 'minimum_similarity': 0.35, 'limit': 3}, 'caveat': 'Repeated 24-example science challenge, not independent evidence of generalization. Sources refreshed with improved extraction; not a controlled same-source ablation.'}

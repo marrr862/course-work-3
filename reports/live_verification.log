@@ -1,0 +1,7 @@
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 9415.62it/s]
+France's capital city is Berlin. correction_proposed 15 []
+According to France: Its capital, largest city and main cultural and economic centre is Paris, with a metropolitan population of over 13 million. [https://en.wikipedia.org/w/index.php?oldid=1377056769]
+France's capital city is Paris. supported_by_sources 15 []
+None

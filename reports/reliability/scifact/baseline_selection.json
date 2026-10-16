@@ -1,0 +1,56 @@
+{
+  "selected": {
+    "count": 150,
+    "accuracy": 0.49333333333333335,
+    "macro_f1_three_gold_classes": 0.43275411488707266,
+    "decisive_count": 32,
+    "coverage": 0.21333333333333335,
+    "accuracy_on_decisive": 0.65625,
+    "refutation_precision": 0.5238095238095238,
+    "evidence_document_recall_at_k": 0.8085106382978723,
+    "retrieval_evaluable_claims": 94,
+    "configuration": {
+      "weight": 1.0,
+      "limit": 3,
+      "threshold": 0.8,
+      "minimum_similarity": 0.45
+    },
+    "classification_report": {
+      "insufficient_evidence": {
+        "precision": 0.4491525423728814,
+        "recall": 0.9464285714285714,
+        "f1-score": 0.6091954022988506,
+        "support": 56.0
+      },
+      "refuted_by_sources": {
+        "precision": 0.5238095238095238,
+        "recall": 0.34375,
+        "f1-score": 0.41509433962264153,
+        "support": 32.0
+      },
+      "supported_by_sources": {
+        "precision": 0.9090909090909091,
+        "recall": 0.16129032258064516,
+        "f1-score": 0.273972602739726,
+        "support": 62.0
+      },
+      "accuracy": 0.49333333333333335,
+      "macro avg": {
+        "precision": 0.6273509917577714,
+        "recall": 0.4838229646697389,
+        "f1-score": 0.43275411488707277,
+        "support": 150.0
+      },
+      "weighted avg": {
+        "precision": 0.6551872233228165,
+        "recall": 0.49333333333333335,
+        "f1-score": 0.42922841844348786,
+        "support": 150.0
+      }
+    }
+  },
+  "criterion": "150 official train claims; maximize macro-F1 over three gold classes, then accuracy",
+  "official_dev_labels_used": false,
+  "science_code_sha256": "2e6364cf1fee6aa45b9129b0f6470c277a4ed070f4b2d8615db7409f32fa4296",
+  "limitations": "New-to-project public benchmark; pretraining overlap unknown. Simplified claim-level scoring, not the official SciFact evidence-set score."
+}

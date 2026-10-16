@@ -1,0 +1,6 @@
+{
+  "liar": "reports/optimization/liar/selected.joblib",
+  "fakenewsnet": "reports/optimization/fakenewsnet/selected.joblib",
+  "fakenewsnet_v2": "models/fakenewsnet_v2.joblib",
+  "liar_v2": "models/liar_v2.joblib"
+}

@@ -1,0 +1,16 @@
+{
+  "winner": {
+    "name": "ensemble_neural_0.5",
+    "accuracy": 0.27564604541895066,
+    "balanced_accuracy": 0.2816244453725814,
+    "macro_precision": 0.276811011324755,
+    "macro_recall": 0.2816244453725814,
+    "macro_f1": 0.27767893745263345,
+    "weighted_f1": 0.27487340012562755
+  },
+  "criterion": "validation macro-F1 only",
+  "manifest_sha256": "17468dca9c3b1f4efb049bfc0dbb1e86ea6e06737dd8133ee389da54f7a7381e",
+  "device": "mps",
+  "candidates": 30,
+  "test_used": false
+}

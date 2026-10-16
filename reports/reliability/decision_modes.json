@@ -1,0 +1,25 @@
+{
+  "balanced": {
+    "accuracy": 0.8610253242742434,
+    "macro_f1": 0.8076234505310654,
+    "fake_precision": 0.7184594953519257,
+    "fake_recall": 0.6944801026957638,
+    "false_negatives": 238,
+    "false_positives": 212,
+    "threshold": 0.4699999999999999
+  },
+  "high_recall": {
+    "accuracy": 0.8285978999382335,
+    "macro_f1": 0.7869959794393262,
+    "fake_precision": 0.6089494163424124,
+    "fake_recall": 0.803594351732991,
+    "false_negatives": 153,
+    "false_positives": 402,
+    "threshold": 0.3
+  },
+  "selection": "Validation only; balanced maximizes macro-F1; high_recall achieves validation fake recall >=0.80 then maximizes fake precision.",
+  "classes": [
+    "fake",
+    "real"
+  ]
+}

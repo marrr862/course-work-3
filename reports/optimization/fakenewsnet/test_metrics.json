@@ -1,0 +1,30 @@
+{
+  "dataset": "fakenewsnet",
+  "selected_model": "ensemble_neural_0.5",
+  "selection": "validation macro-F1 only; train-only fitting",
+  "test_rows": 3239,
+  "accuracy": 0.8570546464958321,
+  "balanced_accuracy": 0.7835258878904579,
+  "macro_precision": 0.8108982501916893,
+  "macro_recall": 0.7835258878904579,
+  "macro_f1": 0.7956019842045974,
+  "weighted_f1": 0.8537674826908391,
+  "baseline": {
+    "accuracy": 0.8237110219203457,
+    "balanced_accuracy": 0.7791185280273856,
+    "macro_precision": 0.7591471804591419,
+    "macro_recall": 0.7791185280273856,
+    "macro_f1": 0.7679280325174729,
+    "weighted_f1": 0.826977909838776
+  },
+  "paired_accuracy_delta_95pct_ci": [
+    0.022846557579499827,
+    0.043531954306884835
+  ],
+  "paired_macro_f1_delta_95pct_ci": [
+    0.013472032809155302,
+    0.04141812037840807
+  ],
+  "evaluation_note": "Previously reported test split; not a new blind benchmark. Pretraining overlap is not ruled out.",
+  "selection_sha256": "b8949efa3fa6da7d9c1976c773d4279a92646e773144586a3d0b5e587b9ed514"
+}

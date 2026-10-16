@@ -1,0 +1,9 @@
+{
+  "fakenews/optimize.py": "501773ea0f5316ff39c5299f2135b9255c0927682839fe706057c2e685245ef2",
+  "fakenews/advanced_models.py": "f6be0344bffeb867d8cfc402cc2f41e670448b6dde137db9f1a8f9629540ff42",
+  "fakenews/evaluate_optimized.py": "d189561993dc4ff78f0385ee8369246d85c863913aaba4ed89dad6e544b31c49",
+  "models/liar_finetuned/model.safetensors": "66dfac264ee978b6b50a3ea0efabef245b31d13d74a86aa387edc9312498b39e",
+  "models/fakenewsnet_finetuned/model.safetensors": "58850832708be03ba68433e6144723333b323aea5a9f1cd65d8f46fb1f9b6135",
+  "reports/optimization/liar/selected.joblib": "66dc5a4252fbb81e4bfe0046ae8d8f9e2962234f57b36779c0033c28004844af",
+  "reports/optimization/fakenewsnet/selected.joblib": "b77f6254dd339c4a60d800c369efca31757ff1f43547bfeed0176f113641f46b"
+}

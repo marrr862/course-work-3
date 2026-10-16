@@ -1,0 +1,14 @@
+{
+  "seed": 42,
+  "python": "3.14.7",
+  "sklearn": "1.9.1",
+  "input_sha256": {
+    "/Users/macbook/Desktop/liar_dataset/train.tsv": "23ef8cb7ff57b25c941100d0744039cebc595d65a67ea190f72b330a658d8c36",
+    "/Users/macbook/Desktop/liar_dataset/test.tsv": "ee41e2c741e0019216952625145af8c4aa8c8d3057ec68284b134267bb845e6f",
+    "/Users/macbook/Desktop/liar_dataset/valid.tsv": "8dd3d7ed1a11e78ed7df090c9eddb0f91147f895850c78d49dd7b4e88fd09a16",
+    "/Users/macbook/Desktop/FakeNewsNet-master/dataset/politifact_fake.csv": "abe7fe7aad801b1e2ab5fc963cbd0881d9670190262ae3df85e91c3380bd004c",
+    "/Users/macbook/Desktop/FakeNewsNet-master/dataset/politifact_real.csv": "2500f86a7addca0f59fe8cf089c0f802d3eca6980f53538992b3b0e9687dbae0",
+    "/Users/macbook/Desktop/FakeNewsNet-master/dataset/gossipcop_fake.csv": "c6932bffadb1230bc61c66bb2ca298f4ef28ce849d268313ad2eed41d18d4c99",
+    "/Users/macbook/Desktop/FakeNewsNet-master/dataset/gossipcop_real.csv": "d721e9a8b7e660da05c089691743c33fecb25367074e936b5fab3d85cdcbe79f"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "selection": {
+    "stage1_neural_ensemble": {
+      "threshold": 0.47,
+      "val_macro_f1": 0.8076,
+      "note": "previous best (MiniLM fine-tuned + TF-IDF, 50/50)"
+    },
+    "lr_word+char": {
+      "threshold": 0.59,
+      "val_macro_f1": 0.7848,
+      "note": "logistic regression C=1"
+    },
+    "stack_neural+word+char": {
+      "threshold": 0.5,
+      "val_macro_f1": 0.8102,
+      "note": "weight neural=0.8, LR=0.2 (chosen on validation)"
+    },
+    "lr_word+char+domain": {
+      "threshold": 0.57,
+      "val_macro_f1": 0.8116,
+      "note": "logistic regression C=1"
+    },
+    "stack_neural+word+char+domain": {
+      "threshold": 0.55,
+      "val_macro_f1": 0.8233,
+      "note": "weight neural=0.5, LR=0.5 (chosen on validation)"
+    }
+  },
+  "paired_macro_f1_delta_ci_vs_stage1": {
+    "lr_word+char": [
+      -0.0407,
+      -0.0152
+    ],
+    "stack_neural+word+char": [
+      -0.0045,
+      0.0053
+    ],
+    "lr_word+char+domain": [
+      0.0006,
+      0.0291
+    ],
+    "stack_neural+word+char+domain": [
+      0.0086,
+      0.0303
+    ]
+  },
+  "confusion_matrices": {
+    "stack_neural+word+char": [
+      [
+        508,
+        271
+      ],
+      [
+        189,
+        2271
+      ]
+    ],
+    "stack_neural+word+char+domain": [
+      [
+        513,
+        266
+      ],
+      [
+        141,
+        2319
+      ]
+    ]
+  },
+  "per_source": {
+    "stage1_neural_ensemble": {
+      "gossipcop": {
+        "accuracy": 0.8632,
+        "macro_f1": 0.8012,
+        "macro_precision": 0.8127,
+        "macro_recall": 0.7915
+      },
+      "politifact": {
+        "accuracy": 0.7143,
+        "macro_f1": 0.7104,
+        "macro_precision": 0.7096,
+        "macro_recall": 0.7123
+      }
+    },
+    "lr_word+char": {
+      "gossipcop": {
+        "accuracy": 0.8457,
+        "macro_f1": 0.7767,
+        "macro_precision": 0.7859,
+        "macro_recall": 0.7689
+      },
+      "politifact": {
+        "accuracy": 0.6735,
+        "macro_f1": 0.6429,
+        "macro_precision": 0.6764,
+        "macro_recall": 0.6448
+      }
+    },
+    "stack_neural+word+char": {
+      "gossipcop": {
+        "accuracy": 0.8645,
+        "macro_f1": 0.8022,
+        "macro_precision": 0.8154,
+        "macro_recall": 0.7913
+      },
+      "politifact": {
+        "accuracy": 0.7211,
+        "macro_f1": 0.7106,
+        "macro_precision": 0.7163,
+        "macro_recall": 0.7083
+      }
+    },
+    "lr_word+char+domain": {
+      "gossipcop": {
+        "accuracy": 0.8758,
+        "macro_f1": 0.8192,
+        "macro_precision": 0.8321,
+        "macro_recall": 0.8084
+      },
+      "politifact": {
+        "accuracy": 0.7075,
+        "macro_f1": 0.6865,
+        "macro_precision": 0.7102,
+        "macro_recall": 0.6845
+      }
+    },
+    "stack_neural+word+char+domain": {
+      "gossipcop": {
+        "accuracy": 0.8816,
+        "macro_f1": 0.8241,
+        "macro_precision": 0.8462,
+        "macro_recall": 0.8074
+      },
+      "politifact": {
+        "accuracy": 0.7211,
+        "macro_f1": 0.7011,
+        "macro_precision": 0.726,
+        "macro_recall": 0.6984
+      }
+    }
+  },
+  "test_domains_seen_in_train": 0.9228,
+  "note": "Selection on validation only; test previously reported (not blind)."
+}

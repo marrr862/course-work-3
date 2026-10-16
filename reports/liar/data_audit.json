@@ -1,0 +1,40 @@
+{
+  "raw_rows": 12791,
+  "empty_removed": 0,
+  "conflicting_rows_removed": 16,
+  "duplicates_removed": 24,
+  "retained_rows": 12751,
+  "split_counts": {
+    "barely-true": {
+      "test": 212,
+      "train": 1653,
+      "valid": 237
+    },
+    "false": {
+      "test": 247,
+      "train": 1981,
+      "valid": 257
+    },
+    "half-true": {
+      "test": 263,
+      "train": 2106,
+      "valid": 248
+    },
+    "mostly-true": {
+      "test": 241,
+      "train": 1961,
+      "valid": 250
+    },
+    "pants-fire": {
+      "test": 92,
+      "train": 839,
+      "valid": 116
+    },
+    "true": {
+      "test": 207,
+      "train": 1672,
+      "valid": 169
+    }
+  },
+  "text_overlap_between_splits": 0
+}

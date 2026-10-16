@@ -1,0 +1,42 @@
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12780.70it/s]
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 10063.75it/s]
+development The Sun is a star. 3
+development The Sun is a planet. 5
+development Earth takes about 365.25 days to orbit the Sun. 4
+development Earth completes an orbit around the Sun in 30 days. 9
+development Mars has two moons. 2
+development Mars has no moons. 2
+development The Moon has no atmosphere at all. 4
+development The Moon is Earth's only natural satellite. 3
+development The mayor of a small village secretly bought a new car yesterday. 0
+development A cafe in Boston will close next Tuesday. 0
+development An unnamed company has doubled its profits this morning. 0
+development Earth is the largest planet in the solar system. 5
+SELECTED {'config': {'ranking': 'lexical', 'threshold': 0.85, 'limit': 3}, 'count': 12, 'accuracy': 0.9166666666666666, 'macro_f1': 0.9259259259259259, 'wrong_corrections': 0, 'corrections': 4}
+test Jupiter is the largest planet in our solar system. 3
+test Jupiter is the smallest planet in our solar system. 3
+test Jupiter is a gas giant. 2
+test Jupiter has a solid surface. 2
+test Mercury is the closest planet to the Sun. 3
+test Mercury is the farthest planet from the Sun. 9
+test Mercury is the smallest planet in our solar system. 2
+test Mercury has a moon. 2
+test Venus is the hottest planet in our solar system. 4
+test Venus is the coldest planet in our solar system. 5
+test Venus has a thick atmosphere. 2
+test Venus has a thin atmosphere. 2
+test Saturn is a gas giant. 4
+test Saturn is a rocky planet. 2
+test Neptune is an ice giant. 5
+test Neptune is the closest planet to the Sun. 6
+test Uranus is an ice giant. 4
+test Uranus is a rocky planet. 1
+test An unknown senator resigned this morning. 0
+test A local shop secretly sold counterfeit shoes yesterday. 0
+test A private bank will open a new branch next Monday. 0
+test A village school has cancelled tomorrow's classes. 0
+test A new restaurant in this neighborhood served 300 customers yesterday. 0
+test An unnamed startup will announce a merger next week. 0
+TEST {'config': {'ranking': 'lexical', 'threshold': 0.85, 'limit': 3}, 'count': 24, 'accuracy': 0.7916666666666666, 'macro_f1': 0.6058823529411765, 'wrong_corrections': 0, 'corrections': 6}

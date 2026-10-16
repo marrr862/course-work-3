@@ -1,0 +1,58 @@
+{
+  "count": 300,
+  "accuracy": 0.5633333333333334,
+  "macro_f1_three_gold_classes": 0.5406835897401935,
+  "decisive_count": 103,
+  "coverage": 0.3433333333333333,
+  "accuracy_on_decisive": 0.7087378640776699,
+  "refutation_precision": 0.6190476190476191,
+  "evidence_document_recall_at_k": 0.7925531914893617,
+  "retrieval_evaluable_claims": 188,
+  "configuration": {
+    "weight": 1.0,
+    "limit": 3,
+    "threshold": 0.8,
+    "minimum_similarity": 0.3
+  },
+  "classification_report": {
+    "conflicting_evidence": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "insufficient_evidence": {
+      "precision": 0.4897959183673469,
+      "recall": 0.8571428571428571,
+      "f1-score": 0.6233766233766234,
+      "support": 112.0
+    },
+    "refuted_by_sources": {
+      "precision": 0.6190476190476191,
+      "recall": 0.40625,
+      "f1-score": 0.49056603773584906,
+      "support": 64.0
+    },
+    "supported_by_sources": {
+      "precision": 0.7704918032786885,
+      "recall": 0.3790322580645161,
+      "f1-score": 0.5081081081081081,
+      "support": 124.0
+    },
+    "accuracy": 0.5633333333333334,
+    "macro avg": {
+      "precision": 0.46983383517341365,
+      "recall": 0.4106062788018433,
+      "f1-score": 0.4055126923051452,
+      "support": 300.0
+    },
+    "weighted avg": {
+      "precision": 0.6333905802758262,
+      "recall": 0.5633333333333334,
+      "f1-score": 0.5473993787956052,
+      "support": 300.0
+    }
+  },
+  "split": "official SciFact dev, reserved as project final holdout",
+  "selection_sha256": "510db55d11dbf7600dcfbcd788cfe167b6b11682c377a1e540bf0b17b957ba88"
+}

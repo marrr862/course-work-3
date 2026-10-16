@@ -1,0 +1,98 @@
+{
+  "split": "test",
+  "count": 24,
+  "accuracy": 0.75,
+  "macro_f1": 0.5875,
+  "corrections_proposed": 6,
+  "correct_refutation_precision": 1.0,
+  "verbatim_source_integrity": 1.0,
+  "threshold": 0.92,
+  "minimum_retrieval_similarity": 0.14,
+  "query_sha256": "a672a60ce977e0638a3d8fd6c8abd0954efb4989b37c18cc63b63d8dbe5aa947",
+  "model_id": "cross-encoder/nli-deberta-v3-small",
+  "model_revision": "fa2804872c3b4bd748f38c0185cc85775361e735",
+  "source_hashes": [
+    "03d79a1e3ef36ca27a63daabab5dd6715f104872b3e01d0544d6c084192c741d",
+    "0a8415160a65c32c414ba2de41f8f1bac13b1580e4b62a3725156632c7e899a8",
+    "21a5414c5855d3b648a2e1dec596a2678a58331066aae9ac8902a9e12a7128e0",
+    "222f0d02badfeaaf9f8b92079745e6dc5e726c2f64aacdc79b545c751cee6047",
+    "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+    "43a675761a586ed0dc57121fc9935d58696ce54a5a008b4363782b1177fb310a",
+    "77f66e1a7a9cee8b187b7eb2379fc1f0b4f83716dfd4da7929260fb8ebcf760b",
+    "9977af64fb27a849e0dad8d3fc20d0c63a204eac4aee3e63c767bddbb5cc7acd",
+    "dd3be9673bc11515325841030f91f70a9154ebf247e3357161b1111ab533c6c1",
+    "f8257d6740545b252819f5e52275f1d424058d454425ee1bbce111bd34874dbe"
+  ],
+  "classification_report": {
+    "conflicting_evidence": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "insufficient_evidence": {
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1-score": 0.8,
+      "support": 6.0
+    },
+    "refuted_by_sources": {
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.8,
+      "support": 9.0
+    },
+    "supported_by_sources": {
+      "precision": 0.8571428571428571,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.75,
+      "support": 9.0
+    },
+    "accuracy": 0.75,
+    "macro avg": {
+      "precision": 0.6309523809523809,
+      "recall": 0.5833333333333333,
+      "f1-score": 0.5875,
+      "support": 24.0
+    },
+    "weighted avg": {
+      "precision": 0.8630952380952381,
+      "recall": 0.75,
+      "f1-score": 0.78125,
+      "support": 24.0
+    }
+  },
+  "confusion_labels": [
+    "supported_by_sources",
+    "refuted_by_sources",
+    "insufficient_evidence",
+    "conflicting_evidence"
+  ],
+  "confusion_matrix": [
+    [
+      6,
+      0,
+      1,
+      2
+    ],
+    [
+      1,
+      6,
+      2,
+      0
+    ],
+    [
+      0,
+      0,
+      6,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "limitations": "Small manually authored English science/unknown-claim challenge; not a broad news benchmark. Verbatim integrity measures provenance, not semantic correctness. Pretrained NLI model was not trained here."
+}

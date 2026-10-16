@@ -1,0 +1,6 @@
+[
+  {"id":"sun-planet","claims":["The Sun is a planet.","The sun is not a star."],"verdict":"false","correction":"The Sun is a star, not a planet.","publisher":"NASA","url":"https://science.nasa.gov/sun/facts/","checked_on":"2026-09-29"},
+  {"id":"sun-star","claims":["The Sun is a star."],"verdict":"true","correction":"The Sun is the star at the center of our solar system.","publisher":"NASA","url":"https://science.nasa.gov/sun/facts/","checked_on":"2026-09-29"},
+  {"id":"earth-orbit","claims":["Earth takes 30 days to orbit the Sun.","Earth orbits the Sun in 30 days."],"verdict":"false","correction":"Earth completes an orbit around the Sun in approximately 365.25 days.","publisher":"NASA","url":"https://science.nasa.gov/earth/facts/","checked_on":"2026-09-29"},
+  {"id":"earth-year","claims":["Earth takes about 365.25 days to orbit the Sun."],"verdict":"true","correction":"Earth's orbital period is approximately 365.25 days.","publisher":"NASA","url":"https://science.nasa.gov/earth/facts/","checked_on":"2026-09-29"}
+]

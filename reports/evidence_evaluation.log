@@ -1,0 +1,14 @@
+{
+  "indexed_records": 10090,
+  "paraphrase_queries": 20,
+  "recall_at_1": 0.8,
+  "recall_at_5": 1.0,
+  "mrr_at_5": 0.8916666666666666,
+  "heldout_test_claims_checked_for_index_overlap": 1262,
+  "heldout_exact_overlap": 0,
+  "changed_number_or_negation_cases": 60,
+  "inappropriate_automatic_corrections": 0,
+  "heldout_end_to_end_cases": 50,
+  "heldout_automatic_corrections": 0,
+  "limitations": "20 manually authored paraphrases of archived training claims, fixed before this evaluation; small development challenge, not an independent real-world fact-checking benchmark. Refusal checks test policy, not semantic truth. No automatic paraphrase correction."
+}

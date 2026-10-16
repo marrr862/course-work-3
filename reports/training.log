@@ -1,0 +1,40 @@
+liar majority validation macro F1 0.0542
+liar complement_nb validation macro F1 0.2488
+liar logistic_regression validation macro F1 0.2596
+liar linear_svm validation macro F1 0.249
+{
+  "dataset": "liar",
+  "selected_model": "logistic_regression",
+  "selection": "highest validation macro-F1; no train+valid refit",
+  "test_rows": 1262,
+  "accuracy": 0.24960380348652933,
+  "balanced_accuracy": 0.2558127192443869,
+  "macro_precision": 0.24717195390628457,
+  "macro_recall": 0.2558127192443869,
+  "macro_f1": 0.24900650015270961,
+  "weighted_f1": 0.2499757157403745,
+  "macro_f1_95pct_bootstrap_ci": [
+    0.2240051552538906,
+    0.2713795776715067
+  ]
+}
+fakenewsnet majority validation macro F1 0.4316
+fakenewsnet complement_nb validation macro F1 0.7636
+fakenewsnet logistic_regression validation macro F1 0.7688
+fakenewsnet linear_svm validation macro F1 0.7621
+{
+  "dataset": "fakenewsnet",
+  "selected_model": "logistic_regression",
+  "selection": "highest validation macro-F1; no train+valid refit",
+  "test_rows": 3239,
+  "accuracy": 0.8237110219203457,
+  "balanced_accuracy": 0.7791185280273856,
+  "macro_precision": 0.7591471804591419,
+  "macro_recall": 0.7791185280273856,
+  "macro_f1": 0.7679280325174729,
+  "weighted_f1": 0.826977909838776,
+  "macro_f1_95pct_bootstrap_ci": [
+    0.7498421005091674,
+    0.784809786249805
+  ]
+}

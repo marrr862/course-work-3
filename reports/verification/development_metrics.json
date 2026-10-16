@@ -1,0 +1,78 @@
+{
+  "split": "development",
+  "count": 12,
+  "accuracy": 0.9166666666666666,
+  "macro_f1": 0.9153439153439153,
+  "corrections_proposed": 4,
+  "correct_refutation_precision": 1.0,
+  "verbatim_source_integrity": 1.0,
+  "threshold": 0.92,
+  "minimum_retrieval_similarity": 0.14,
+  "query_sha256": "6e85a551360d9e4af010ede5240cfce92aa1be4df2e40268dfe55da45fd06b35",
+  "classification_report": {
+    "insufficient_evidence": {
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1-score": 0.8571428571428571,
+      "support": 3.0
+    },
+    "refuted_by_sources": {
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1-score": 0.8888888888888888,
+      "support": 5.0
+    },
+    "supported_by_sources": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 4.0
+    },
+    "accuracy": 0.9166666666666666,
+    "macro avg": {
+      "precision": 0.9166666666666666,
+      "recall": 0.9333333333333332,
+      "f1-score": 0.9153439153439153,
+      "support": 12.0
+    },
+    "weighted avg": {
+      "precision": 0.9375,
+      "recall": 0.9166666666666666,
+      "f1-score": 0.917989417989418,
+      "support": 12.0
+    }
+  },
+  "confusion_labels": [
+    "supported_by_sources",
+    "refuted_by_sources",
+    "insufficient_evidence",
+    "conflicting_evidence"
+  ],
+  "confusion_matrix": [
+    [
+      4,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      4,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      3,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "limitations": "Small manually authored English science/unknown-claim challenge; not a broad news benchmark. Verbatim integrity measures provenance, not semantic correctness. Pretrained NLI model was not trained here."
+}

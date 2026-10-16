@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://science.nasa.gov/earth/facts/",
+    "title": "Facts About Earth",
+    "sha256": "220a3776b4af2bbbb2db9197c63f1472135c1dd8361ca5c72f6cd5746845e629",
+    "retrieved_at": "2026-09-30T17:34:59.149940+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/sun/facts/",
+    "title": "Sun: Facts - NASA Science",
+    "sha256": "6ccd49ad8d45eb4b15a10684f5899f1d32f02050a2a129f52d1999ce6f3a6b1a",
+    "retrieved_at": "2026-09-30T17:34:59.577282+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/moon/facts/",
+    "title": "Moon Facts - NASA Science",
+    "sha256": "e5572e9269c7f6b805f326d8b854261b193addbb12cdca2860a74572f8ca4047",
+    "retrieved_at": "2026-09-30T17:34:59.995155+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/mars/facts/",
+    "title": "Mars: Facts - NASA Science",
+    "sha256": "352d09e8604741ec0e3c30245291665a5285689b5e62801f272bce7bc3c155a4",
+    "retrieved_at": "2026-09-30T17:35:00.412875+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/jupiter/jupiter-facts/",
+    "title": "Jupiter Facts",
+    "sha256": "569a22f0be7f72986701b604441956232150b8f92a0267834bd8d3ca6fd3c131",
+    "retrieved_at": "2026-09-30T17:35:01.389354+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/mercury/facts/",
+    "title": "Mercury: Facts",
+    "sha256": "64334d953430f0fa9d3c3156cd78d3e342fb39e6c0526fc8edb4bc2a9f49af0b",
+    "retrieved_at": "2026-09-30T17:52:06.275076+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/saturn/facts/",
+    "title": "Saturn: Facts - NASA Science",
+    "sha256": "f99ed45a9fb7ecb5e7a7042ae0f26225b1ff943eddc3ea9e52c8a08bdb709af4",
+    "retrieved_at": "2026-09-30T17:52:06.648294+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/uranus/facts/",
+    "title": "Uranus: Facts - NASA Science",
+    "sha256": "1cfee1c0e04c4a388659afce6e05ea210585295a934f807c4993dce5f22ae66a",
+    "retrieved_at": "2026-09-30T17:52:07.042687+00:00"
+  },
+  {
+    "url": "https://science.nasa.gov/neptune/neptune-facts/",
+    "title": "Neptune: Facts - NASA Science",
+    "sha256": "92b13a75d51dfba7d4cfaa6c8b4c00cae45f35157ddb3cb2dd4f117b7065e88f",
+    "retrieved_at": "2026-09-30T17:52:08.341157+00:00"
+  }
+]

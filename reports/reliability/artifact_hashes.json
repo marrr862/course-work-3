@@ -1,0 +1,8 @@
+{
+  "models/nli_science/model.safetensors": "d41905438a1ca2ab7f3f1f527c18fc06ee4662753404b58d4278adcdb9bd8594",
+  "models/nli_science/tokenizer_config.json": "5c19d606a9a444336416d4a6701513438e5b8f1bab823ddc1e2f0af48f438df9",
+  "models/nli_science/config.json": "97644e07291dcf2e711ba59ea1ee0d2cf8fac0c08bb25f7fc4ce6e64d2fa32de",
+  "models/nli_science/tokenizer.json": "b749631de7e86cf7bf2a3855d065002e6d70cdc88eabbbd39129de6d40354935",
+  "models/science_index.joblib": "a00657af69ff2cb91c7a5c5e7fc1453eceed4df77890ecf9a9fe30f0e5f55108",
+  "reports/reliability/scifact/selection.json": "510db55d11dbf7600dcfbcd788cfe167b6b11682c377a1e540bf0b17b957ba88"
+}

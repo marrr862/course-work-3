@@ -1,0 +1,143 @@
+"""Stage-2 stacked models: feature helpers, stacking arithmetic, saved artifacts and API routing."""
+import json
+from pathlib import Path
+import joblib
+import numpy as np
+import pandas as pd
+import pytest
+from sklearn.linear_model import LogisticRegression
+from fastapi.testclient import TestClient
+import fakenews.app as app_module
+from fakenews.stacking import FakeNewsFeatures, StackedClassifier, domain, normalize_meta
+
+ROOT = Path(__file__).resolve().parents[1]
+client = TestClient(app_module.app)
+
+
+class FixedBase:
+    """Stand-in for the stage-1 neural ensemble (no torch needed)."""
+    def __init__(self, classes, row):
+        self.classes_ = np.asarray(classes); self.row = np.asarray(row, dtype=float)
+    def predict_proba(self, texts):
+        return np.tile(self.row, (len(list(texts)), 1))
+
+
+@pytest.mark.parametrize('url,expected', [
+    ('https://www.dailymail.co.uk/tvshowbiz/article-1.html', 'dailymail.co.uk'),
+    ('variety.com/2017/biz/news/tax-march', 'variety.com'),
+    ('HTTP://WWW2.Example.com:8080/a?b=c', 'example.com'),
+    ('https://user@site.org/x', 'site.org'),
+    (None, 'NONE'), ('', 'NONE'), (float('nan'), 'NONE'),
+])
+def test_domain(url, expected):
+    assert domain(url) == expected
+
+
+def test_metadata_normalization_matches_liar_conventions():
+    assert normalize_meta('speaker', 'Barack Obama') == 'barack-obama'
+    assert normalize_meta('party', ' Democrat ') == 'democrat'
+    assert normalize_meta('subject', 'Health care, Taxes') == 'health-care,taxes'
+    assert normalize_meta('state', '') == 'NA'
+    assert normalize_meta('job', None) == 'NA'
+
+
+def tiny_stack(alpha=.5, threshold=.5):
+    titles = ['shocking secret revealed', 'shocking truth exposed', 'you will not believe this', 'secret exposed now',
+              'senate passes budget bill', 'court rules on budget', 'senate votes on bill', 'court passes new rule'] * 3
+    labels = (['fake'] * 4 + ['real'] * 4) * 3
+    urls = ['https://hoax.example/a'] * 4 + ['https://news.example/b'] * 4
+    frame = pd.DataFrame({'key': titles, 'domain': [domain(u) for u in urls * 3], 'label': labels})
+    feats = FakeNewsFeatures(True).fit(frame)
+    lr = LogisticRegression(max_iter=1000).fit(feats.transform(frame), frame.label)
+    return StackedClassifier('unused.joblib', feats, lr, alpha, ['fake', 'real'], threshold=threshold, positive='fake').set_base(FixedBase(['real', 'fake'], [.4, .6]))
+
+
+def test_stacking_is_weighted_average_with_aligned_classes():
+    stack = tiny_stack(alpha=.5)
+    texts, urls = ['shocking secret exposed'], ['https://hoax.example/x']
+    lr = stack.lr_proba(stack.features.frame(texts, urls))
+    # base returns columns [real, fake] -> must be realigned to [fake, real]
+    np.testing.assert_allclose(stack.predict_proba(texts, urls), .5 * np.array([[.6, .4]]) + .5 * lr)
+    assert stack.predict(texts, urls)[0] == 'fake'
+
+
+def test_alpha_one_equals_stage1_and_threshold_is_used():
+    stack = tiny_stack(alpha=1., threshold=.65)
+    np.testing.assert_allclose(stack.predict_proba(['anything']), [[.6, .4]])
+    assert stack.predict(['anything'])[0] == 'real'  # 0.6 < 0.65
+    stack.threshold = .55
+    assert stack.predict(['anything'])[0] == 'fake'
+
+
+def test_pickle_never_contains_the_neural_base(tmp_path):
+    stack = tiny_stack()
+    path = tmp_path / 's.joblib'; joblib.dump(stack, path)
+    loaded = joblib.load(path)
+    assert loaded._base is None and loaded.base_path == 'unused.joblib'
+
+
+V2 = ROOT / 'models/fakenewsnet_v2.joblib'
+
+
+@pytest.mark.skipif(not V2.exists(), reason='run python -m fakenews.improve_v2 first')
+def test_saved_fakenewsnet_v2_reproduces_reported_test_predictions():
+    artifact = joblib.load(V2)
+    man = pd.read_csv(ROOT / 'reports/fakenewsnet/split_manifest.csv')
+    te = man[man.split == 'test'].reset_index(drop=True)
+    saved = pd.read_csv(ROOT / 'reports/v2/fakenewsnet_v2_test_predictions.csv')
+    assert (saved.id.values == te.id.values).all()
+    urls = pd.concat([pd.read_csv(p, usecols=['id', 'news_url']) for p in [ROOT / f'data/raw/fakenewsnet/{s}_{l}.csv' for s in ['politifact', 'gossipcop'] for l in ['fake', 'real']]]).drop_duplicates('id')
+    te = te.merge(urls, on='id', how='left')
+    base = np.load(ROOT / 'reports/optimization/fakenewsnet/test_probabilities.npy')
+    for kind, column in [('text', 'stack_neural+word+char'), ('domain', 'stack_neural+word+char+domain')]:
+        model = artifact['models'][kind]
+        frame = model.features.frame(te.text.tolist(), te.news_url.tolist())
+        pred = model.decide(model.combine(base, frame))
+        assert (pred == saved[column].values).all()
+        assert (pred == te.label.values).mean() == pytest.approx(artifact['metrics'][kind]['accuracy'], abs=5e-5)
+    assert artifact['metrics']['domain']['macro_f1'] > artifact['metrics']['text']['macro_f1']
+
+
+@pytest.fixture
+def stub_models(monkeypatch):
+    """Route the API through stage-2 logic with stub stage-1 models (no torch)."""
+    class Stage1(FixedBase):
+        pass
+    vocabulary = type('V', (), {'transform': staticmethod(lambda texts: type('X', (), {'nnz': 1})())})()
+    stage1 = {'model': Stage1(['fake', 'real'], [.3, .7]), 'vocabulary_gate': vocabulary, 'training_keys': set(), 'metrics': {}}
+    stack = tiny_stack(alpha=.5)
+    v2 = {'models': {'text': stack, 'domain': stack, 'metadata': stack}, 'metrics': {'text': {}, 'domain': {}, 'metadata': {}}}
+    monkeypatch.setattr(app_module, 'load_model', lambda dataset: stage1)
+    monkeypatch.setattr(app_module, 'load_v2', lambda dataset: v2)
+    return stack
+
+
+def analyze(**body):
+    return client.post('/analyze', json={'text': 'Shocking secret exposed', **body})
+
+
+def test_api_uses_domain_model_only_with_url(stub_models):
+    with_url = analyze(dataset='fakenewsnet', source_url='https://hoax.example/story').json()
+    assert with_url['model_version'] == 'stage2_domain' and with_url['source_domain_used']
+    without = analyze(dataset='fakenewsnet').json()
+    assert without['model_version'] == 'stage2_text' and not without['source_domain_used']
+
+
+def test_api_keeps_evaluated_stage1_thresholds_for_other_modes(stub_models):
+    result = analyze(dataset='fakenewsnet', decision_mode='high_recall', source_url='https://hoax.example/x').json()
+    assert result['model_version'] == 'stage1'
+
+
+def test_api_explicit_stage1_request(stub_models):
+    assert analyze(dataset='fakenewsnet', source_url='https://hoax.example/x', model='stage1').json()['model_version'] == 'stage1'
+
+
+def test_api_liar_metadata_switches_to_stage2(stub_models):
+    assert analyze(dataset='liar').json()['model_version'] == 'stage1'
+    assert analyze(dataset='liar', metadata={'speaker': '  '}).json()['model_version'] == 'stage1'
+    assert analyze(dataset='liar', metadata={'speaker': 'Barack Obama', 'party': 'democrat'}).json()['model_version'] == 'stage2_metadata'
+
+
+@pytest.mark.parametrize('url', ['not a url', 'javascript:alert(1)', 'http://', 'x' * 2001])
+def test_api_rejects_invalid_source_url(stub_models, url):
+    assert analyze(dataset='fakenewsnet', source_url=url).status_code == 422

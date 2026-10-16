@@ -1,0 +1,28 @@
+{
+  "dataset": "liar",
+  "model_prediction": "barely-true",
+  "prediction_status": "statistical_prediction",
+  "seen_in_training": false,
+  "warning": "A text classifier prediction is not a factual verdict. English only. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.",
+  "evidence": {
+    "status": "verified_local_match",
+    "verdict": "false",
+    "correction": "The Sun is a star, not a planet.",
+    "sources": [
+      {
+        "id": "sun-planet",
+        "claims": [
+          "The Sun is a planet.",
+          "The sun is not a star."
+        ],
+        "verdict": "false",
+        "correction": "The Sun is a star, not a planet.",
+        "publisher": "NASA",
+        "url": "https://science.nasa.gov/sun/facts/",
+        "checked_on": "2026-09-29"
+      }
+    ],
+    "online_status": "not_needed",
+    "method": "exact match to a manually curated claim; four demonstration records"
+  }
+}

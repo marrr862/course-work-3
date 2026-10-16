@@ -1,0 +1,302 @@
+[
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.92,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.85,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8333333333333334,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.85,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.85,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.85,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.92,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8333333333333334,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.92,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.92,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.92,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.97,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8333333333333334,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.97,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.97,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "lexical",
+      "threshold": 0.97,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.85,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.832010582010582,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.85,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.85,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.85,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9259259259259259,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.92,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8333333333333334,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.92,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.92,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.92,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.97,
+      "limit": 1
+    },
+    "count": 12,
+    "accuracy": 0.8333333333333334,
+    "macro_f1": 0.8333333333333334,
+    "wrong_corrections": 0,
+    "corrections": 3
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.97,
+      "limit": 3
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.97,
+      "limit": 5
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  },
+  {
+    "config": {
+      "ranking": "semantic",
+      "threshold": 0.97,
+      "limit": 16
+    },
+    "count": 12,
+    "accuracy": 0.9166666666666666,
+    "macro_f1": 0.9153439153439153,
+    "wrong_corrections": 0,
+    "corrections": 4
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "epoch": 1,
+    "tuning_pair_macro_f1": 0.7122834193638051,
+    "tuning_pair_accuracy": 0.7628458498023716,
+    "seconds": 316.27127454199945
+  },
+  {
+    "epoch": 2,
+    "tuning_pair_macro_f1": 0.7069753233989428,
+    "tuning_pair_accuracy": 0.7509881422924901,
+    "seconds": 342.59582787500403
+  },
+  {
+    "epoch": 3,
+    "tuning_pair_macro_f1": 0.7500746069725924,
+    "tuning_pair_accuracy": 0.7944664031620553,
+    "seconds": 495.83923662500456
+  }
+]

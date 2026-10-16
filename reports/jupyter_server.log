@@ -1,0 +1,139 @@
+[I 2026-10-01 21:53:53.905 ServerApp] jupyter_lsp | extension was successfully linked.
+[I 2026-10-01 21:53:53.906 ServerApp] jupyter_server_terminals | extension was successfully linked.
+[I 2026-10-01 21:53:53.908 ServerApp] jupyterlab | extension was successfully linked.
+[I 2026-10-01 21:53:53.931 ServerApp] notebook_shim | extension was successfully linked.
+[I 2026-10-01 21:53:53.946 ServerApp] notebook_shim | extension was successfully loaded.
+[I 2026-10-01 21:53:53.947 ServerApp] jupyter_lsp | extension was successfully loaded.
+[I 2026-10-01 21:53:53.948 ServerApp] jupyter_server_terminals | extension was successfully loaded.
+[I 2026-10-01 21:53:53.948 LabApp] JupyterLab extension loaded from /Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/jupyterlab
+[I 2026-10-01 21:53:53.948 LabApp] JupyterLab application directory is /Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/share/jupyter/lab
+[I 2026-10-01 21:53:53.948 LabApp] Extension Manager is 'pypi'.
+[I 2026-10-01 21:53:53.968 ServerApp] jupyterlab | extension was successfully loaded.
+[I 2026-10-01 21:53:53.968 ServerApp] Serving notebooks from local directory: /Users/macbook/Desktop/FakeNewsNet-master/practical
+[I 2026-10-01 21:53:53.968 ServerApp] Jupyter Server 2.21.1 is running at:
+[I 2026-10-01 21:53:53.968 ServerApp] http://127.0.0.1:8888/lab?token=3987aa795a0243c153978a125bba133eaf02ffcf377b0528
+[I 2026-10-01 21:53:53.968 ServerApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 2026-10-01 21:53:53.969 ServerApp] 
+    
+    To access the server, open this file in a browser:
+        file:/Users/macbook/Library/Jupyter/runtime/jpserver-11841-open.html
+    Or copy and paste one of these URLs:
+        http://127.0.0.1:8888/lab?token=3987aa795a0243c153978a125bba133eaf02ffcf377b0528
+[I 2026-10-01 21:53:54.088 ServerApp] Skipped non-installed server(s): basedpyright, bash-language-server, dockerfile-language-server-nodejs, javascript-typescript-langserver, jedi-language-server, julia-language-server, pyrefly, pyright, python-language-server, python-lsp-server, r-languageserver, sql-language-server, texlab, typescript-language-server, unified-language-server, vscode-css-languageserver-bin, vscode-html-languageserver-bin, vscode-json-languageserver-bin, yaml-language-server
+[I 2026-10-01 21:54:22.777 LabApp] Build is up to date
+[W 2026-10-01 21:54:23.777 ServerApp] Notebook Final_Practical.ipynb is not trusted
+[I 2026-10-01 21:54:24.010 ServerApp] Kernel started: 7f1381db-b265-4109-a72a-429c2c9c2acf
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[E 2026-10-01 21:54:24.144 ServerApp] Uncaught exception GET /api/kernels/7f1381db-b265-4109-a72a-429c2c9c2acf/channels?session_id=48b65a59-9d0e-4c37-8fc5-ea25548e198f (127.0.0.1)
+    HTTPServerRequest(protocol='http', host='127.0.0.1:8888', method='GET', uri='/api/kernels/7f1381db-b265-4109-a72a-429c2c9c2acf/channels?session_id=48b65a59-9d0e-4c37-8fc5-ea25548e198f', version='HTTP/1.1', remote_ip='127.0.0.1')
+    Traceback (most recent call last):
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/tornado/web.py", line 1887, in _execute
+        result = await result
+                 ^^^^^^^^^^^^
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/jupyter_server/services/kernels/websocket.py", line 66, in get
+        await super().get(kernel_id=kernel_id)
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/tornado/websocket.py", line 277, in get
+        await self.ws_connection.accept_connection(self)
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/tornado/websocket.py", line 890, in accept_connection
+        await self._accept_connection(handler)
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/tornado/websocket.py", line 930, in _accept_connection
+        self.selected_subprotocol = handler.select_subprotocol(subprotocols)
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+      File "/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/jupyter_server/services/kernels/websocket.py", line 88, in select_subprotocol
+        preferred_protocol = self.connection.kernel_ws_protocol
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    AttributeError: 'NoneType' object has no attribute 'kernel_ws_protocol'
+[E 2026-10-01 21:54:24.152 ServerApp] {
+      "Host": "127.0.0.1:8888",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.7922.34 Safari/537.36"
+    }
+[E 2026-10-01 21:54:24.152 ServerApp] 500 GET /api/kernels/7f1381db-b265-4109-a72a-429c2c9c2acf/channels?session_id=48b65a59-9d0e-4c37-8fc5-ea25548e198f (dd33433e7c7947feb93be13060a305d2@127.0.0.1) 137.98ms referer=None
+[I 2026-10-01 21:54:46.805 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-01 21:54:46.806 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[W 2026-10-01 21:54:46.807 ServerApp] The websocket_ping_timeout (90000) cannot be longer than the websocket_ping_interval (30000).
+    Setting websocket_ping_timeout=30000
+[I 2026-10-01 21:54:47.396 LabApp] Build is up to date
+[W 2026-10-01 21:54:48.242 ServerApp] Notebook Final_Practical.ipynb is not trusted
+[I 2026-10-01 21:54:48.465 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-01 21:54:48.465 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/nbformat/validator.py:434: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+  _validate(nbdict, ref, version, version_minor, relax_add_props)
+[W 2026-10-01 22:34:31.629 ServerApp] Notebook experiments.ipynb is not trusted
+[I 2026-10-01 22:34:31.706 ServerApp] Kernel started: 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+[I 2026-10-01 22:34:31.941 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:34:31.941 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:34:31.946 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:6979fec8-4746-4d39-9850-c9527ac97379
+[I 2026-10-01 22:34:31.954 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:34:31.954 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:34:31.966 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:34:31.966 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:36:32.397 ServerApp] Saving file at /experiments.ipynb
+[I 2026-10-01 22:44:46.618 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-01 22:44:46.623 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:44:46.623 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:44:46.623 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-01 22:44:46.638 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-01 22:44:46.639 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-01 22:45:03.247 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-01 22:45:03.251 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-01 22:45:03.251 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-01 22:45:03.262 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:45:03.263 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:45:03.263 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-01 22:49:25.377 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-01 22:49:25.381 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-01 22:49:25.382 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-01 22:49:25.397 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-01 22:49:25.397 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-01 22:49:25.397 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 12:56:06.890 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 12:56:06.895 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 12:56:06.895 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 12:56:06.895 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 12:56:06.912 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 12:56:06.912 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 13:41:03.311 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 13:41:03.312 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 13:41:03.312 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 13:41:03.325 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 13:41:03.325 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 13:41:03.325 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 13:51:36.313 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 13:51:36.319 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 13:51:36.320 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 13:51:36.320 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 13:51:36.332 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 13:51:36.332 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 13:56:18.637 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 13:56:18.639 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 13:56:18.640 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 13:56:18.655 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 13:56:18.656 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 13:56:18.656 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 15:10:37.901 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 15:10:37.905 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 15:10:37.906 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 15:10:37.917 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 15:10:37.917 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 15:10:37.917 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 16:14:48.515 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 16:14:48.518 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 16:14:48.519 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 16:14:48.519 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 16:14:48.533 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 16:14:48.534 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 17:19:47.606 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 17:19:47.608 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 17:19:47.608 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[I 2026-10-02 17:19:47.623 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 17:19:47.624 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 17:19:47.624 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 19:13:48.062 ServerApp] Starting buffering for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 19:13:48.084 ServerApp] Adapting from protocol version 5.3 (kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d) to 5.4 (client).
+[I 2026-10-02 19:13:48.085 ServerApp] Connecting to kernel 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d.
+[I 2026-10-02 19:13:48.085 ServerApp] Restoring connection for 6c5bde9b-59e7-42d0-92a9-5d59dd509f7d:66533780-829c-418a-99ba-0d9e277b7596
+[I 2026-10-02 19:13:48.097 ServerApp] Adapting from protocol version 5.3 (kernel 7f1381db-b265-4109-a72a-429c2c9c2acf) to 5.4 (client).
+[I 2026-10-02 19:13:48.097 ServerApp] Connecting to kernel 7f1381db-b265-4109-a72a-429c2c9c2acf.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+[IPKernelApp] WARNING | Parent appears to have exited, shutting down.

@@ -1,0 +1,93 @@
+{
+  "caveat": "Raw model scores are not calibrated truth probabilities. These are descriptive test curves, not test-selected deployment thresholds.",
+  "results": {
+    "liar": [
+      {
+        "minimum_raw_model_score": 0.0,
+        "answered": 1262,
+        "total": 1262,
+        "coverage": 1.0,
+        "accuracy_on_answered": 0.2630744849445325
+      },
+      {
+        "minimum_raw_model_score": 0.5,
+        "answered": 5,
+        "total": 1262,
+        "coverage": 0.003961965134706815,
+        "accuracy_on_answered": 0.2
+      },
+      {
+        "minimum_raw_model_score": 0.6,
+        "answered": 0,
+        "total": 1262,
+        "coverage": 0.0,
+        "accuracy_on_answered": null
+      },
+      {
+        "minimum_raw_model_score": 0.7,
+        "answered": 0,
+        "total": 1262,
+        "coverage": 0.0,
+        "accuracy_on_answered": null
+      },
+      {
+        "minimum_raw_model_score": 0.8,
+        "answered": 0,
+        "total": 1262,
+        "coverage": 0.0,
+        "accuracy_on_answered": null
+      },
+      {
+        "minimum_raw_model_score": 0.9,
+        "answered": 0,
+        "total": 1262,
+        "coverage": 0.0,
+        "accuracy_on_answered": null
+      }
+    ],
+    "fakenewsnet": [
+      {
+        "minimum_raw_model_score": 0.0,
+        "answered": 3239,
+        "total": 3239,
+        "coverage": 1.0,
+        "accuracy_on_answered": 0.8570546464958321
+      },
+      {
+        "minimum_raw_model_score": 0.5,
+        "answered": 3239,
+        "total": 3239,
+        "coverage": 1.0,
+        "accuracy_on_answered": 0.8570546464958321
+      },
+      {
+        "minimum_raw_model_score": 0.6,
+        "answered": 2992,
+        "total": 3239,
+        "coverage": 0.9237418956468045,
+        "accuracy_on_answered": 0.883355614973262
+      },
+      {
+        "minimum_raw_model_score": 0.7,
+        "answered": 2692,
+        "total": 3239,
+        "coverage": 0.8311207162704538,
+        "accuracy_on_answered": 0.9093610698365527
+      },
+      {
+        "minimum_raw_model_score": 0.8,
+        "answered": 2372,
+        "total": 3239,
+        "coverage": 0.7323247916023464,
+        "accuracy_on_answered": 0.928752107925801
+      },
+      {
+        "minimum_raw_model_score": 0.9,
+        "answered": 1769,
+        "total": 3239,
+        "coverage": 0.5461562210558815,
+        "accuracy_on_answered": 0.9519502543810062
+      }
+    ]
+  }
+}

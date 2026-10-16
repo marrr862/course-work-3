@@ -1,0 +1,25 @@
+{
+  "pages": 14,
+  "all_pages_visually_reviewed": true,
+  "final_render": "reports/docx_reliability_verified",
+  "unchanged_pages_verified_by_pixel_hash": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    13,
+    14
+  ],
+  "final_changed_pages_inspected": [
+    9,
+    10,
+    11,
+    12
+  ],
+  "docx_sha256": "72ea7664adf66a9a6f769e5b35fa38494b8a67e0127b07faa52c8a58644b9791",
+  "layout": "passed"
+}

@@ -1,0 +1,22 @@
+BUILDING SCIENTIFIC INDEX
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 10703.47it/s]
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 8972.50it/s]
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9324.70it/s]
+tuning_scored.json 1 / 150
+tuning_scored.json 11 / 150
+tuning_scored.json 21 / 150
+tuning_scored.json 31 / 150
+tuning_scored.json 41 / 150
+tuning_scored.json 51 / 150
+tuning_scored.json 61 / 150
+tuning_scored.json 71 / 150
+tuning_scored.json 81 / 150
+tuning_scored.json 91 / 150
+tuning_scored.json 101 / 150
+tuning_scored.json 111 / 150
+tuning_scored.json 121 / 150
+tuning_scored.json 131 / 150
+tuning_scored.json 141 / 150
+FROZEN SELECTION {"count": 150, "accuracy": 0.49333333333333335, "macro_f1_three_gold_classes": 0.43275411488707266, "decisive_count": 32, "coverage": 0.21333333333333335, "accuracy_on_decisive": 0.65625, "refutation_precision": 0.5238095238095238, "evidence_document_recall_at_k": 0.8085106382978723, "retrieval_evaluable_claims": 94, "configuration": {"weight": 1.0, "limit": 3, "threshold": 0.8, "minimum_similarity": 0.45}, "classification_report": {"insufficient_evidence": {"precision": 0.4491525423728814, "recall": 0.9464285714285714, "f1-score": 0.6091954022988506, "support": 56.0}, "refuted_by_sources": {"precision": 0.5238095238095238, "recall": 0.34375, "f1-score": 0.41509433962264153, "support": 32.0}, "supported_by_sources": {"precision": 0.9090909090909091, "recall": 0.16129032258064516, "f1-score": 0.273972602739726, "support": 62.0}, "accuracy": 0.49333333333333335, "macro avg": {"precision": 0.6273509917577714, "recall": 0.4838229646697389, "f1-score": 0.43275411488707277, "support": 150.0}, "weighted avg": {"precision": 0.6551872233228165, "recall": 0.49333333333333335, "f1-score": 0.42922841844348786, "support": 150.0}}}

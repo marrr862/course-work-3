@@ -1,0 +1,110 @@
+[
+  {
+    "input": "France's capital city is Berlin.",
+    "status": "correction_proposed",
+    "claims": [
+      {
+        "claim": "France's capital city is Berlin.",
+        "status": "refuted_by_sources",
+        "correction": "Its capital, largest city and main cultural and economic centre is Paris, with a metropolitan population of over 13 million.",
+        "correction_method": "verbatim_source_sentence",
+        "correction_source": {
+          "id": "wiki-5843419",
+          "title": "France",
+          "url": "https://en.wikipedia.org/w/index.php?oldid=1377056769",
+          "publisher": "Wikipedia",
+          "source_type": "encyclopedia",
+          "delivery": "live_search",
+          "retrieved_at": "2026-09-29T15:13:10.495550+00:00",
+          "sha256": "c173bd25b8b5e1206e750982783226a84aa5fc9b9f700f63de5ff3d0b9085b88"
+        },
+        "evidence": [
+          {
+            "text": "Its capital, largest city and main cultural and economic centre is Paris, with a metropolitan population of over 13 million.",
+            "source": {
+              "id": "wiki-5843419",
+              "title": "France",
+              "url": "https://en.wikipedia.org/w/index.php?oldid=1377056769",
+              "publisher": "Wikipedia",
+              "source_type": "encyclopedia",
+              "delivery": "live_search",
+              "retrieved_at": "2026-09-29T15:13:10.495550+00:00",
+              "sha256": "c173bd25b8b5e1206e750982783226a84aa5fc9b9f700f63de5ff3d0b9085b88"
+            },
+            "similarity": 0.2944229918644073,
+            "nli_scores": {
+              "contradiction": 0.999664306640625,
+              "entailment": 3.479426231933758e-05,
+              "neutral": 0.00030091844382695854
+            }
+          }
+        ]
+      }
+    ],
+    "corrected_text": "According to France: Its capital, largest city and main cultural and economic centre is Paris, with a metropolitan population of over 13 million. [https://en.wikipedia.org/w/index.php?oldid=1377056769]",
+    "provider_errors": [],
+    "source_count": 15,
+    "elapsed_seconds": 3.607,
+    "mode": "live_and_cached",
+    "method": "Retrieved evidence scored by a pretrained NLI model; corrections quote source sentences and retain attribution.",
+    "caveat": "Automated evidence-relative assessment, not guaranteed truth. Source dates, context, source reliability and model errors require consideration. NLI scores are not calibrated probabilities of truth."
+  },
+  {
+    "input": "France's capital city is Paris.",
+    "status": "supported_by_sources",
+    "claims": [
+      {
+        "claim": "France's capital city is Paris.",
+        "status": "supported_by_sources",
+        "correction": null,
+        "evidence": [
+          {
+            "text": "Its capital, largest city and main cultural and economic centre is Paris, with a metropolitan population of over 13 million.",
+            "source": {
+              "id": "wiki-5843419",
+              "title": "France",
+              "url": "https://en.wikipedia.org/w/index.php?oldid=1377056769",
+              "publisher": "Wikipedia",
+              "source_type": "encyclopedia",
+              "delivery": "live_search",
+              "retrieved_at": "2026-09-29T15:13:13.992647+00:00",
+              "sha256": "c173bd25b8b5e1206e750982783226a84aa5fc9b9f700f63de5ff3d0b9085b88"
+            },
+            "similarity": 0.3552960514726744,
+            "nli_scores": {
+              "contradiction": 0.0001789767702575773,
+              "entailment": 0.9978673458099365,
+              "neutral": 0.0019535848405212164
+            }
+          },
+          {
+            "text": "The president of France and both houses of the French Parliament sit in Paris.",
+            "source": {
+              "id": "wiki-22989",
+              "title": "Paris",
+              "url": "https://en.wikipedia.org/w/index.php?oldid=1377460894",
+              "publisher": "Wikipedia",
+              "source_type": "encyclopedia",
+              "delivery": "live_search",
+              "retrieved_at": "2026-09-29T15:13:13.992667+00:00",
+              "sha256": "e63e8a477d9f6895e1c0644c799d68cbd55099bd357e7334e112e3595daa88b6"
+            },
+            "similarity": 0.1714797938432989,
+            "nli_scores": {
+              "contradiction": 0.0007665478624403477,
+              "entailment": 0.959851861000061,
+              "neutral": 0.03938165679574013
+            }
+          }
+        ]
+      }
+    ],
+    "corrected_text": null,
+    "provider_errors": [],
+    "source_count": 15,
+    "elapsed_seconds": 0.819,
+    "mode": "live_and_cached",
+    "method": "Retrieved evidence scored by a pretrained NLI model; corrections quote source sentences and retain attribution.",
+    "caveat": "Automated evidence-relative assessment, not guaranteed truth. Source dates, context, source reliability and model errors require consideration. NLI scores are not calibrated probabilities of truth."
+  }
+]

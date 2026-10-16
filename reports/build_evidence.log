@@ -1,0 +1,17 @@
+{
+  "source_url": "https://raw.githubusercontent.com/Tariq60/LIAR-PLUS/992bfd97555631e48b6bddb1a87aa61c51ee1197/dataset/tsv/train2.tsv",
+  "commit": "992bfd97555631e48b6bddb1a87aa61c51ee1197",
+  "sha256": "63adafa9360f43788fb16499871ff7665143c554fc8a3cce1af846233ce53f07",
+  "raw_rows": 10242,
+  "indexed_records": 10090,
+  "excluded": {
+    "not_in_clean_train": 30,
+    "mismatched_claim_or_label": 6,
+    "missing_explanation": 116
+  },
+  "classifier_training_changed": false,
+  "allowed_split": "cleaned LIAR train only",
+  "retrieval": "0.65 word TF-IDF cosine + 0.35 character TF-IDF cosine",
+  "automatic_application": "exact archived claim match only; all other candidates require review",
+  "license": "Research use only; original sources retain copyright"
+}

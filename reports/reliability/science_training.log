@@ -1,0 +1,23 @@
+/Users/macbook/Desktop/FakeNewsNet-master/practical/.venv/lib/python3.14/site-packages/torch/jit/_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Loading weights:   0%|          | 0/106 [00:00<?, ?it/s]Loading weights: 100%|██████████| 106/106 [00:00<00:00, 13159.57it/s]
+epoch 1 pairs 0 / 1581 loss 2.981
+epoch 1 pairs 320 / 1581 loss 0.7803
+epoch 1 pairs 640 / 1581 loss 0.9803
+epoch 1 pairs 960 / 1581 loss 0.0558
+epoch 1 pairs 1280 / 1581 loss 0.5701
+{"epoch": 1, "tuning_pair_macro_f1": 0.7122834193638051, "tuning_pair_accuracy": 0.7628458498023716, "seconds": 316.27127454199945}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  3.54it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  3.50it/s]
+epoch 2 pairs 0 / 1581 loss 0.2291
+epoch 2 pairs 320 / 1581 loss 0.1168
+epoch 2 pairs 640 / 1581 loss 0.7802
+epoch 2 pairs 960 / 1581 loss 0.4489
+epoch 2 pairs 1280 / 1581 loss 0.5133
+{"epoch": 2, "tuning_pair_macro_f1": 0.7069753233989428, "tuning_pair_accuracy": 0.7509881422924901, "seconds": 342.59582787500403}
+epoch 3 pairs 0 / 1581 loss 0.4179
+epoch 3 pairs 320 / 1581 loss 0.1919
+epoch 3 pairs 640 / 1581 loss 0.1467
+epoch 3 pairs 960 / 1581 loss 0.8642
+epoch 3 pairs 1280 / 1581 loss 0.6451
+{"epoch": 3, "tuning_pair_macro_f1": 0.7500746069725924, "tuning_pair_accuracy": 0.7944664031620553, "seconds": 495.83923662500456}
+Writing model shards:   0%|          | 0/1 [00:00<?, ?it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  3.07it/s]Writing model shards: 100%|██████████| 1/1 [00:00<00:00,  3.06it/s]

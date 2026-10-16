@@ -1,0 +1,9 @@
+{
+  "nli_model": "cross-encoder/nli-deberta-v3-small",
+  "threshold": 0.92,
+  "retrieval_min_similarity": 0.14,
+  "passages": 16,
+  "selection_basis": "12 development cases only",
+  "test_opened_for_tuning": false,
+  "verify_code_sha256": "5451d3cdbfef7655f4eb17b12a0671113b8291ef6f3a3990adb130bc74b5933a"
+}

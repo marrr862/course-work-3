@@ -1,0 +1,20 @@
+{
+  "raw_rows": 23196,
+  "empty_removed": 0,
+  "conflicting_rows_removed": 369,
+  "duplicates_removed": 1239,
+  "retained_rows": 21588,
+  "split_counts": {
+    "fake": {
+      "test": 779,
+      "train": 3638,
+      "valid": 779
+    },
+    "real": {
+      "test": 2460,
+      "train": 11473,
+      "valid": 2459
+    }
+  },
+  "text_overlap_between_splits": 0
+}

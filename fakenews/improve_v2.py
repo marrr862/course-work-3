@@ -177,8 +177,12 @@ def main():
     raw = a.raw or next(p for p in [ROOT / 'data/raw/fakenewsnet', ROOT.parent / 'dataset'] if (p / 'politifact_fake.csv').exists())
     out = ROOT / 'reports/v2'; out.mkdir(parents=True, exist_ok=True)
     pd.set_option('display.width', 200)
-    print(fakenewsnet(raw, out, not a.no_save).to_string(index=False))
-    print(liar(out, not a.no_save).to_string(index=False))
+    fnn = fakenewsnet(raw, out, not a.no_save)
+    print('FakeNewsNet (test):')
+    print(fnn[['model', 'threshold', 'val_macro_f1', 'accuracy', 'macro_f1', 'fake_precision', 'fake_recall']].to_string(index=False))
+    print('\nLIAR (test):')
+    print(liar(out, not a.no_save)[['task', 'model', 'accuracy', 'macro_f1']].to_string(index=False))
+    print('\nFull tables: reports/v2/')
 
 
 if __name__ == '__main__':

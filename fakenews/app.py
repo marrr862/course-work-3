@@ -74,6 +74,15 @@ def load_v2(dataset):
     return joblib.load(path) if path.exists() else None
 
 
+@lru_cache(maxsize=2)
+def load_v3(dataset):
+    """Stage-3 models (larger fine-tuned transformer), or None when not trained."""
+    registry_path = ROOT / 'models/active_models.json'
+    registry = json.loads(registry_path.read_text()) if registry_path.exists() else {}
+    path = ROOT / registry.get(f'{dataset}_v3', f'models/{dataset}_v3.joblib')
+    return joblib.load(path) if path.exists() and (ROOT / f'models/{dataset}_large').exists() else None
+
+
 def stage2(request, artifact):
     """Pick the stage-2 model that fits the supplied inputs; None means use stage 1."""
     v2 = load_v2(request.dataset)
@@ -81,6 +90,11 @@ def stage2(request, artifact):
         return None
     if request.dataset == 'fakenewsnet':
         kind = 'domain' if request.source_url else 'text'
+        v3 = load_v3('fakenewsnet')
+        if v3 is not None:
+            model = v3['models'][kind]
+            model.set_base(artifact['model'])
+            return f'stage3_{kind}', model, model.predict_proba([request.text], urls=[request.source_url])[0]
         model = v2['models'][kind]
         model.set_base(artifact['model'])
         return f'stage2_{kind}', model, model.predict_proba([request.text], urls=[request.source_url])[0]
@@ -100,7 +114,7 @@ def home():
 def health():
     ready = {name: (ROOT / 'models' / f'{name}.joblib').exists() for name in ['liar', 'fakenewsnet']}
     stage2_ready = {name: load_v2(name) is not None for name in ['liar', 'fakenewsnet']}
-    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'language': 'en', 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
+    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'stage3_models': {'fakenewsnet': load_v3('fakenewsnet') is not None}, 'language': 'en', 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
 
 
 @app.get('/metrics')
@@ -110,6 +124,9 @@ def get_metrics():
         v2 = load_v2(name)
         if v2 is not None:
             result[f'{name}_stage2'] = v2['metrics']
+    v3 = load_v3('fakenewsnet')
+    if v3 is not None:
+        result['fakenewsnet_stage3'] = v3['metrics']
     return result
 
 
@@ -147,7 +164,7 @@ def analyze(request: Request):
             prediction = str(stacked.decide(scores[None, :])[0])
             threshold = stacked.threshold
     fact_check = evidence.search(request.text, online=request.online)
-    return {'model_version': model_version, 'source_domain_used': model_version == 'stage2_domain', 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. English only. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check}
+    return {'model_version': model_version, 'source_domain_used': model_version.endswith('_domain'), 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. English only. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check}
 
 
 class VerifyRequest(Request):

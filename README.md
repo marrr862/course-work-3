@@ -146,6 +146,28 @@ NLI մոդելը մոտ 0.6 GB է և տեղադրվում է տեղային `mod
 
 API-ն ինքնաշխատ ընտրում է մոդելը․ `/analyze` հարցման մեջ `source_url` (FakeNewsNet) կամ `metadata` (LIAR՝ speaker, party, state, job, context, subject) դաշտերի առկայության դեպքում օգտագործվում է փուլ 2-ի համապատասխան մոդելը։ Հղման էջը չի բեռնվում, օգտագործվում է միայն տիրույթը։ `balanced` և `high_recall` ռեժիմները, ինչպես նաև `"model": "stage1"` պարամետրը, պահպանում են փուլ 1-ի գնահատված մոդելը։ Պատասխանի `model_version` դաշտը ցույց է տալիս, թե որ մոդելն է օգտագործվել։ Փուլ 2-ի արտեֆակտները չեն պարունակում նեյրոնային կշիռները․ դրանք բեռնում են փուլ 1-ի մոդելը `models/active_models.json`-ով։
 
+
+### Փուլ 3՝ RoBERTa-base
+
+`roberta-base` մոդելը լրացուցիչ ուսուցվել է FakeNewsNet-ի վերնագրերով (MPS, 4 epoch, լավագույնը՝ 2-րդը) և համադրվել է փուլ 1-ի և փուլ 2-ի բաղադրիչների հետ։ Կշիռներն ու շեմը ընտրված են validation-ով։
+
+| Մոդել | Test accuracy | Test macro-F1 |
+|---|---:|---:|
+| Փուլ 3, միայն տեքստ | 86.05% | 80.77% |
+| Փուլ 3, տեքստ + տիրույթ | 87.90% | 82.65% |
+
+```bash
+.venv/bin/python -m fakenews.train_large --dataset fakenewsnet --model roberta-base   # ~25 րոպե M4-ի վրա
+.venv/bin/python -m fakenews.train_large --dataset fakenewsnet --build-only           # միայն արտեֆակտը
+```
+
+### Telegram բոտ
+
+1. @BotFather-ով ստեղծիր բոտ և token-ը գրիր `.env` ֆայլում՝ `TELEGRAM_BOT_TOKEN=...` (ֆայլը git-ում չի պահվում)։
+2. Գործարկիր `./telegram_bot.command` կամ `.venv/bin/python -m fakenews.telegram_bot`։
+
+Բոտը ընդունում է անգլերեն վերնագիր (ցանկության դեպքում՝ հղումով) և հայերենով վերադարձնում է դասակարգումը, աղբյուրներով ստուգումը և արխիվային համընկնումը։ `/liar <պնդում>` հրամանը գնահատում է քաղաքական պնդումը։ Բոտն աշխատում է long polling-ով, հաղորդագրությունները չի պահում։
+
 ### Reliability modes and scientific evidence
 
 The default FakeNewsNet threshold remains 0.50. `decision_mode` on `/analyze` also accepts `balanced` (0.47) or `high_recall` (0.30). Thresholds were selected on validation only. The high-recall mode catches more fake headlines but raises more false alarms; model scores are not calibrated truth probabilities. See `reports/reliability/decision_modes_test.json` for the full tradeoff. Coverage curves are descriptive and are not deployed as confidence guarantees.

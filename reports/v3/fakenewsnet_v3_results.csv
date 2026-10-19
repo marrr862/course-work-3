@@ -1,0 +1,6 @@
+model,threshold,val_macro_f1,accuracy,macro_f1,macro_precision,macro_recall,fake_precision,fake_recall
+large_alone,0.5,0.8074,0.8589,0.8022,0.8101,0.7953,0.7218,0.6727
+stage2_text,0.5,0.8102,0.858,0.7982,0.8111,0.7876,0.7288,0.6521
+"stage3_text (large=0.4, stage1=0.5)",0.45,0.8179,0.8605,0.8077,0.8099,0.8055,0.7143,0.6996
+stage2_domain,0.55,0.8233,0.8743,0.8177,0.8408,0.8006,0.7844,0.6585
+"stage3_domain (large=0.2, stage1=0.2)",0.54,0.832,0.879,0.8265,0.8444,0.8124,0.785,0.6842

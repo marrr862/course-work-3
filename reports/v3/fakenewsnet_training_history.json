@@ -1,0 +1,26 @@
+[
+  {
+    "epoch": 1,
+    "val_macro_f1": 0.7249,
+    "mean_loss": 0.4946,
+    "seconds": 288.6
+  },
+  {
+    "epoch": 2,
+    "val_macro_f1": 0.8074,
+    "mean_loss": 0.3533,
+    "seconds": 322.7
+  },
+  {
+    "epoch": 3,
+    "val_macro_f1": 0.8031,
+    "mean_loss": 0.2718,
+    "seconds": 340.8
+  },
+  {
+    "epoch": 4,
+    "val_macro_f1": 0.7976,
+    "mean_loss": 0.2113,
+    "seconds": 354.1
+  }
+]

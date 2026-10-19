@@ -1,0 +1,23 @@
+{
+  "model_id": "roberta-base",
+  "device": "mps",
+  "paired_macro_f1_delta_ci_vs_stage2_domain": {
+    "large_alone": [
+      -0.0306,
+      -0.0002
+    ],
+    "stage2_text": [
+      -0.0287,
+      -0.0093
+    ],
+    "stage3_text (large=0.4, stage1=0.5)": [
+      -0.021,
+      0.0013
+    ],
+    "stage3_domain (large=0.2, stage1=0.2)": [
+      0.0017,
+      0.0159
+    ]
+  },
+  "note": "All weights and thresholds chosen on validation; test evaluated once."
+}

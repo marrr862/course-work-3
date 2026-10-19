@@ -48,7 +48,7 @@ class TransformerClassifier:
         texts=list(texts);tok,model,lock=encoder(self.path,classification=True,device=device);rows=[]
         with lock,torch.inference_mode():
             for start in range(0,len(texts),48):
-                inputs=tok(texts[start:start+48],padding=True,truncation=True,max_length=128,return_tensors='pt').to(device)
+                inputs=tok(texts[start:start+48],padding=True,truncation=True,max_length=getattr(self,'max_length',128),return_tensors='pt').to(device)
                 rows.append(model(**inputs).logits.softmax(-1).cpu().numpy())
         return np.concatenate(rows)
     def predict(self,texts):return self.classes_[self.predict_proba(texts).argmax(1)]

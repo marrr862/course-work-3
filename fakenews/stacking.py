@@ -177,3 +177,44 @@ class StackedClassifier:
 
     def predict(self, texts, urls=None, metadata=None):
         return self.decide(self.predict_proba(texts, urls, metadata))
+
+
+class Stage3Classifier:
+    """p = w_large * p_large(text) + w_stage1 * p_stage1(text) + (1 - w_large - w_stage1) * p_LR(features).
+
+    Wraps a stage-2 StackedClassifier (its features, LR, threshold logic and lazily loaded
+    stage-1 model) and adds a larger fine-tuned transformer stored under models/.
+    """
+
+    def __init__(self, stage2, large_path, w_large, w_stage1, threshold, max_length=64):
+        from .advanced_models import TransformerClassifier
+        self.stage2 = stage2
+        self.large = TransformerClassifier(large_path, stage2.classes_)
+        self.large.max_length = max_length
+        self.w_large, self.w_stage1 = float(w_large), float(w_stage1)
+        self.threshold = threshold
+        self.positive = stage2.positive
+        self.classes_ = stage2.classes_
+
+    def set_base(self, model):
+        self.stage2.set_base(model)
+        return self
+
+    def combine(self, large_proba, stage1_proba, frame):
+        lr = self.stage2.lr_proba(frame)
+        return self.w_large * np.asarray(large_proba) + self.w_stage1 * np.asarray(stage1_proba) + (1 - self.w_large - self.w_stage1) * lr
+
+    def decide(self, probabilities):
+        k = list(self.classes_).index(self.positive)
+        other = [c for c in self.classes_ if c != self.positive][0]
+        return np.where(np.asarray(probabilities)[:, k] >= self.threshold, self.positive, other)
+
+    def predict_proba(self, texts, urls=None, metadata=None):
+        texts = list(texts)
+        s2 = self.stage2
+        stage1 = s2._align(s2.base.predict_proba(texts), s2.base.classes_)
+        large = s2._align(self.large.predict_proba(texts), self.large.classes_)
+        return self.combine(large, stage1, s2.features.frame(texts, urls, metadata))
+
+    def predict(self, texts, urls=None, metadata=None):
+        return self.decide(self.predict_proba(texts, urls, metadata))

@@ -109,6 +109,7 @@ def stub_models(monkeypatch):
     v2 = {'models': {'text': stack, 'domain': stack, 'metadata': stack}, 'metrics': {'text': {}, 'domain': {}, 'metadata': {}}}
     monkeypatch.setattr(app_module, 'load_model', lambda dataset: stage1)
     monkeypatch.setattr(app_module, 'load_v2', lambda dataset: v2)
+    monkeypatch.setattr(app_module, 'load_v3', lambda dataset: None)
     return stack
 
 
@@ -141,3 +142,25 @@ def test_api_liar_metadata_switches_to_stage2(stub_models):
 @pytest.mark.parametrize('url', ['not a url', 'javascript:alert(1)', 'http://', 'x' * 2001])
 def test_api_rejects_invalid_source_url(stub_models, url):
     assert analyze(dataset='fakenewsnet', source_url=url).status_code == 422
+
+
+def test_api_prefers_stage3_when_available(stub_models, monkeypatch):
+    v3 = {'models': {'text': stub_models, 'domain': stub_models}, 'metrics': {}}
+    monkeypatch.setattr(app_module, 'load_v3', lambda dataset: v3)
+    assert analyze(dataset='fakenewsnet').json()['model_version'] == 'stage3_text'
+    r = analyze(dataset='fakenewsnet', source_url='https://hoax.example/x').json()
+    assert r['model_version'] == 'stage3_domain' and r['source_domain_used']
+    assert analyze(dataset='liar', metadata={'speaker': 'x'}).json()['model_version'] == 'stage2_metadata'
+
+
+V3 = ROOT / 'models/fakenewsnet_v3.joblib'
+
+
+@pytest.mark.skipif(not V3.exists(), reason='run python -m fakenews.train_large first')
+def test_saved_stage3_reproduces_reported_metrics():
+    artifact = joblib.load(V3)
+    reported = pd.read_csv(ROOT / 'reports/v3/fakenewsnet_v3_results.csv')
+    for kind in ['text', 'domain']:
+        row = reported[reported.model.str.startswith(f'stage3_{kind}')].iloc[0]
+        assert artifact['metrics'][kind]['accuracy'] == pytest.approx(row.accuracy, abs=5e-5)
+        assert artifact['metrics'][kind]['macro_f1'] == pytest.approx(row.macro_f1, abs=5e-5)

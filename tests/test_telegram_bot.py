@@ -36,7 +36,7 @@ def test_parse_message(text, headline, url):
 def test_news_reply_uses_url_and_shows_correction():
     client = StubClient()
     answer = reply_for('Mars has no moons. https://example.com/story', Analyzer(client))
-    assert client.calls[0] == ('/analyze', {'text': 'Mars has no moons.', 'dataset': 'fakenewsnet', 'source_url': 'https://example.com/story'})
+    assert client.calls[0] == ('/analyze', {'text': 'Mars has no moons.', 'dataset': 'fakenewsnet', 'explain': True, 'source_url': 'https://example.com/story'})
     assert 'Կեղծ' in answer and '83%' in answer and 'կայքի տիրույթ' in answer
     assert 'Phobos' in answer and 'science.nasa.gov' in answer
 
@@ -44,7 +44,7 @@ def test_news_reply_uses_url_and_shows_correction():
 def test_bad_url_falls_back_to_text_only():
     client = StubClient()
     reply_for('Some headline here https://bad', Analyzer(client))
-    assert client.calls[1] == ('/analyze', {'text': 'Some headline here', 'dataset': 'fakenewsnet'})
+    assert client.calls[1] == ('/analyze', {'text': 'Some headline here', 'dataset': 'fakenewsnet', 'explain': True})
 
 
 @pytest.mark.parametrize('text', ['这是中文新闻标题', 'https://only-a-link.com', 'ok', 'x' * 1200])
@@ -84,3 +84,14 @@ def test_armenian_input_is_sent_and_translation_shown():
     assert client.calls[0][1]['text'] == 'Մարսը արբանյակներ չունի'
     assert client.calls[1] == ('/verify', {'text': 'Mars has no moons.', 'live': True})
     assert 'Թարգմանություն հայերենից' in answer and 'Mars has no moons.' in answer
+
+
+def test_influential_words_are_shown_and_escaped():
+    class Explaining(StubClient):
+        def post(self, path, json):
+            r = super().post(path, json)
+            if path == '/analyze':
+                r._data['explanation'] = {'words': [{'word': 'BREAKING:', 'effect': .21}, {'word': '<b>', 'effect': .05}, {'word': 'Senate', 'effect': -.1}]}
+            return r
+    answer = reply_for('BREAKING: Senate passes <b> bill', Analyzer(Explaining()))
+    assert 'BREAKING:' in answer and '(+21)' in answer and '&lt;b&gt;' in answer and 'Senate</code>' not in answer

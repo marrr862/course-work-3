@@ -24,7 +24,8 @@ MODELS = {'stage1': 'միայն տեքստ (փուլ 1)', 'stage2_text': 'տեք
           'stage2_metadata': 'տեքստ + խոսնակի տվյալներ (փուլ 2)', 'stage3_text': 'RoBERTa + տեքստ (փուլ 3)',
           'stage3_domain': 'RoBERTa + տեքստ + կայքի տիրույթ (փուլ 3)',
           'stage4_text': '3 տրանսֆորմեր + տեքստ, մետա-մոդել (փուլ 4)',
-          'stage4_domain': '4 տրանսֆորմեր + տեքստ + հղում, մետա-մոդել (փուլ 4)'}
+          'stage4_domain': '4 տրանսֆորմեր + տեքստ + հղում, մետա-մոդել (փուլ 4)',
+          'stage4_metadata': 'RoBERTa + խոսնակի տվյալներ, անսամբլ (փուլ 4)'}
 LANGS = {'hy': 'հայերենից', 'ru': 'ռուսերենից'}
 VERIFY = {'correction_proposed': 'Աղբյուրը հակասում է պնդմանը, առաջարկվում է ուղղում',
           'supported_by_sources': 'Աղբյուրները հաստատում են պնդումը',
@@ -86,6 +87,9 @@ def format_classification(result):
     if pred in scores:
         lines.append(f'Միավոր՝ {scores[pred] * 100:.0f}%')
     lines.append(f"Մոդել՝ {MODELS.get(result.get('model_version'), result.get('model_version'))}")
+    words = [w for w in ((result.get('explanation') or {}).get('words') or []) if w['effect'] > 0][:3]
+    if words:
+        lines.append('Պատասխանին ամենաշատը նպաստած բառերը՝ ' + ', '.join(f"<code>{html.escape(w['word'])}</code> (+{w['effect'] * 100:.0f})" for w in words))
     if result.get('seen_in_training'):
         lines.append('Այս տեքստը եղել է ուսուցման տվյալներում։')
     return '\n'.join(lines)
@@ -123,12 +127,12 @@ class Analyzer:
         self.client = client
 
     def news(self, headline, url=None):
-        body = {'text': headline, 'dataset': 'fakenewsnet'}
+        body = {'text': headline, 'dataset': 'fakenewsnet', 'explain': True}
         if url:
             body['source_url'] = url
         r = self.client.post('/analyze', json=body)
         if r.status_code == 422 and url:  # unusable link: classify the text alone
-            r = self.client.post('/analyze', json={'text': headline, 'dataset': 'fakenewsnet'})
+            r = self.client.post('/analyze', json={'text': headline, 'dataset': 'fakenewsnet', 'explain': True})
         if r.status_code == 422:
             return 'Տեքստը մշակել չհաջողվեց՝ ' + html.escape(str(r.json().get('detail', '')))[:300]
         r.raise_for_status()
@@ -142,7 +146,7 @@ class Analyzer:
         return '\n\n'.join(p for p in parts if p)
 
     def liar(self, claim):
-        r = self.client.post('/analyze', json={'text': claim, 'dataset': 'liar'})
+        r = self.client.post('/analyze', json={'text': claim, 'dataset': 'liar', 'explain': True})
         if r.status_code == 422:
             return 'Տեքստը մշակել չհաջողվեց՝ ' + html.escape(str(r.json().get('detail', '')))[:300]
         r.raise_for_status()

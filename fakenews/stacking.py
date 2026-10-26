@@ -49,7 +49,7 @@ def url_words(url):
 def normalize_meta(field, value):
     """Map user-typed LIAR metadata to the dataset's conventions (speaker slugs, lowercase party)."""
     value = '' if value is None else str(value).strip()
-    if not value or value.lower() == 'nan':
+    if not value or value.lower() in ('nan', 'na'):
         return 'NA'
     if field == 'speaker':
         return re.sub(r'[^a-z0-9]+', '-', value.lower()).strip('-') or 'NA'
@@ -335,3 +335,64 @@ class Stage4Classifier:
 
     def predict(self, texts, urls=None, metadata=None):
         return self.decide(self.predict_proba(texts, urls))
+
+
+def liar_pair_text(meta):
+    """Second input segment of the LIAR RoBERTa model, built exactly as in train_transformer."""
+    def get(field):
+        value = normalize_meta(field, (meta or {}).get(field))
+        return '' if value == 'NA' else value
+    return ('speaker: ' + get('speaker').replace('-', ' ') + '; party: ' + get('party') + '; state: ' + get('state') +
+            '; job: ' + get('job') + '; context: ' + get('context') + '; subject: ' + get('subject').replace(',', ', '))
+
+
+class LiarStage4Classifier:
+    """Average of three six-class probability vectors: stage 1 (text), RoBERTa fine-tuned on
+    statement + speaker metadata, and the stage-2 logistic model with metadata features.
+    The plain average was selected over a learned meta-model by validation macro-F1."""
+
+    def __init__(self, classes, model_dir='models/liar_rb_meta', v2_path='models/liar_v2.joblib', max_length=128):
+        self.classes_ = np.asarray(classes)
+        self.model_dir, self.v2_path, self.max_length = model_dir, v2_path, max_length
+        self.threshold = None
+        self._v2 = None
+        self._base = None
+
+    def __getstate__(self):
+        state = self.__dict__.copy(); state['_v2'] = None; state['_base'] = None
+        return state
+
+    @property
+    def v2(self):
+        if self._v2 is None:
+            self._v2 = joblib.load(ROOT / self.v2_path)['models']['metadata']
+        return self._v2
+
+    def set_base(self, model):
+        self._base = model
+        return self
+
+    def _align(self, proba, classes):
+        return np.asarray(proba)[:, [list(classes).index(c) for c in self.classes_]]
+
+    def transformer_proba(self, texts, metadata):
+        import torch
+        from .advanced_models import encoder
+        tok, model, lock = encoder(self.model_dir, classification=True)
+        with lock, torch.inference_mode():
+            batch = tok(list(texts), [liar_pair_text(m) for m in metadata], padding=True, truncation='longest_first',
+                        max_length=self.max_length, return_tensors='pt')
+            return model(**batch).logits.float().softmax(-1).numpy()  # columns: sorted labels = self.classes_
+
+    def predict_proba(self, texts, urls=None, metadata=None):
+        texts = list(texts); metadata = list(metadata) if metadata is not None else [{}] * len(texts)
+        base = self._base if self._base is not None else self.v2.base
+        stage1 = self._align(base.predict_proba(texts), base.classes_)
+        lr = self.v2.lr_proba(self.v2.features.frame(texts, None, metadata))
+        return (stage1 + self.transformer_proba(texts, metadata) + lr) / 3
+
+    def decide(self, probabilities):
+        return self.classes_[np.asarray(probabilities).argmax(1)]
+
+    def predict(self, texts, urls=None, metadata=None):
+        return self.decide(self.predict_proba(texts, urls, metadata))

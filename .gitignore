@@ -25,3 +25,5 @@ deliverables/versions/
 !models/fakenewsnet_v3.joblib
 !models/fakenewsnet_v4.joblib
 reports/v4/*.log
+!models/liar_v4.joblib
+~$*

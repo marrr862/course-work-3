@@ -43,16 +43,24 @@ def _load():
     return AutoTokenizer.from_pretrained(MODEL_DIR), AutoModelForSeq2SeqLM.from_pretrained(MODEL_DIR).eval(), Lock()
 
 
-def translate(text, lang):
-    """Translate hy/ru text to English, sentence by sentence so long inputs are not cut."""
+def generate(texts, src, tgt, batch_size=16):
+    """Batched NLLB translation between NLLB language codes (e.g. 'hye_Armn' -> 'eng_Latn')."""
     import torch
     tok, model, lock = _load()
-    parts = [p for p in re.split(r'(?<=[.!?։:])\s+|\n+', text.strip()) if p.strip()] or [text]
+    out = []
     with lock, torch.inference_mode():
-        tok.src_lang = SUPPORTED[lang]
-        batch = tok(parts, return_tensors='pt', padding=True, truncation=True, max_length=256)
-        out = model.generate(**batch, forced_bos_token_id=tok.convert_tokens_to_ids('eng_Latn'), num_beams=4, max_new_tokens=256)
-    return ' '.join(tok.batch_decode(out, skip_special_tokens=True)).strip()
+        tok.src_lang = src
+        for i in range(0, len(texts), batch_size):
+            batch = tok(list(texts[i:i + batch_size]), return_tensors='pt', padding=True, truncation=True, max_length=256)
+            ids = model.generate(**batch, forced_bos_token_id=tok.convert_tokens_to_ids(tgt), num_beams=4, max_new_tokens=256)
+            out += [t.strip() for t in tok.batch_decode(ids, skip_special_tokens=True)]
+    return out
+
+
+def translate(text, lang):
+    """Translate hy/ru text to English, sentence by sentence so long inputs are not cut."""
+    parts = [p for p in re.split(r'(?<=[.!?։:])\s+|\n+', text.strip()) if p.strip()] or [text]
+    return ' '.join(generate(parts, SUPPORTED[lang], 'eng_Latn')).strip()
 
 
 def to_english(text):

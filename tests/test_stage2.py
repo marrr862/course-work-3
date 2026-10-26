@@ -213,3 +213,46 @@ def test_saved_stage4_reproduces_reported_test_metrics():
         pred = model.decide(np.column_stack([p, 1 - p]))
         assert M(y, pred, 'fake')['macro_f1'] == pytest.approx(artifact['metrics'][kind]['macro_f1'], abs=5e-5)
     assert artifact['metrics']['domain']['macro_f1'] > artifact['metrics']['text']['macro_f1']
+
+
+def test_occlusion_finds_the_decisive_word():
+    from fakenews.explain import occlusion
+    predict = lambda texts: np.array([[.9, .1] if 'BREAKING' in t else [.3, .7] for t in texts])
+    result = occlusion(predict, 'BREAKING celebrity couple married', 0)
+    assert result['words'][0] == {'word': 'BREAKING', 'position': 0, 'effect': .6} and len(result['words']) == 1
+    assert occlusion(predict, 'single', 0) is None and occlusion(predict, 'w ' * 61, 0) is None
+
+
+def test_api_explanation_uses_the_routed_model(stub_models):
+    r = analyze(dataset='fakenewsnet', source_url='https://hoax.example/x', explain=True).json()
+    assert r['explanation']['method'].startswith('leave-one-word-out')
+    assert {w['word'] for w in r['explanation']['words']} <= {'Shocking', 'secret', 'exposed'}
+    assert analyze(dataset='fakenewsnet').json()['explanation'] is None
+
+
+def test_api_liar_prefers_stage4_with_metadata(stub_models, monkeypatch):
+    v4 = {'models': {'metadata': stub_models}, 'metrics': {}}
+    monkeypatch.setattr(app_module, 'load_v4', lambda dataset: v4 if dataset == 'liar' else None)
+    assert analyze(dataset='liar', metadata={'speaker': 'Barack Obama'}).json()['model_version'] == 'stage4_metadata'
+    assert analyze(dataset='liar').json()['model_version'] == 'stage1'
+
+
+def test_liar_pair_text_matches_training_format():
+    from fakenews.stacking import liar_pair_text
+    assert liar_pair_text({'speaker': 'Barack Obama', 'party': 'Democrat', 'subject': 'health-care,taxes'}) == \
+        'speaker: barack obama; party: democrat; state: ; job: ; context: ; subject: health-care, taxes'
+
+
+V4L = ROOT / 'models/liar_v4.joblib'
+
+
+@pytest.mark.skipif(not V4L.exists(), reason='run python -m fakenews.stack_v4 --build --dataset liar first')
+def test_saved_liar_stage4_reproduces_reported_metrics():
+    from fakenews.improve_v2 import M
+    artifact = joblib.load(V4L)
+    man = pd.read_csv(ROOT / 'reports/liar/split_manifest.csv')
+    y = man[man.split == 'test'].label.values
+    model = artifact['models']['metadata']
+    p = np.load(ROOT / 'reports/v4/liar_v4_metadata_test_proba.npy')
+    assert M(y, model.decide(p))['macro_f1'] == pytest.approx(artifact['metrics']['metadata']['macro_f1'], abs=5e-5)
+    assert artifact['metrics']['metadata']['val_macro_f1'] > artifact['metrics']['stage2_reference']['val_macro_f1']

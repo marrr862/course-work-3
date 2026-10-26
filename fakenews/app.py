@@ -36,6 +36,7 @@ class Request(BaseModel):
     source_url: Optional[str] = Field(None, max_length=2000, description='FakeNewsNet: article URL; only its domain is used, nothing is fetched.')
     metadata: Optional[LiarMetadata] = Field(None, description='LIAR: optional speaker metadata.')
     model: Literal['auto', 'stage1'] = Field('auto', description='auto = best available model for the supplied inputs; stage1 = text-only stage-1 ensemble.')
+    explain: bool = Field(False, description='Also return the words that most influenced the answer (leave-one-word-out).')
 
     @field_validator('source_url')
     @classmethod
@@ -100,13 +101,13 @@ def load_v3(dataset):
     return joblib.load(path) if path.exists() and (ROOT / f'models/{dataset}_large').exists() else None
 
 
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=2)
 def load_v4(dataset):
     """Stage-4 meta-learner over several fine-tuned transformers, or None when its models are missing."""
     registry_path = ROOT / 'models/active_models.json'
     registry = json.loads(registry_path.read_text()) if registry_path.exists() else {}
     path = ROOT / registry.get(f'{dataset}_v4', f'models/{dataset}_v4.joblib')
-    needed = ['fakenewsnet_large', 'fakenewsnet_electra', 'fakenewsnet_rb_url']
+    needed = {'fakenewsnet': ['fakenewsnet_large', 'fakenewsnet_electra', 'fakenewsnet_rb_url'], 'liar': ['liar_rb_meta']}[dataset]
     return joblib.load(path) if path.exists() and all((ROOT / 'models' / n).exists() for n in needed) else None
 
 
@@ -131,6 +132,11 @@ def stage2(request, artifact):
         model.set_base(artifact['model'])
         return f'stage2_{kind}', model, model.predict_proba([request.text], urls=[request.source_url])[0]
     if request.metadata is not None and request.metadata.provided():
+        v4 = load_v4('liar')
+        if v4 is not None:
+            model = v4['models']['metadata']
+            model.set_base(artifact['model'])
+            return 'stage4_metadata', model, model.predict_proba([request.text], metadata=[request.metadata.model_dump()])[0]
         model = v2['models']['metadata']
         model.set_base(artifact['model'])
         return 'stage2_metadata', model, model.predict_proba([request.text], metadata=[request.metadata.model_dump()])[0]
@@ -146,7 +152,7 @@ def home():
 def health():
     ready = {name: (ROOT / 'models' / f'{name}.joblib').exists() for name in ['liar', 'fakenewsnet']}
     stage2_ready = {name: load_v2(name) is not None for name in ['liar', 'fakenewsnet']}
-    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'stage3_models': {'fakenewsnet': load_v3('fakenewsnet') is not None}, 'stage4_models': {'fakenewsnet': load_v4('fakenewsnet') is not None}, 'language': 'en', 'translation': {lang: translation_available(lang) for lang in ['hy', 'ru']}, 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
+    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'stage3_models': {'fakenewsnet': load_v3('fakenewsnet') is not None}, 'stage4_models': {name: load_v4(name) is not None for name in ['fakenewsnet', 'liar']}, 'language': 'en', 'translation': {lang: translation_available(lang) for lang in ['hy', 'ru']}, 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
 
 
 @app.get('/metrics')
@@ -159,9 +165,10 @@ def get_metrics():
     v3 = load_v3('fakenewsnet')
     if v3 is not None:
         result['fakenewsnet_stage3'] = v3['metrics']
-    v4 = load_v4('fakenewsnet')
-    if v4 is not None:
-        result['fakenewsnet_stage4'] = v4['metrics']
+    for name in ['fakenewsnet', 'liar']:
+        v4 = load_v4(name)
+        if v4 is not None:
+            result[f'{name}_stage4'] = v4['metrics']
     return result
 
 
@@ -192,6 +199,7 @@ def analyze(request: Request):
         prediction = 'fake' if fake_score >= threshold else 'real'
     model_version = 'stage1'
     classes = model.classes_
+    chosen = None
     if scores is not None:
         chosen = stage2(request, artifact)
         if chosen is not None:
@@ -199,8 +207,17 @@ def analyze(request: Request):
             classes = stacked.classes_
             prediction = str(stacked.decide(scores[None, :])[0])
             threshold = stacked.threshold
+    explanation = None
+    if request.explain and prediction:
+        from .explain import occlusion
+        if chosen is not None:
+            meta = request.metadata.model_dump() if request.metadata is not None else None
+            predict = lambda texts: stacked.predict_proba(texts, urls=[request.source_url] * len(texts), metadata=[meta] * len(texts))
+        else:
+            predict = model.predict_proba
+        explanation = occlusion(predict, request.text, list(map(str, classes)).index(prediction))
     fact_check = evidence.search(request.text, online=request.online)
-    return {'model_version': model_version, 'source_domain_used': model_version.endswith('_domain'), 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. Trained on English data; Armenian and Russian input is machine-translated. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check, 'analyzed_text': request.text, **language}
+    return {'explanation': explanation, 'model_version': model_version, 'source_domain_used': model_version.endswith('_domain'), 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. Trained on English data; Armenian and Russian input is machine-translated. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check, 'analyzed_text': request.text, **language}
 
 
 class VerifyRequest(Request):

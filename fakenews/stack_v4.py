@@ -205,13 +205,50 @@ def build_artifact():
     return metrics
 
 
+def build_liar_artifact():
+    """LIAR stage 4 (needs speaker metadata): average of stage 1, RoBERTa(statement + metadata) and
+    the stage-2 metadata LR. Kept only if it beats the stage-2 metadata model on validation."""
+    from .stacking import LiarStage4Classifier
+    man = pd.read_csv(ROOT / 'reports/liar/split_manifest.csv')
+    va, te = [man[man.split == s].reset_index(drop=True) for s in ['valid', 'test']]
+    raw_cols = ['id', 'label', 'statement', 'subject', 'speaker', 'job', 'state', 'party', 'bt', 'f', 'ht', 'mt', 'pof', 'context']
+    raw = pd.concat([pd.read_csv(ROOT / f'data/raw/liar/{s}.tsv', sep='\t', header=None, names=raw_cols, quoting=3, dtype=str) for s in ['train', 'valid', 'test']]).fillna('NA')
+    v2 = joblib.load(ROOT / 'models/liar_v2.joblib')['models']['metadata']
+    classes = v2.classes_
+    fva = va.merge(raw.drop(columns=['label']).drop_duplicates('id'), on='id', how='left')
+    fte = te.merge(raw.drop(columns=['label']).drop_duplicates('id'), on='id', how='left')
+    s1 = [np.load(ROOT / f'reports/optimization/liar/{n}.npy') for n in ['selected_validation_probabilities', 'test_probabilities']]
+    rb = [np.load(V4 / f'liar_rb_meta_{n}.npy') for n in ['valid', 'test']]
+    lr = [v2.lr_proba(fva), v2.lr_proba(fte)]
+    cand = {'stage2_metadata': [v2.alpha * s1[i] + (1 - v2.alpha) * lr[i] for i in (0, 1)],
+            'stage4_average': [(s1[i] + rb[i] + lr[i]) / 3 for i in (0, 1)]}
+    rows = {}
+    for name, (pv, pt) in cand.items():
+        rows[name] = {'val_macro_f1': round(f1_score(va.label, classes[pv.argmax(1)], average='macro'), 4), **M(te.label.values, classes[pt.argmax(1)])}
+    print(json.dumps(rows, indent=1))
+    if rows['stage4_average']['val_macro_f1'] <= rows['stage2_metadata']['val_macro_f1']:
+        print('stage 4 is not better on validation; artifact not saved'); return rows
+    np.save(V4 / 'liar_v4_metadata_test_proba.npy', cand['stage4_average'][1])
+    artifact = {'dataset': 'liar', 'models': {'metadata': LiarStage4Classifier(classes)}, 'metrics': {'metadata': rows['stage4_average'], 'stage2_reference': rows['stage2_metadata']},
+                'note': 'LIAR stage 4: mean of stage-1, RoBERTa(statement + metadata) and stage-2 metadata LR probabilities; selected on validation.'}
+    joblib.dump(artifact, ROOT / 'models/liar_v4.joblib', compress=3)
+    reg_path = ROOT / 'models/active_models.json'
+    reg = json.loads(reg_path.read_text()) if reg_path.exists() else {}
+    reg['liar_v4'] = 'models/liar_v4.joblib'; reg_path.write_text(json.dumps(reg, indent=2))
+    return rows
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dataset', choices=['fakenewsnet', 'liar', 'both'], default='both')
     ap.add_argument('--build', action='store_true', help='save the deployable FakeNewsNet stage-4 artifact')
     a = ap.parse_args()
     if a.build:
-        print(json.dumps(build_artifact(), indent=1)); return
+        if a.dataset in ('fakenewsnet', 'both'):
+            print(json.dumps(build_artifact(), indent=1))
+        if a.dataset in ('liar', 'both'):
+            build_liar_artifact()
+        return
     V4.mkdir(parents=True, exist_ok=True)
     pd.set_option('display.width', 220)
     if a.dataset in ('fakenewsnet', 'both'):

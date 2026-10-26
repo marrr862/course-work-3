@@ -1,0 +1,39 @@
+{
+  "text": {
+    "components": [
+      "stage1",
+      "roberta",
+      "electra",
+      "lr_text"
+    ],
+    "C": 0.03,
+    "threshold": 0.33,
+    "val_macro_f1_oof": 0.8175,
+    "accuracy": 0.8608,
+    "macro_f1": 0.809,
+    "macro_precision": 0.8097,
+    "macro_recall": 0.8083,
+    "fake_precision": 0.7119,
+    "fake_recall": 0.7073
+  },
+  "domain": {
+    "components": [
+      "stage1",
+      "roberta",
+      "electra",
+      "rb_url",
+      "lr_text",
+      "lr_domain",
+      "lr_url"
+    ],
+    "C": 3,
+    "threshold": 0.47,
+    "val_macro_f1_oof": 0.8454,
+    "accuracy": 0.887,
+    "macro_f1": 0.8354,
+    "macro_precision": 0.8616,
+    "macro_recall": 0.8164,
+    "fake_precision": 0.8192,
+    "fake_recall": 0.6804
+  }
+}

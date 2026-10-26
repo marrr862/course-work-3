@@ -47,7 +47,7 @@ def test_bad_url_falls_back_to_text_only():
     assert client.calls[1] == ('/analyze', {'text': 'Some headline here', 'dataset': 'fakenewsnet'})
 
 
-@pytest.mark.parametrize('text', ['Սա հայերեն լուր է', 'https://only-a-link.com', 'ok', 'x' * 1200])
+@pytest.mark.parametrize('text', ['这是中文新闻标题', 'https://only-a-link.com', 'ok', 'x' * 1200])
 def test_rejected_inputs_never_call_the_api(text):
     client = StubClient()
     answer = reply_for(text, Analyzer(client))
@@ -70,3 +70,17 @@ def test_html_is_escaped():
                 r._data['claims'][0]['correction'] = '<script>x</script>'
             return r
     assert '<script>' not in reply_for('Mars has no moons.', Analyzer(Evil()))
+
+
+def test_armenian_input_is_sent_and_translation_shown():
+    class Translating(StubClient):
+        def post(self, path, json):
+            r = super().post(path, json)
+            if path == '/analyze':
+                r._data.update(detected_language='hy', translated_text='Mars has no moons.', analyzed_text='Mars has no moons.')
+            return r
+    client = Translating()
+    answer = reply_for('Մարսը արբանյակներ չունի', Analyzer(client))
+    assert client.calls[0][1]['text'] == 'Մարսը արբանյակներ չունի'
+    assert client.calls[1] == ('/verify', {'text': 'Mars has no moons.', 'live': True})
+    assert 'Թարգմանություն հայերենից' in answer and 'Mars has no moons.' in answer

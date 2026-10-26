@@ -36,6 +36,16 @@ def domain(url):
     return host or 'NONE'
 
 
+def url_words(url):
+    """Domain plus the words of the URL path, e.g. 'hollywoodlife.com paris jackson cara'."""
+    u = str(url).lower()
+    if u in ('nan', '', 'none'):
+        return 'no link'
+    path = re.sub(r'^[a-z]+://', '', u).split('/', 1)
+    words = ' '.join(re.findall(r'[a-z]{2,}', path[1] if len(path) > 1 else ''))
+    return (domain(url) + ' ' + words).strip()
+
+
 def normalize_meta(field, value):
     """Map user-typed LIAR metadata to the dataset's conventions (speaker slugs, lowercase party)."""
     value = '' if value is None else str(value).strip()
@@ -218,3 +228,110 @@ class Stage3Classifier:
 
     def predict(self, texts, urls=None, metadata=None):
         return self.decide(self.predict_proba(texts, urls, metadata))
+
+
+class UrlLR:
+    """Logistic regression on headline TF-IDF, domain one-hot and TF-IDF of URL path words."""
+
+    def __init__(self, features, path_vectorizer, lr):
+        self.features, self.path_vectorizer, self.lr = features, path_vectorizer, lr
+
+    def fake_proba(self, texts, urls):
+        frame = self.features.frame(texts, urls)
+        X = sp.hstack([self.features.transform(frame), self.path_vectorizer.transform([url_words(u) for u in urls])]).tocsr()
+        return self.lr.predict_proba(X)[:, list(self.lr.classes_).index('fake')]
+
+
+class PairTransformer:
+    """Fine-tuned transformer whose input is (headline, domain + URL path words)."""
+
+    def __init__(self, path, classes, max_length=96):
+        self.path, self.classes_, self.max_length = path, np.asarray(classes), max_length
+
+    def predict_proba(self, texts, urls):
+        import torch
+        from .advanced_models import encoder
+        tok, model, lock = encoder(self.path, classification=True)
+        second = [url_words(u) for u in urls]
+        with lock, torch.inference_mode():
+            batch = tok(list(texts), second, padding=True, truncation='longest_first', max_length=self.max_length, return_tensors='pt')
+            return model(**batch).logits.float().softmax(-1).numpy()
+
+
+# component name -> (model directory, max token length) for single-input transformers
+STAGE4_TRANSFORMERS = {'roberta': ('models/fakenewsnet_large', 64), 'electra': ('models/fakenewsnet_electra', 96)}
+
+
+class Stage4Classifier:
+    """P(fake) = sigmoid(w . logit(p_component) + b), threshold chosen by cross-validation on validation.
+
+    Components: stage1 (MiniLM + TF-IDF ensemble), fine-tuned RoBERTa / ELECTRA on the headline,
+    RoBERTa on headline + URL words (rb_url), and the stage-2 logistic models (lr_text, lr_domain)
+    plus a URL-path logistic model (lr_url). All loaded lazily; nothing heavy is pickled.
+    """
+
+    def __init__(self, components, meta, threshold, url_lr=None, v2_path='models/fakenewsnet_v2.joblib'):
+        self.components, self.meta, self.threshold, self.url_lr = list(components), meta, float(threshold), url_lr
+        self.v2_path = v2_path
+        self.classes_ = np.array(['fake', 'real'])
+        self.positive = 'fake'
+        self._v2 = None
+        self._base = None
+
+    def __getstate__(self):
+        state = self.__dict__.copy(); state['_v2'] = None; state['_base'] = None
+        return state
+
+    @property
+    def v2(self):
+        if self._v2 is None:
+            self._v2 = joblib.load(ROOT / self.v2_path)['models']
+        return self._v2
+
+    def set_base(self, model):
+        self._base = model
+        return self
+
+    @property
+    def uses_url(self):
+        return any(c in self.components for c in ('rb_url', 'lr_domain', 'lr_url'))
+
+    def component_proba(self, texts, urls):
+        """P(fake) of every component, columns in self.components order."""
+        from .advanced_models import TransformerClassifier
+        texts = list(texts); urls = list(urls) if urls is not None else [None] * len(texts)
+        cols = []
+        for name in self.components:
+            if name == 'stage1':
+                base = self._base if self._base is not None else self.v2['text'].base
+                p = np.asarray(base.predict_proba(texts))[:, list(base.classes_).index('fake')]
+            elif name in STAGE4_TRANSFORMERS:
+                path, length = STAGE4_TRANSFORMERS[name]
+                model = TransformerClassifier(path, ['fake', 'real']); model.max_length = length
+                p = model.predict_proba(texts)[:, 0]
+            elif name == 'rb_url':
+                p = PairTransformer('models/fakenewsnet_rb_url', ['fake', 'real']).predict_proba(texts, urls)[:, 0]
+            elif name in ('lr_text', 'lr_domain'):
+                st = self.v2[name[3:]]
+                p = st.lr_proba(st.features.frame(texts, urls))[:, 0]
+            elif name == 'lr_url':
+                p = self.url_lr.fake_proba(texts, urls)
+            else:
+                raise ValueError(f'unknown component {name}')
+            cols.append(p)
+        return np.column_stack(cols)
+
+    def meta_proba(self, X):
+        """X: logits of component P(fake). Returns [[P(fake), P(real)], ...]."""
+        p = self.meta.predict_proba(X)[:, list(self.meta.classes_).index('fake')]
+        return np.column_stack([p, 1 - p])
+
+    def decide(self, probabilities):
+        return np.where(np.asarray(probabilities)[:, 0] >= self.threshold, 'fake', 'real')
+
+    def predict_proba(self, texts, urls=None, metadata=None):
+        P = np.clip(self.component_proba(texts, urls), 1e-5, 1 - 1e-5)
+        return self.meta_proba(np.log(P / (1 - P)))
+
+    def predict(self, texts, urls=None, metadata=None):
+        return self.decide(self.predict_proba(texts, urls))

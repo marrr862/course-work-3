@@ -1,0 +1,17 @@
+{
+  "model": "roberta-large",
+  "input": "title",
+  "seed": 42,
+  "classes": [
+    "fake",
+    "real"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "val_macro_f1": 0.7948,
+      "mean_loss": 0.4849,
+      "seconds": 14809.5
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import numpy as np
 from scipy import sparse
 ROOT=Path(__file__).resolve().parents[1]
 
-@lru_cache(maxsize=3)
+@lru_cache(maxsize=8)
 def encoder(path, classification=False, device='cpu'):
     import torch
     from transformers import AutoTokenizer, AutoModel, AutoModelForSequenceClassification

@@ -51,7 +51,7 @@ def test_similar_or_unknown_claim_never_auto_corrected(text):
     assert result['correction'] is None
 
 
-@pytest.mark.parametrize('text', ['', '   ', '123456', 'Սա հայերեն պնդում է', 'Это русское утверждение', 'x'*10001])
+@pytest.mark.parametrize('text', ['', '   ', '123456', '这是中文新闻标题', 'x'*10001])
 def test_invalid_input(text):
     assert client.post('/analyze', json={'text': text}).status_code == 422
 

@@ -1,0 +1,39 @@
+{
+  "model": "roberta-base",
+  "input": "liar_meta",
+  "seed": 42,
+  "classes": [
+    "barely-true",
+    "false",
+    "half-true",
+    "mostly-true",
+    "pants-fire",
+    "true"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "val_macro_f1": 0.263,
+      "mean_loss": 1.7617,
+      "seconds": 1426.8
+    },
+    {
+      "epoch": 2,
+      "val_macro_f1": 0.2806,
+      "mean_loss": 1.6568,
+      "seconds": 2899.5
+    },
+    {
+      "epoch": 3,
+      "val_macro_f1": 0.2944,
+      "mean_loss": 1.5525,
+      "seconds": 1880.8
+    },
+    {
+      "epoch": 4,
+      "val_macro_f1": 0.2925,
+      "mean_loss": 1.4635,
+      "seconds": 888.4
+    }
+  ]
+}

@@ -110,6 +110,7 @@ def stub_models(monkeypatch):
     monkeypatch.setattr(app_module, 'load_model', lambda dataset: stage1)
     monkeypatch.setattr(app_module, 'load_v2', lambda dataset: v2)
     monkeypatch.setattr(app_module, 'load_v3', lambda dataset: None)
+    monkeypatch.setattr(app_module, 'load_v4', lambda dataset: None)
     return stack
 
 
@@ -164,3 +165,51 @@ def test_saved_stage3_reproduces_reported_metrics():
         row = reported[reported.model.str.startswith(f'stage3_{kind}')].iloc[0]
         assert artifact['metrics'][kind]['accuracy'] == pytest.approx(row.accuracy, abs=5e-5)
         assert artifact['metrics'][kind]['macro_f1'] == pytest.approx(row.macro_f1, abs=5e-5)
+
+
+def test_api_prefers_stage4_over_stage3(stub_models, monkeypatch):
+    both = {'models': {'text': stub_models, 'domain': stub_models}, 'metrics': {}}
+    monkeypatch.setattr(app_module, 'load_v3', lambda dataset: both)
+    monkeypatch.setattr(app_module, 'load_v4', lambda dataset: both)
+    assert analyze(dataset='fakenewsnet').json()['model_version'] == 'stage4_text'
+    assert analyze(dataset='fakenewsnet', source_url='https://hoax.example/x').json()['model_version'] == 'stage4_domain'
+
+
+def test_api_translates_armenian_and_russian(stub_models, monkeypatch):
+    import fakenews.translate as tr
+    monkeypatch.setattr(tr, 'available', lambda lang: True)
+    monkeypatch.setattr(tr, 'translate', lambda text, lang: 'Shocking secret exposed')
+    r = client.post('/analyze', json={'text': 'Ցնցող գաղտնիք է բացահայտվել', 'dataset': 'fakenewsnet'}).json()
+    assert r['detected_language'] == 'hy' and r['translated_text'] == 'Shocking secret exposed' and r['analyzed_text'] == 'Shocking secret exposed'
+    assert client.post('/analyze', json={'text': 'Шокирующая тайна раскрыта', 'dataset': 'fakenewsnet'}).json()['detected_language'] == 'ru'
+    assert analyze(dataset='fakenewsnet').json()['detected_language'] == 'en'
+
+
+def test_api_without_translation_model_returns_422(stub_models, monkeypatch):
+    import fakenews.translate as tr
+    monkeypatch.setattr(tr, 'available', lambda lang: lang == 'en')
+    assert client.post('/analyze', json={'text': 'Шокирующая тайна раскрыта', 'dataset': 'fakenewsnet'}).status_code == 422
+
+
+@pytest.mark.parametrize('text,lang', [('Mars has no moons.', 'en'), ('Մարսը արբանյակներ չունի', 'hy'), ('У Марса нет спутников', 'ru'),
+                                       ('火星没有卫星', 'other'), ('12345', 'other')])
+def test_detect_language(text, lang):
+    from fakenews.translate import detect_language
+    assert detect_language(text) == lang
+
+
+V4 = ROOT / 'models/fakenewsnet_v4.joblib'
+
+
+@pytest.mark.skipif(not V4.exists(), reason='run python -m fakenews.stack_v4 --build first')
+def test_saved_stage4_reproduces_reported_test_metrics():
+    from fakenews.improve_v2 import M
+    artifact = joblib.load(V4)
+    man = pd.read_csv(ROOT / 'reports/fakenewsnet/split_manifest.csv')
+    y = man[man.split == 'test'].label.values
+    for kind in ['text', 'domain']:
+        model = artifact['models'][kind]
+        p = np.load(ROOT / f'reports/v4/fakenewsnet_v4_{kind}_test_fake_proba.npy')
+        pred = model.decide(np.column_stack([p, 1 - p]))
+        assert M(y, pred, 'fake')['macro_f1'] == pytest.approx(artifact['metrics'][kind]['macro_f1'], abs=5e-5)
+    assert artifact['metrics']['domain']['macro_f1'] > artifact['metrics']['text']['macro_f1']

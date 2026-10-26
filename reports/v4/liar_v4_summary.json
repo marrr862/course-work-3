@@ -1,0 +1,14 @@
+{
+  "selected": "average",
+  "components": [
+    "stage1",
+    "rb_meta",
+    "lr_metadata"
+  ],
+  "selected_test": {
+    "accuracy": 0.2861,
+    "macro_f1": 0.2887,
+    "macro_precision": 0.2864,
+    "macro_recall": 0.2965
+  }
+}

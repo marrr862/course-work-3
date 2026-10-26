@@ -9,6 +9,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, field_validator
 from .data import clean_text, text_key
 from .evidence import EvidenceLookup
+from .translate import available as translation_available
 
 ROOT = Path(__file__).resolve().parents[1]
 app = FastAPI(title='Fake News Research Demo', version='4.0.0')
@@ -50,9 +51,25 @@ class Request(BaseModel):
     @field_validator('text')
     @classmethod
     def meaningful(cls, value):
-        if len(re.findall(r'[A-Za-z]', clean_text(value))) < 3 or re.search(r'[^\x00-\x7f]', value) and re.search(r'[\u0400-\u058f\u4e00-\u9fff]', value):
-            raise ValueError('This model supports English text only. Enter an English claim or headline.')
+        from .translate import detect_language
+        if detect_language(value) == 'other' or len(re.findall(r'[A-Za-z\u0400-\u04ff\u0531-\u0587]', value)) < 3:
+            raise ValueError('Enter a claim or headline in English, Armenian or Russian.')
         return value.strip()
+
+
+def english(request):
+    """Translate Armenian/Russian input; returns (request with English text, info dict)."""
+    from .translate import to_english
+    try:
+        text, lang = to_english(request.text)
+    except ValueError as error:
+        raise HTTPException(422, str(error))
+    info = {'detected_language': lang}
+    if lang != 'en':
+        info.update(original_text=request.text, translated_text=text,
+                    translation_note='The text was machine-translated to English before analysis; translation errors can change the result.')
+        request = request.model_copy(update={'text': text})
+    return request, info
 
 
 @lru_cache(maxsize=2)
@@ -83,6 +100,16 @@ def load_v3(dataset):
     return joblib.load(path) if path.exists() and (ROOT / f'models/{dataset}_large').exists() else None
 
 
+@lru_cache(maxsize=1)
+def load_v4(dataset):
+    """Stage-4 meta-learner over several fine-tuned transformers, or None when its models are missing."""
+    registry_path = ROOT / 'models/active_models.json'
+    registry = json.loads(registry_path.read_text()) if registry_path.exists() else {}
+    path = ROOT / registry.get(f'{dataset}_v4', f'models/{dataset}_v4.joblib')
+    needed = ['fakenewsnet_large', 'fakenewsnet_electra', 'fakenewsnet_rb_url']
+    return joblib.load(path) if path.exists() and all((ROOT / 'models' / n).exists() for n in needed) else None
+
+
 def stage2(request, artifact):
     """Pick the stage-2 model that fits the supplied inputs; None means use stage 1."""
     v2 = load_v2(request.dataset)
@@ -90,6 +117,11 @@ def stage2(request, artifact):
         return None
     if request.dataset == 'fakenewsnet':
         kind = 'domain' if request.source_url else 'text'
+        v4 = load_v4('fakenewsnet')
+        if v4 is not None:
+            model = v4['models'][kind]
+            model.set_base(artifact['model'])
+            return f'stage4_{kind}', model, model.predict_proba([request.text], urls=[request.source_url])[0]
         v3 = load_v3('fakenewsnet')
         if v3 is not None:
             model = v3['models'][kind]
@@ -114,7 +146,7 @@ def home():
 def health():
     ready = {name: (ROOT / 'models' / f'{name}.joblib').exists() for name in ['liar', 'fakenewsnet']}
     stage2_ready = {name: load_v2(name) is not None for name in ['liar', 'fakenewsnet']}
-    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'stage3_models': {'fakenewsnet': load_v3('fakenewsnet') is not None}, 'language': 'en', 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
+    return {'ready': all(ready.values()), 'models': ready, 'stage2_models': stage2_ready, 'stage3_models': {'fakenewsnet': load_v3('fakenewsnet') is not None}, 'stage4_models': {'fakenewsnet': load_v4('fakenewsnet') is not None}, 'language': 'en', 'translation': {lang: translation_available(lang) for lang in ['hy', 'ru']}, 'archive_records': len(evidence.archive.data['records']) if evidence.archive.data else 0, 'nli_model_ready': (ROOT / 'models/nli_deberta/model.safetensors').exists(), 'science_ready': (ROOT/'models/science_index.joblib').exists() and (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists()}
 
 
 @app.get('/metrics')
@@ -127,11 +159,15 @@ def get_metrics():
     v3 = load_v3('fakenewsnet')
     if v3 is not None:
         result['fakenewsnet_stage3'] = v3['metrics']
+    v4 = load_v4('fakenewsnet')
+    if v4 is not None:
+        result['fakenewsnet_stage4'] = v4['metrics']
     return result
 
 
 @app.post('/analyze')
 def analyze(request: Request):
+    request, language = english(request)
     artifact = load_model(request.dataset)
     model = artifact['model']
     vocabulary = artifact.get('vocabulary_gate')
@@ -164,7 +200,7 @@ def analyze(request: Request):
             prediction = str(stacked.decide(scores[None, :])[0])
             threshold = stacked.threshold
     fact_check = evidence.search(request.text, online=request.online)
-    return {'model_version': model_version, 'source_domain_used': model_version.endswith('_domain'), 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. English only. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check}
+    return {'model_version': model_version, 'source_domain_used': model_version.endswith('_domain'), 'verification_status': fact_check['status'], 'dataset': request.dataset, 'model_prediction': prediction, 'decision_mode': request.decision_mode, 'decision_threshold': threshold, 'model_scores': dict(zip(map(str, classes), map(float, scores))) if scores is not None else {}, 'score_note': 'Model scores are not calibrated probabilities of truth.', 'prediction_status': 'statistical_prediction' if prediction else 'out_of_vocabulary', 'seen_in_training': seen, 'warning': 'A text classifier prediction is not a factual verdict. Trained on English data; Armenian and Russian input is machine-translated. LIAR uses six labels; FakeNewsNet uses headline-only fake/real labels.', 'evidence': fact_check, 'analyzed_text': request.text, **language}
 
 
 class VerifyRequest(Request):
@@ -183,7 +219,8 @@ class VerifyRequest(Request):
 @app.post('/verify')
 def verify(request: VerifyRequest):
     from .verify import verify_text
-    return verify_text(request.text, live=request.live, source_urls=request.source_urls)
+    request, language = english(request)
+    return {**verify_text(request.text, live=request.live, source_urls=request.source_urls), **language}
 
 
 @app.get('/verification-metrics')
@@ -202,6 +239,7 @@ def reliability_metrics():
 @app.post('/verify-science')
 def verify_science_route(request: Request):
     from .verify import split_claims
+    request, _ = english(request)
     if len(split_claims(request.text)) != 1 or len(request.text.split()) > 100:
         raise HTTPException(422, 'Enter one scientific claim of at most 100 words.')
     if not (ROOT/'reports/reliability/scifact/holdout_metrics.json').exists():

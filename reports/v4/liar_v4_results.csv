@@ -1,0 +1,6 @@
+method,val_score,accuracy,macro_f1,macro_precision,macro_recall
+average,0.3175,0.2861,0.2887,0.2864,0.2965
+single:rb_meta,0.2944,0.2829,0.2803,0.2884,0.2917
+single:lr_metadata,0.2904,0.2599,0.2603,0.2585,0.2748
+meta_lr(C=0.3),0.2795,0.2655,0.266,0.2657,0.2985
+single:stage1,0.2777,0.2631,0.2638,0.2641,0.2661

@@ -1,0 +1,35 @@
+{
+  "model": "google/electra-base-discriminator",
+  "input": "title",
+  "seed": 42,
+  "classes": [
+    "fake",
+    "real"
+  ],
+  "history": [
+    {
+      "epoch": 1,
+      "val_macro_f1": 0.7573,
+      "mean_loss": 0.4997,
+      "seconds": 351.2
+    },
+    {
+      "epoch": 2,
+      "val_macro_f1": 0.7968,
+      "mean_loss": 0.3549,
+      "seconds": 362.2
+    },
+    {
+      "epoch": 3,
+      "val_macro_f1": 0.8041,
+      "mean_loss": 0.255,
+      "seconds": 333.1
+    },
+    {
+      "epoch": 4,
+      "val_macro_f1": 0.8013,
+      "mean_loss": 0.1716,
+      "seconds": 328.7
+    }
+  ]
+}

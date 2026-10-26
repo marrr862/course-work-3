@@ -16,14 +16,16 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 URL_RE = re.compile(r'https?://\S+|www\.\S+', re.I)
-NON_LATIN = re.compile(r'[Ѐ-ӿ԰-֏一-鿿]')
 MAX_CHARS = 1000
 
 LABELS = {'fake': 'Կեղծ', 'real': 'Իրական', 'pants-fire': 'Ակնհայտ կեղծ', 'false': 'Սխալ', 'barely-true': 'Հիմնականում սխալ',
           'half-true': 'Մասամբ ճիշտ', 'mostly-true': 'Հիմնականում ճիշտ', 'true': 'Ճիշտ'}
 MODELS = {'stage1': 'միայն տեքստ (փուլ 1)', 'stage2_text': 'տեքստ (փուլ 2)', 'stage2_domain': 'տեքստ + կայքի տիրույթ (փուլ 2)',
           'stage2_metadata': 'տեքստ + խոսնակի տվյալներ (փուլ 2)', 'stage3_text': 'RoBERTa + տեքստ (փուլ 3)',
-          'stage3_domain': 'RoBERTa + տեքստ + կայքի տիրույթ (փուլ 3)'}
+          'stage3_domain': 'RoBERTa + տեքստ + կայքի տիրույթ (փուլ 3)',
+          'stage4_text': '3 տրանսֆորմեր + տեքստ, մետա-մոդել (փուլ 4)',
+          'stage4_domain': '4 տրանսֆորմեր + տեքստ + հղում, մետա-մոդել (փուլ 4)'}
+LANGS = {'hy': 'հայերենից', 'ru': 'ռուսերենից'}
 VERIFY = {'correction_proposed': 'Աղբյուրը հակասում է պնդմանը, առաջարկվում է ուղղում',
           'supported_by_sources': 'Աղբյուրները հաստատում են պնդումը',
           'refuted_by_sources': 'Աղբյուրները հակասում են պնդմանը',
@@ -34,7 +36,8 @@ VERIFY = {'correction_proposed': 'Աղբյուրը հակասում է պնդմ�
           'model_unavailable': 'Ստուգման մոդելը տեղադրված չէ'}
 
 HELP = ('<b>Կեղծ լուրերի ստուգման բոտ</b>\n\n'
-        'Ուղարկիր <b>անգլերեն</b> լուրի վերնագիր կամ կարճ պնդում։ Կարող ես ավելացնել նաև լուրի հղումը, '
+        'Ուղարկիր լուրի վերնագիր կամ կարճ պնդում <b>անգլերեն, հայերեն կամ ռուսերեն</b> '
+        '(հայերեն և ռուսերեն տեքստը ավտոմատ թարգմանվում է անգլերեն)։ Կարող ես ավելացնել նաև լուրի հղումը, '
         'այդ դեպքում հաշվի կառնվի կայքի տիրույթը (էջը չի բեռնվում)։\n\n'
         'Օրինակ՝\n<code>BREAKING: Celebrity couple secretly married in Las Vegas!!! https://hollywoodlife.com/...</code>\n'
         '<code>Mars has no moons.</code>\n\n'
@@ -55,21 +58,31 @@ def parse_message(text):
 def check_input(headline):
     if not headline:
         return 'Ուղարկիր նաև լուրի վերնագիրը, ոչ միայն հղումը։'
-    if NON_LATIN.search(headline):
-        return 'Մոդելն աշխատում է միայն անգլերեն տեքստով։ Ուղարկիր վերնագիրը անգլերեն։'
-    if len(re.findall(r'[A-Za-z]', headline)) < 3:
+    from .translate import detect_language
+    if detect_language(headline) == 'other':
+        return 'Աջակցվում են անգլերեն, հայերեն և ռուսերեն տեքստերը։'
+    if len(re.findall(r'[A-Za-z\u0400-\u04ff\u0531-\u0587]', headline)) < 3:
         return 'Տեքստը չափազանց կարճ է։ Ուղարկիր ամբողջական վերնագիր կամ պնդում։'
     if len(headline) > MAX_CHARS:
         return f'Տեքստը շատ երկար է։ Ուղարկիր մինչև {MAX_CHARS} նիշ։'
     return None
 
 
+def translation_line(result):
+    if not result.get('translated_text'):
+        return ''
+    src = LANGS.get(result.get('detected_language'), '')
+    return f"<b>Թարգմանություն {src}</b>\n<i>{html.escape(result['translated_text'])}</i>"
+
+
 def format_classification(result):
     scores = result.get('model_scores') or {}
     pred = result.get('model_prediction')
+    head = translation_line(result)
+    head = head + '\n\n' if head else ''
     if not pred:
-        return '<b>Դասակարգում</b>\nՄոդելի բառապաշարում բավարար տվյալ չկա այս տեքստի համար։'
-    lines = [f"<b>Դասակարգում</b>\nԿանխատեսում՝ <b>{LABELS.get(pred, pred)}</b>"]
+        return head + '<b>Դասակարգում</b>\nՄոդելի բառապաշարում բավարար տվյալ չկա այս տեքստի համար։'
+    lines = [f"{head}<b>Դասակարգում</b>\nԿանխատեսում՝ <b>{LABELS.get(pred, pred)}</b>"]
     if pred in scores:
         lines.append(f'Միավոր՝ {scores[pred] * 100:.0f}%')
     lines.append(f"Մոդել՝ {MODELS.get(result.get('model_version'), result.get('model_version'))}")
@@ -116,9 +129,11 @@ class Analyzer:
         r = self.client.post('/analyze', json=body)
         if r.status_code == 422 and url:  # unusable link: classify the text alone
             r = self.client.post('/analyze', json={'text': headline, 'dataset': 'fakenewsnet'})
+        if r.status_code == 422:
+            return 'Տեքստը մշակել չհաջողվեց՝ ' + html.escape(str(r.json().get('detail', '')))[:300]
         r.raise_for_status()
         cls = r.json()
-        v = self.client.post('/verify', json={'text': headline, 'live': True})
+        v = self.client.post('/verify', json={'text': cls.get('analyzed_text', headline), 'live': True})
         parts = [format_classification(cls)]
         if v.status_code == 200:
             parts.append(format_verification(v.json()))
@@ -128,6 +143,8 @@ class Analyzer:
 
     def liar(self, claim):
         r = self.client.post('/analyze', json={'text': claim, 'dataset': 'liar'})
+        if r.status_code == 422:
+            return 'Տեքստը մշակել չհաջողվեց՝ ' + html.escape(str(r.json().get('detail', '')))[:300]
         r.raise_for_status()
         res = r.json()
         return '\n\n'.join(p for p in [format_classification(res), archive_line(res)] if p) + '\n\n<i>LIAR՝ 6 աստիճան, ճշգրտությունը մոտ 28% է․ օգտագործիր միայն որպես ցուցիչ։</i>'
@@ -164,7 +181,13 @@ def main():
     token = load_token()
     api = f'https://api.telegram.org/bot{token}'
     http = httpx.Client(timeout=40)
-    me = http.get(f'{api}/getMe').json()
+    while True:  # wait for the network after login / wake-up instead of crashing
+        try:
+            me = http.get(f'{api}/getMe').json()
+            break
+        except httpx.HTTPError:
+            print('network unavailable, retrying in 15 s', flush=True)
+            time.sleep(15)
     if not me.get('ok'):
         raise SystemExit('Telegram rejected the token: ' + str(me.get('description')))
     http.post(f'{api}/setMyCommands', json={'commands': [{'command': 'help', 'description': 'Ինչպես օգտվել'},
@@ -184,14 +207,20 @@ def main():
             if not msg or 'text' not in msg:
                 continue
             chat = msg['chat']['id']
-            http.post(f'{api}/sendChatAction', json={'chat_id': chat, 'action': 'typing'})
+            try:
+                http.post(f'{api}/sendChatAction', json={'chat_id': chat, 'action': 'typing'})
+            except httpx.HTTPError:
+                pass
             try:
                 answer = reply_for(msg['text'], analyzer)
             except Exception as error:  # keep the bot alive on unexpected input
                 print('error:', type(error).__name__, error, flush=True)
                 answer = 'Ներողություն, տեքստը մշակել չհաջողվեց։ Փորձիր կրկին։'
-            http.post(f'{api}/sendMessage', json={'chat_id': chat, 'text': answer, 'parse_mode': 'HTML',
-                                                   'disable_web_page_preview': True, 'reply_to_message_id': msg['message_id']})
+            try:
+                http.post(f'{api}/sendMessage', json={'chat_id': chat, 'text': answer, 'parse_mode': 'HTML',
+                                                       'disable_web_page_preview': True, 'reply_to_message_id': msg['message_id']})
+            except httpx.HTTPError as error:
+                print('send failed:', type(error).__name__, flush=True)
 
 
 if __name__ == '__main__':

@@ -1,11 +1,11 @@
 # Կեղծ լուրերի հայտնաբերման և ճշգրտման համակարգ
 
-> **Repository contents.** The code, tests, notebook (`Final_Practical.ipynb`), datasets, results (`reports/`) and the course-work report (`deliverables/Kursayin_ashkhatanq_HY.docx`) are included. The Python environment and the large neural models (fine-tuned MiniLM, DeBERTa NLI, ~1.7 GB) are not, because of GitHub's file-size limits. Only small models (`models/*.joblib`, stage 1 TF-IDF and stage 2) are included. To rebuild the rest, follow the commands below (`fakenews.train`, `setup_encoder`, `optimize`, `setup_verifier`, `improve_v2`).
+> **Repository contents.** The code, tests, notebook (`Final_Practical.ipynb`), datasets, results (`reports/`) and the final course work (`deliverables/Կուրսային աշխատանք 3 (փուլ 4).docx` and `.pdf`) are included. The Python environment and the large neural models (fine-tuned MiniLM, RoBERTa, ELECTRA, DeBERTa NLI, NLLB-200, about 5 GB) are not, because of GitHub's file-size limits. Only small models (`models/*.joblib`, stages 1–4 without neural weights) are included. To rebuild the rest, follow the commands below (`fakenews.train`, `setup_encoder`, `optimize`, `setup_verifier`, `improve_v2`, `train_large`, `train_transformer`, `stack_v4 --build`, `translate --download`).
 
 
 **Հիմնական գործարկում՝ START_HERE_HY.md → open_notebook.command → Final_Practical.ipynb։** Notebook-ը սկզբից մինչև վերջ գործարկված է։ Պատրաստի վեբ ցուցադրությունը՝ start.command։
 
-Ամբողջական տեղային հետազոտական նախատիպ՝ տվյալների մաքրում, TF-IDF հատկանիշներ, երեք ուսուցվող մոդելի և majority baseline-ի համեմատություն, առանձին թեստային գնահատում, պահպանված մոդելներ, FastAPI և հայերեն վեբ միջերես։ Տեքստի դասակարգումն անգլերենով է։
+Ամբողջական տեղային հետազոտական նախատիպ՝ տվյալների մաքրում, TF-IDF հատկանիշներ, երեք ուսուցվող մոդելի և majority baseline-ի համեմատություն, առանձին թեստային գնահատում, պահպանված մոդելներ, FastAPI, հայերեն վեբ միջերես և Telegram բոտ։ Մոդելները ուսուցված են անգլերենով, իսկ հայերեն և ռուսերեն մուտքը նախ թարգմանվում է անգլերեն (NLLB-200)։
 
 ## Արագ մեկնարկ
 
@@ -85,10 +85,10 @@ NLI մոդելը մոտ 0.6 GB է և տեղադրվում է տեղային `mod
 - Առաջարկվել է վեց ուղղում. վեցն էլ հերքվող պնդումների համար են և բառացի պահպանել են աղբյուրի հատվածը։ Սա փոքր նմուշ է, ոչ 100% ընդհանուր որակի ապացույց։
 - Մեկ սխալ հաստատում կա՝ `Mercury has a moon.`։ Ամբողջ սխալների ցանկը՝ `reports/verification/errors.json`։
 - 20 ձեռքով վերաշարադրված արխիվային հարցման որոնումը՝ Recall@1=80%, Recall@5=100%։
-- Անցել են 53 ավտոմատ ստուգումները և բրաուզերի փորձարկումը։
+- Անցել են բոլոր 108 ավտոմատ թեստերը և բրաուզերի փորձարկումը։
 - Առցանց ստուգումը իրականում փորձարկվել է Ֆրանսիայի մայրաքաղաքի ճիշտ և սխալ պնդումներով՝ `reports/live_verification.json`։
 
-Աղբյուրները կարող են հնանալ, որոնումն ու NLI-ն կարող են սխալվել, իսկ կորպուսից դուրս կամ բարդ պնդումները կարող են մնալ չստուգված։ Մոդելները հայերենով չեն ուսուցանվել։ Google Fact Check-ի ընտրովի միակցիչի համար անհրաժեշտ է `GOOGLE_FACT_CHECK_API_KEY`․ այն իրական բանալիով չի փորձարկվել և չի պահանջվում հիմնական շղթայի համար։
+Աղբյուրները կարող են հնանալ, որոնումն ու NLI-ն կարող են սխալվել, իսկ կորպուսից դուրս կամ բարդ պնդումները կարող են մնալ չստուգված։ Մոդելները հայերենով չեն ուսուցանվել․ հայերեն և ռուսերեն տեքստը մեքենայական թարգմանվում է, ինչը կարող է փոխել արդյունքը։ Google Fact Check-ի ընտրովի միակցիչի համար անհրաժեշտ է `GOOGLE_FACT_CHECK_API_KEY`․ այն իրական բանալիով չի փորձարկվել և չի պահանջվում հիմնական շղթայի համար։
 
 ## Միջերեսի փորձարկում
 
@@ -161,12 +161,47 @@ API-ն ինքնաշխատ ընտրում է մոդելը․ `/analyze` հարց�
 .venv/bin/python -m fakenews.train_large --dataset fakenewsnet --build-only           # միայն արտեֆակտը
 ```
 
+### Փուլ 4՝ մետա-մոդել (աշխատող տարբերակը)
+
+Լրացուցիչ ուսուցված են ELECTRA-base (վերնագիր), RoBERTa-base («վերնագիր + հղման բառեր» զույգ մուտք) և LIAR-ի համար RoBERTa-base («պնդում + խոսնակի տվյալներ»)։ FakeNewsNet-ում բոլոր բաղադրիչների «կեղծ» հավանականությունների logit-ները միավորվում են լոգիստիկ մետա-մոդելով, որի կշիռներն ու շեմը ընտրված են validation-ի վրա 5-ապատիկ cross-validation-ով։ LIAR-ում (խոսնակի տվյալների առկայության դեպքում) օգտագործվում է փուլ 1-ի, RoBERTa-ի և փուլ 2-ի LR-ի հավանականությունների միջինը։
+
+| Մոդել | Test accuracy | Test macro-F1 |
+|---|---:|---:|
+| FakeNewsNet, միայն տեքստ (4 բաղադրիչ) | 86.08% | 80.90% |
+| FakeNewsNet, տեքստ + հղում (7 բաղադրիչ) | 88.70% | 83.54% |
+| LIAR 6 դաս, տեքստ + մետատվյալներ | 28.61% | 28.87% |
+
+Տեքստ + հղում տարբերակի աճը փուլ 2-ի համեմատ վիճակագրորեն նշանակալի է (macro-F1-ի 95% bootstrap միջակայք՝ [+0.65; +2.99] տոկոսային կետ)։ RoBERTa-large-ը և kNN հատկանիշները փորձարկվել են, բայց աշխատող տարբերակում չեն ներառվել։
+
+```bash
+.venv/bin/python -m fakenews.train_transformer --dataset fakenewsnet --model google/electra-base-discriminator --tag electra
+.venv/bin/python -m fakenews.train_transformer --dataset fakenewsnet --model roberta-base --input url_title --tag rb_url
+.venv/bin/python -m fakenews.train_transformer --dataset liar --model roberta-base --input liar_meta --tag rb_meta --max-len 128
+.venv/bin/python -m fakenews.stack_v4 --build            # models/fakenewsnet_v4.joblib, models/liar_v4.joblib
+```
+
+API-ն ինքնաշխատ նախընտրում է փուլ 4-ը (`model_version`՝ `stage4_text`, `stage4_domain` կամ `stage4_metadata`)։
+
+### Հայերեն և ռուսերեն մուտք
+
+Լեզուն որոշվում է այբուբենով, իսկ թարգմանությունը կատարվում է տեղում՝ `facebook/nllb-200-distilled-600M` մոդելով (`models/mt_nllb`)։ Պատասխանում վերադարձվում են `detected_language`, `translated_text` և `analyzed_text` դաշտերը։ Շրջադարձային գնահատում (300 թեստային վերնագիր, EN → HY/RU → EN)՝ macro-F1 82.50% (անգլերեն), 78.13% (հայերեն), 79.90% (ռուսերեն)։
+
+```bash
+.venv/bin/python -m fakenews.translate --download         # ~2.3 GB
+.venv/bin/python -m fakenews.eval_translation             # reports/translation/
+```
+
+### Կանխատեսման բացատրություն
+
+`/analyze` հարցման մեջ `"explain": true`-ն վերադարձնում է `explanation` դաշտը՝ ամենաազդեցիկ բառերը։ Յուրաքանչյուր բառի ազդեցությունը հաշվարկվում է այդ բառը հեռացնելով (`Δ = P(պատասխան | տեքստ) − P(պատասխան | տեքստ առանց բառի)`)՝ հենց աշխատող մոդելի վրա (`fakenews/explain.py`)։
+
 ### Telegram բոտ
 
 1. @BotFather-ով ստեղծիր բոտ և token-ը գրիր `.env` ֆայլում՝ `TELEGRAM_BOT_TOKEN=...` (ֆայլը git-ում չի պահվում)։
 2. Գործարկիր `./telegram_bot.command` կամ `.venv/bin/python -m fakenews.telegram_bot`։
+3. Ինքնաշխատ գործարկման համար՝ `bash tools/install_bot_service.sh`։ Մուտք գործելիս բոտը բացվում է Terminal-ում (`tools/bot_forever.command`), կանգ առնելու դեպքում վերագործարկվում է և թույլ չի տալիս Mac-ին քնել։ Հեռացնել՝ `bash tools/install_bot_service.sh remove`։
 
-Բոտը ընդունում է անգլերեն վերնագիր (ցանկության դեպքում՝ հղումով) և հայերենով վերադարձնում է դասակարգումը, աղբյուրներով ստուգումը և արխիվային համընկնումը։ `/liar <պնդում>` հրամանը գնահատում է քաղաքական պնդումը։ Բոտն աշխատում է long polling-ով, հաղորդագրությունները չի պահում։
+Բոտը ընդունում է վերնագիր անգլերեն, հայերեն կամ ռուսերեն (ցանկության դեպքում՝ հղումով) և հայերենով վերադարձնում է թարգմանությունը, դասակարգումը, ամենաազդեցիկ բառերը, աղբյուրներով ստուգումը և արխիվային համընկնումը։ `/liar <պնդում>` հրամանը գնահատում է քաղաքական պնդումը։ Բոտն աշխատում է long polling-ով, հաղորդագրությունները չի պահում։
 
 ### Reliability modes and scientific evidence
 

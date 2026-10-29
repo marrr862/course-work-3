@@ -3,7 +3,6 @@
 Corpus documents are public SciFact abstracts; never treat the output as clinical advice.
 """
 from functools import lru_cache
-from pathlib import Path
 from threading import Lock
 import json
 import hashlib

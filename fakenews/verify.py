@@ -132,7 +132,7 @@ def verify_text(text, live=False, source_urls=None, *, verifier=None, initial_do
     documents=list({d['url']:d for d in documents}.values())
     try:
         results=[(verifier or verify_claim)(claim,documents) for claim in claims]
-    except (FileNotFoundError, OSError) as exc:
+    except (FileNotFoundError, OSError):
         return {'status':'model_unavailable','claims':[],'corrected_text':None,'message':'Install the verifier model with python -m fakenews.setup_verifier','provider_errors':errors}
     decisive={'refuted_by_sources','supported_by_sources'}
     complete=bool(results) and all(r['status'] in decisive for r in results)

@@ -1,4 +1,4 @@
-import copy, sys
+import copy
 import docx
 from docx.oxml.ns import qn
 from docx.text.paragraph import Paragraph

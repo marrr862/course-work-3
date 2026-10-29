@@ -7,7 +7,7 @@ import joblib
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field, field_validator
-from .data import clean_text, text_key
+from .data import text_key
 from .evidence import EvidenceLookup
 from .translate import available as translation_available
 

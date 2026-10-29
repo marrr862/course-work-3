@@ -12,14 +12,13 @@ Outputs: models/<dataset>_<tag>/ (best checkpoint by validation macro-F1),
 import argparse
 import gc
 import json
-import re
 import time
 import numpy as np
 import pandas as pd
 import torch
 from sklearn.metrics import f1_score
 from .improve_v2 import ROOT
-from .stacking import domain, url_words
+from .stacking import url_words
 
 DEVICE = 'mps' if torch.backends.mps.is_available() else ('cuda' if torch.cuda.is_available() else 'cpu')
 OUT = ROOT / 'reports/v4'

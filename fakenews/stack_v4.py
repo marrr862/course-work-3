@@ -10,14 +10,13 @@ cross-validated validation macro-F1 is selected.
 """
 import argparse
 import json
-from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import f1_score
-from .improve_v2 import ROOT, M, paired_ci, best_threshold, THRESHOLDS
+from .improve_v2 import ROOT, M, best_threshold
 from .stacking import domain
 
 V4 = ROOT / 'reports/v4'
@@ -112,19 +111,17 @@ def run_fnn(out):
         k = list(meta.classes_).index('fake')
         cands.append((f, 'meta_lr', lambda: np.where(meta.predict_proba(Xte)[:, k] >= t, 'fake', 'real'),
                       {'C': C, 'threshold': t, 'coef': dict(zip(names, np.round(meta.coef_[0] * (1 if k == 1 else -1), 3).tolist()))}))
-        for f, label, fn, info in cands:
+        for f, label, fn, _ in cands:
             p = fn(); key = f'{mode}:{label}'; preds[key] = p
             rows.append({'mode': mode, 'method': label, 'val_score': round(f, 4), **M(yte, p, 'fake')})
         winner = max(cands, key=lambda c: c[0])
         chosen[mode] = {'method': winner[1], 'val_score': round(winner[0], 4), 'components': names, **winner[3]}
     res = pd.DataFrame(rows).sort_values(['mode', 'val_score'], ascending=[True, False])
     res.to_csv(out / 'fakenewsnet_v4_results.csv', index=False)
-    base = preds.get('url:single:lr_domain')
     summary = {'selected': chosen, 'note': 'val_score: macro-F1 on validation (5-fold out-of-fold for meta_lr); test evaluated once.'}
     for mode in ['text', 'url']:
         key = f"{mode}:{chosen[mode]['method']}"
         summary[f'{mode}_selected_test'] = M(yte, preds[key], 'fake')
-    stage3 = json.loads((ROOT / 'reports/v3/fakenewsnet_v3_summary.json').read_text()) if (ROOT / 'reports/v3/fakenewsnet_v3_summary.json').exists() else None
     json.dump(summary, open(out / 'fakenewsnet_v4_summary.json', 'w'), indent=2)
     return res, summary
 
@@ -141,8 +138,6 @@ def run_liar(out):
     raw_cols = ['id', 'label', 'statement', 'subject', 'speaker', 'job', 'state', 'party', 'bt', 'f', 'ht', 'mt', 'pof', 'context']
     raw = pd.concat([pd.read_csv(ROOT / f'data/raw/liar/{s}.tsv', sep='\t', header=None, names=raw_cols, quoting=3, dtype=str) for s in ['train', 'valid', 'test']]).fillna('NA')
     v2 = joblib.load(ROOT / 'models/liar_v2.joblib')['models']['metadata']
-    for name, frame in [('va', va), ('te', te)]:
-        pass
     fva = va.merge(raw.drop(columns=['label']).drop_duplicates('id'), on='id', how='left'); fte = te.merge(raw.drop(columns=['label']).drop_duplicates('id'), on='id', how='left')
     comps['lr_metadata'] = (v2.lr_proba(fva), v2.lr_proba(fte))
     names = list(comps)

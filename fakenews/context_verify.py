@@ -1,7 +1,6 @@
 """Context-preserving evidence verification for NASA/Wikipedia articles."""
 from functools import lru_cache
 import json,re
-import numpy as np
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS,TfidfVectorizer
 from .advanced_models import embed
 from .verify import get_nli,verify_text as legacy_verify_text

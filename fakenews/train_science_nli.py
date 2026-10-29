@@ -1,5 +1,5 @@
 """Adapt NLI on official SciFact train only, excluding the 150 tuning claims."""
-import json,time,gc
+import json,time
 import numpy as np
 import torch
 from transformers import AutoTokenizer,AutoModelForSequenceClassification,get_linear_schedule_with_warmup

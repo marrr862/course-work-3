@@ -1,5 +1,4 @@
 """Create the practical report using the bundled document runtime."""
-import json
 import re
 from pathlib import Path
 from docx import Document

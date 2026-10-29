@@ -1,5 +1,5 @@
 """Select context verifier on old development set; report old test as follow-up only."""
-import json,hashlib
+import json
 from sklearn.metrics import accuracy_score,f1_score
 from .context_verify import retrieve,decide
 from .verify import get_nli

@@ -1,8 +1,5 @@
 """Development-only evidence ranking search; original verifier remains unchanged."""
 import json
-import hashlib
-from pathlib import Path
-import numpy as np
 from sklearn.metrics import accuracy_score,f1_score
 from .advanced_models import embed
 from .sources import cached_sources

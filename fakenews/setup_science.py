@@ -1,5 +1,5 @@
 """Download and verify the exact public SciFact snapshot used in this study."""
-import hashlib,io,json,tarfile
+import hashlib,io,tarfile
 from datetime import datetime,timezone
 import httpx
 from .train import ROOT,write_json

@@ -17,7 +17,6 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import f1_score
 from .improve_v2 import ROOT, M, paired_ci, best_threshold
 from .stack_v4 import fnn_components, cv_meta, logit, NOT_DEPLOYABLE
 

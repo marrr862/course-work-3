@@ -1,0 +1,271 @@
+{
+  "results": [
+    {
+      "model": "social only (gradient boosting)",
+      "val_macro_f1": 0.8506,
+      "accuracy": 0.8978,
+      "macro_f1": 0.859,
+      "macro_precision": 0.8621,
+      "macro_recall": 0.856,
+      "fake_precision": 0.7947,
+      "fake_recall": 0.7754
+    },
+    {
+      "model": "social_24h only (gradient boosting)",
+      "val_macro_f1": 0.7877,
+      "accuracy": 0.862,
+      "macro_f1": 0.8021,
+      "macro_precision": 0.8189,
+      "macro_recall": 0.789,
+      "fake_precision": 0.7448,
+      "fake_recall": 0.6483
+    },
+    {
+      "model": "social_with_year only (gradient boosting)",
+      "val_macro_f1": 0.8615,
+      "accuracy": 0.9061,
+      "macro_f1": 0.8701,
+      "macro_precision": 0.8745,
+      "macro_recall": 0.8658,
+      "fake_precision": 0.8154,
+      "fake_recall": 0.7882
+    },
+    {
+      "model": "stage4 text (reference)",
+      "val_macro_f1": 0.8175,
+      "accuracy": 0.8608,
+      "macro_f1": 0.809,
+      "macro_precision": 0.8097,
+      "macro_recall": 0.8083,
+      "fake_precision": 0.7119,
+      "fake_recall": 0.7073
+    },
+    {
+      "model": "stage4 text + url (reference)",
+      "val_macro_f1": 0.8454,
+      "accuracy": 0.887,
+      "macro_f1": 0.8354,
+      "macro_precision": 0.8616,
+      "macro_recall": 0.8164,
+      "fake_precision": 0.8192,
+      "fake_recall": 0.6804
+    },
+    {
+      "model": "text + social",
+      "val_macro_f1": 0.9147,
+      "accuracy": 0.9358,
+      "macro_f1": 0.9114,
+      "macro_precision": 0.9148,
+      "macro_recall": 0.9082,
+      "fake_precision": 0.8752,
+      "fake_recall": 0.8549
+    },
+    {
+      "model": "text + url + social",
+      "val_macro_f1": 0.9231,
+      "accuracy": 0.9441,
+      "macro_f1": 0.9236,
+      "macro_precision": 0.9234,
+      "macro_recall": 0.9237,
+      "fake_precision": 0.8833,
+      "fake_recall": 0.8845
+    },
+    {
+      "model": "text + social 24h",
+      "val_macro_f1": 0.8872,
+      "accuracy": 0.9061,
+      "macro_f1": 0.8723,
+      "macro_precision": 0.8701,
+      "macro_recall": 0.8746,
+      "fake_precision": 0.7995,
+      "fake_recall": 0.8139
+    },
+    {
+      "model": "text + url + social 24h",
+      "val_macro_f1": 0.9058,
+      "accuracy": 0.9247,
+      "macro_f1": 0.8967,
+      "macro_precision": 0.8974,
+      "macro_recall": 0.896,
+      "fake_precision": 0.8452,
+      "fake_recall": 0.8408
+    }
+  ],
+  "meta": {
+    "stage4 text (reference)": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "lr_text"
+      ],
+      "C": 0.03,
+      "threshold": 0.33,
+      "coef": {
+        "stage1": 0.186,
+        "roberta": 0.299,
+        "electra": 0.196,
+        "lr_text": 0.192
+      }
+    },
+    "stage4 text + url (reference)": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "rb_url",
+        "lr_text",
+        "lr_domain",
+        "lr_url"
+      ],
+      "C": 3,
+      "threshold": 0.47,
+      "coef": {
+        "stage1": 0.14,
+        "roberta": 0.02,
+        "electra": 0.131,
+        "rb_url": 0.35,
+        "lr_text": -0.156,
+        "lr_domain": -0.399,
+        "lr_url": 0.796
+      }
+    },
+    "text + social": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "lr_text",
+        "social"
+      ],
+      "C": 1,
+      "threshold": 0.47,
+      "coef": {
+        "stage1": 0.096,
+        "roberta": 0.309,
+        "electra": 0.191,
+        "lr_text": 0.221,
+        "social": 0.89
+      }
+    },
+    "text + url + social": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "rb_url",
+        "lr_text",
+        "lr_domain",
+        "lr_url",
+        "social"
+      ],
+      "C": 1,
+      "threshold": 0.39,
+      "coef": {
+        "stage1": 0.092,
+        "roberta": -0.008,
+        "electra": 0.121,
+        "rb_url": 0.383,
+        "lr_text": -0.213,
+        "lr_domain": -0.453,
+        "lr_url": 0.893,
+        "social": 0.897
+      }
+    },
+    "text + social 24h": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "lr_text",
+        "social_24h"
+      ],
+      "C": 0.3,
+      "threshold": 0.41,
+      "coef": {
+        "stage1": 0.027,
+        "roberta": 0.299,
+        "electra": 0.206,
+        "lr_text": 0.328,
+        "social_24h": 0.868
+      }
+    },
+    "text + url + social 24h": {
+      "components": [
+        "stage1",
+        "roberta",
+        "electra",
+        "rb_url",
+        "lr_text",
+        "lr_domain",
+        "lr_url",
+        "social_24h"
+      ],
+      "C": 0.3,
+      "threshold": 0.4,
+      "coef": {
+        "stage1": 0.004,
+        "roberta": 0.016,
+        "electra": 0.146,
+        "rb_url": 0.346,
+        "lr_text": -0.071,
+        "lr_domain": -0.237,
+        "lr_url": 0.669,
+        "social_24h": 0.877
+      }
+    }
+  },
+  "macro_f1_diff_95ci": {
+    "text + social vs stage4 text": [
+      0.0873,
+      0.1189
+    ],
+    "text + url + social vs stage4 text + url": [
+      0.0747,
+      0.1034
+    ],
+    "text + url + social 24h vs stage4 text + url": [
+      0.0475,
+      0.0768
+    ]
+  },
+  "by_source": {
+    "stage4 text + url (reference)": {
+      "politifact": {
+        "accuracy": 0.8231,
+        "macro_f1": 0.8125,
+        "macro_precision": 0.8367,
+        "macro_recall": 0.8056,
+        "fake_precision": 0.8776,
+        "fake_recall": 0.6825
+      },
+      "gossipcop": {
+        "accuracy": 0.89,
+        "macro_f1": 0.8357,
+        "macro_precision": 0.8613,
+        "macro_recall": 0.8167,
+        "fake_precision": 0.8144,
+        "fake_recall": 0.6802
+      }
+    },
+    "text + url + social": {
+      "politifact": {
+        "accuracy": 0.8639,
+        "macro_f1": 0.8625,
+        "macro_precision": 0.8609,
+        "macro_recall": 0.8671,
+        "fake_precision": 0.8116,
+        "fake_recall": 0.8889
+      },
+      "gossipcop": {
+        "accuracy": 0.9479,
+        "macro_f1": 0.9267,
+        "macro_precision": 0.9277,
+        "macro_recall": 0.9256,
+        "fake_precision": 0.8903,
+        "fake_recall": 0.8841
+      }
+    }
+  },
+  "note": "Social features: propagation statistics from Snowflake tweet IDs, no absolute dates. social_with_year is a leakage check only. Thresholds/weights chosen on validation; test evaluated once."
+}

@@ -1,0 +1,10 @@
+model,val_macro_f1,accuracy,macro_f1,macro_precision,macro_recall,fake_precision,fake_recall
+social only (gradient boosting),0.8506,0.8978,0.859,0.8621,0.856,0.7947,0.7754
+social_24h only (gradient boosting),0.7877,0.862,0.8021,0.8189,0.789,0.7448,0.6483
+social_with_year only (gradient boosting),0.8615,0.9061,0.8701,0.8745,0.8658,0.8154,0.7882
+stage4 text (reference),0.8175,0.8608,0.809,0.8097,0.8083,0.7119,0.7073
+stage4 text + url (reference),0.8454,0.887,0.8354,0.8616,0.8164,0.8192,0.6804
+text + social,0.9147,0.9358,0.9114,0.9148,0.9082,0.8752,0.8549
+text + url + social,0.9231,0.9441,0.9236,0.9234,0.9237,0.8833,0.8845
+text + social 24h,0.8872,0.9061,0.8723,0.8701,0.8746,0.7995,0.8139
+text + url + social 24h,0.9058,0.9247,0.8967,0.8974,0.896,0.8452,0.8408

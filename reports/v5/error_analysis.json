@@ -1,0 +1,296 @@
+{
+  "rows": 3239,
+  "pred_stage4": {
+    "confusion_fake_real": [
+      [
+        530,
+        249
+      ],
+      [
+        117,
+        2343
+      ]
+    ],
+    "errors": 366,
+    "false_negative": 249,
+    "false_positive": 117
+  },
+  "pred_v5": {
+    "confusion_fake_real": [
+      [
+        689,
+        90
+      ],
+      [
+        91,
+        2369
+      ]
+    ],
+    "errors": 181,
+    "false_negative": 90,
+    "false_positive": 91
+  },
+  "fixed_by_social": 242,
+  "broken_by_social": 57,
+  "errors_in_both": 124,
+  "by_source": {
+    "gossipcop": {
+      "pred_stage4": 0.11,
+      "pred_v5": 0.0521,
+      "rows": 3092
+    },
+    "politifact": {
+      "pred_stage4": 0.1769,
+      "pred_v5": 0.1361,
+      "rows": 147
+    }
+  },
+  "by_tweets": [
+    {
+      "bucket": "0",
+      "rows": 235,
+      "fake_share": 0.1532,
+      "pred_stage4_error_rate": 0.0809,
+      "pred_stage4_macro_f1": 0.8424,
+      "pred_v5_error_rate": 0.0809,
+      "pred_v5_macro_f1": 0.8424
+    },
+    {
+      "bucket": "1–9",
+      "rows": 533,
+      "fake_share": 0.5422,
+      "pred_stage4_error_rate": 0.1745,
+      "pred_stage4_macro_f1": 0.8253,
+      "pred_v5_error_rate": 0.0901,
+      "pred_v5_macro_f1": 0.9091
+    },
+    {
+      "bucket": "10–99",
+      "rows": 2155,
+      "fake_share": 0.1485,
+      "pred_stage4_error_rate": 0.0854,
+      "pred_stage4_macro_f1": 0.8276,
+      "pred_v5_error_rate": 0.0367,
+      "pred_v5_macro_f1": 0.9276
+    },
+    {
+      "bucket": "≥100",
+      "rows": 316,
+      "fake_share": 0.4241,
+      "pred_stage4_error_rate": 0.2215,
+      "pred_stage4_macro_f1": 0.7549,
+      "pred_v5_error_rate": 0.1108,
+      "pred_v5_macro_f1": 0.886
+    }
+  ],
+  "by_words": [
+    {
+      "bucket": "≤5",
+      "rows": 209,
+      "fake_share": 0.2871,
+      "pred_stage4_error_rate": 0.1435,
+      "pred_stage4_macro_f1": 0.8028,
+      "pred_v5_error_rate": 0.0478,
+      "pred_v5_macro_f1": 0.9421
+    },
+    {
+      "bucket": "6–9",
+      "rows": 810,
+      "fake_share": 0.2481,
+      "pred_stage4_error_rate": 0.121,
+      "pred_stage4_macro_f1": 0.8277,
+      "pred_v5_error_rate": 0.0716,
+      "pred_v5_macro_f1": 0.9044
+    },
+    {
+      "bucket": "10–14",
+      "rows": 1615,
+      "fake_share": 0.2427,
+      "pred_stage4_error_rate": 0.1146,
+      "pred_stage4_macro_f1": 0.8348,
+      "pred_v5_error_rate": 0.0514,
+      "pred_v5_macro_f1": 0.9298
+    },
+    {
+      "bucket": "≥15",
+      "rows": 605,
+      "fake_share": 0.2083,
+      "pred_stage4_error_rate": 0.0876,
+      "pred_stage4_macro_f1": 0.861,
+      "pred_v5_error_rate": 0.0496,
+      "pred_v5_macro_f1": 0.9253
+    }
+  ],
+  "examples": {
+    "false_negative": [
+      {
+        "id": "gossipcop-59586871",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 3,
+        "text": "Aritzia Says Meghan Markle Boosted Earnings; Will It Last?"
+      },
+      {
+        "id": "gossipcop-1455024839",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 159,
+        "text": "Amal Clooney changed dresses during the Met Gala in the museum gift shop"
+      },
+      {
+        "id": "gossipcop-1670898356",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 1,
+        "text": "Sean Spicer Says 'SNL' Went \"Over the Line\" in First Post-Resignation Interview on 'Hannity'"
+      },
+      {
+        "id": "gossipcop-7217208021",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 2,
+        "text": "This Is Us’ Justin Hartley on ‘Best Friends’ Milo Ventimiglia, Sterling K. Brown"
+      },
+      {
+        "id": "politifact14548",
+        "source": "politifact",
+        "label": "fake",
+        "n_tweets": 29060,
+        "text": "The Legislative Process"
+      },
+      {
+        "id": "gossipcop-8158264241",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 49,
+        "text": "New Mom Kylie Jenner Explains Why She Loves Changing Diapers"
+      },
+      {
+        "id": "gossipcop-6516122558",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 462,
+        "text": "How 'American Idol' Host Ryan Seacrest Escaped His Sexual Harassment Allegations Unscathed"
+      },
+      {
+        "id": "gossipcop-8066502884",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 46,
+        "text": "Here's a Timeline of Selena Gomez & Justin Bieber's Rocky Relationship, From Start to ...Finish?"
+      }
+    ],
+    "false_positive": [
+      {
+        "id": "gossipcop-925048",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 125,
+        "text": "Celebrity Couples Who Prove That Love Isn’t Dead"
+      },
+      {
+        "id": "gossipcop-953393",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 24,
+        "text": "Kendall Jenner’s latest date night with Ben Simmons again ruined by Tinashe, reports say"
+      },
+      {
+        "id": "gossipcop-892353",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 17,
+        "text": "Kate Hudson Calls Brad Pitt Dating Rumors the 'Craziest of All Time'"
+      },
+      {
+        "id": "gossipcop-917692",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 4,
+        "text": "Pregnant Khloé Kardashian and Kylie Jenner Bond with Kim's Surrogate: 'This Is So Beautiful'"
+      },
+      {
+        "id": "politifact13013",
+        "source": "politifact",
+        "label": "real",
+        "n_tweets": 40,
+        "text": "UN Refugee Agency welcomes arrival of 10,000th Syrian refugee resettled to United States"
+      },
+      {
+        "id": "gossipcop-860519",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 0,
+        "text": "Milo Ventimiglia Mandy Moore Not Dating Reason"
+      },
+      {
+        "id": "gossipcop-871817",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 1,
+        "text": "Chris Pratt's rising fame to blame for Anna Faris split"
+      },
+      {
+        "id": "gossipcop-915402",
+        "source": "gossipcop",
+        "label": "real",
+        "n_tweets": 11,
+        "text": "Cheryl & Liam Payne BRITs ‘safe word’ moment shows THIS according to body language expert"
+      }
+    ],
+    "fixed_fake_by_social": [
+      {
+        "id": "gossipcop-1344406228",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 38,
+        "text": "The Songs on Taylor Swift’s Album That Definitely Diss Kanye and Kim"
+      },
+      {
+        "id": "gossipcop-1426832166",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 7,
+        "text": "Portia de Rossi Opens Up to Ellen About Why She Quit Acting: \"I Decided to Start a Business\""
+      },
+      {
+        "id": "gossipcop-3093408195",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 1158,
+        "text": "Trump defends 'beautiful' Confederate statues"
+      },
+      {
+        "id": "gossipcop-2663107661",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 29,
+        "text": "'Game of Thrones' Co-Stars Kit Harington and Rose Leslie Are Engaged"
+      },
+      {
+        "id": "gossipcop-8941881759",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 17,
+        "text": "Jennifer Lawrence, Bill Murray, Johnny Depp and the role of the muse"
+      },
+      {
+        "id": "gossipcop-8542451981",
+        "source": "gossipcop",
+        "label": "fake",
+        "n_tweets": 3,
+        "text": "Jenna Dewan Says Her Divorce From Channing Tatum Was “a Positive Thing”"
+      }
+    ]
+  },
+  "calibration": {
+    "pred_stage4": {
+      "brier": 0.0831,
+      "ece_10_bins": 0.014
+    },
+    "pred_v5": {
+      "brier": 0.0421,
+      "ece_10_bins": 0.0082
+    }
+  }
+}

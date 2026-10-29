@@ -1,6 +1,6 @@
 # Կեղծ լուրերի հայտնաբերման և ճշգրտման համակարգ
 
-> **Repository contents.** The code, tests, notebook (`Final_Practical.ipynb`), datasets, results (`reports/`) and the final course work (`deliverables/Կուրսային աշխատանք 3 (փուլ 4).docx` and `.pdf`) are included. The Python environment and the large neural models (fine-tuned MiniLM, RoBERTa, ELECTRA, DeBERTa NLI, NLLB-200, about 5 GB) are not, because of GitHub's file-size limits. Only small models (`models/*.joblib`, stages 1–4 without neural weights) are included. To rebuild the rest, follow the commands below (`fakenews.train`, `setup_encoder`, `optimize`, `setup_verifier`, `improve_v2`, `train_large`, `train_transformer`, `stack_v4 --build`, `translate --download`).
+> **Repository contents.** The code, tests, notebook (`Final_Practical.ipynb`), datasets, results (`reports/`) and the final course work (`deliverables/Կուրսային աշխատանք 3 (փուլ 5).docx` and `.pdf`) are included. The Python environment and the large neural models (fine-tuned MiniLM, RoBERTa, ELECTRA, DeBERTa NLI, NLLB-200, about 5 GB) are not, because of GitHub's file-size limits. Only small models (`models/*.joblib`, stages 1–4 without neural weights) are included. To rebuild the rest, follow the commands below (`fakenews.train`, `setup_encoder`, `optimize`, `setup_verifier`, `improve_v2`, `train_large`, `train_transformer`, `stack_v4 --build`, `translate --download`).
 
 
 **Հիմնական գործարկում՝ START_HERE_HY.md → open_notebook.command → Final_Practical.ipynb։** Notebook-ը սկզբից մինչև վերջ գործարկված է։ Պատրաստի վեբ ցուցադրությունը՝ start.command։
@@ -85,7 +85,7 @@ NLI մոդելը մոտ 0.6 GB է և տեղադրվում է տեղային `mod
 - Առաջարկվել է վեց ուղղում. վեցն էլ հերքվող պնդումների համար են և բառացի պահպանել են աղբյուրի հատվածը։ Սա փոքր նմուշ է, ոչ 100% ընդհանուր որակի ապացույց։
 - Մեկ սխալ հաստատում կա՝ `Mercury has a moon.`։ Ամբողջ սխալների ցանկը՝ `reports/verification/errors.json`։
 - 20 ձեռքով վերաշարադրված արխիվային հարցման որոնումը՝ Recall@1=80%, Recall@5=100%։
-- Անցել են բոլոր 108 ավտոմատ թեստերը և բրաուզերի փորձարկումը։
+- Անցել են բոլոր 112 ավտոմատ թեստերը և բրաուզերի փորձարկումը։
 - Առցանց ստուգումը իրականում փորձարկվել է Ֆրանսիայի մայրաքաղաքի ճիշտ և սխալ պնդումներով՝ `reports/live_verification.json`։
 
 Աղբյուրները կարող են հնանալ, որոնումն ու NLI-ն կարող են սխալվել, իսկ կորպուսից դուրս կամ բարդ պնդումները կարող են մնալ չստուգված։ Մոդելները հայերենով չեն ուսուցանվել․ հայերեն և ռուսերեն տեքստը մեքենայական թարգմանվում է, ինչը կարող է փոխել արդյունքը։ Google Fact Check-ի ընտրովի միակցիչի համար անհրաժեշտ է `GOOGLE_FACT_CHECK_API_KEY`․ այն իրական բանալիով չի փորձարկվել և չի պահանջվում հիմնական շղթայի համար։
@@ -181,6 +181,23 @@ API-ն ինքնաշխատ ընտրում է մոդելը․ `/analyze` հարց�
 ```
 
 API-ն ինքնաշխատ նախընտրում է փուլ 4-ը (`model_version`՝ `stage4_text`, `stage4_domain` կամ `stage4_metadata`)։
+
+### Փուլ 5՝ սոցիալական համատեքստ (հետազոտական)
+
+FakeNewsNet-ի `tweet_ids` սյունակից, առանց Twitter API-ի, Snowflake ID-ներից վերականգնվում է թվիթների ստեղծման ժամանակը (`t = (id >> 22) + 1288834974657` մվ) և հաշվարկվում են 17 տարածման հատկանիշ (քանակ, տևողություն, ընդմիջումներ, առաջին 1/6/24/168 ժամը)։ Բացարձակ ամսաթիվը չի օգտագործվում։ HistGradientBoosting մոդելի P(fake)-ն ավելացվում է փուլ 4-ի մետա-մոդելին։
+
+| Մոդել | Test accuracy | Test macro-F1 | Fake recall |
+|---|---:|---:|---:|
+| Փուլ 4, տեքստ + հղում | 88.70% | 83.54% | 68.04% |
+| Փուլ 5, տեքստ + հղում + տարածում | 94.41% | 92.36% | 88.45% |
+| Փուլ 5, միայն առաջին 24 ժամը | 92.47% | 89.67% | 84.08% |
+
+Փուլ 5-ը API-ում ներդրված չէ․ նոր լուրի համար թվիթները հասանելի չեն և հայտնվում են միայն տարածումից հետո։ Հատկանիշները կարող են մասամբ արտացոլել տվյալների հավաքման ընթացակարգը։ Սխալների վերլուծությունը՝ `reports/v5/error_analysis.json`։
+
+```bash
+.venv/bin/python -m fakenews.social            # reports/v5/
+.venv/bin/python -m fakenews.error_analysis    # սխալներ, տրամաչափում, գրաֆիկներ
+```
 
 ### Հայերեն և ռուսերեն մուտք
 

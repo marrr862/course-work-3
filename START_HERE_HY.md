@@ -13,7 +13,7 @@
 Եթե կրկնակի սեղմումը չի գործարկում ֆայլը, Terminal-ում գրիր՝
 
 ```bash
-cd /Users/macbook/Desktop/FakeNewsNet-master/practical
+cd course-work-3   # նախագծի պանակը
 bash open_notebook.command
 ```
 

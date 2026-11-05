@@ -271,3 +271,12 @@ LIAR-PLUS-ը (Alhindi et al., 2018) յուրաքանչյուր LIAR պնդման
 ```bash
 .venv/bin/python -m fakenews.liar_plus_stage6     # reports/v6/
 ```
+
+Հիմնավորումը, հավանաբար, օգտակար կլինի միայն նեյրոնային մոդելով։ RoBERTa-base-ը «պնդում + մետատվյալներ + հիմնավորում» մուտքով ուսուցանելու և գնահատելու համար (անհրաժեշտ են torch և Hugging Face հասանելիություն, M-սերիայի Mac-ի վրա՝ մոտ 1–2 ժամ)՝
+
+```bash
+.venv/bin/python -m fakenews.train_transformer --dataset liar --model roberta-base --input liar_plus --tag rb_plus --max-len 256 --batch 16
+.venv/bin/python -m fakenews.liar_plus_stage6 --transformer rb_plus   # reports/v6/liar_plus_rb_plus_results.json
+```
+
+Երկրորդ հրամանը ցույց է տալիս մոդելը առանձին և փուլ 4-ի RoBERTa-ի հետ միջինացված (կշիռն ընտրվում է validation-ով)։

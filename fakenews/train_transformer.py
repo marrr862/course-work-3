@@ -6,6 +6,8 @@
   title       headline / statement only
   url_title   FakeNewsNet: headline + "domain + URL path words" as a second segment
   liar_meta   LIAR: statement + speaker/party/state/job/context/subject as a second segment
+  liar_plus   LIAR: as liar_meta plus the LIAR-PLUS justification (stage 6, research only;
+              use --max-len 256). Evaluate with: python -m fakenews.liar_plus_stage6 --transformer <tag>
 Outputs: models/<dataset>_<tag>/ (best checkpoint by validation macro-F1),
          reports/v4/<dataset>_<tag>_{valid,test}.npy and _history.json
 """
@@ -36,8 +38,13 @@ def load(dataset, kind):
         raw = pd.concat([pd.read_csv(ROOT / f'data/raw/liar/{s}.tsv', sep='\t', header=None, names=cols, quoting=3, dtype=str)
                          for s in ['train', 'valid', 'test']]).fillna('')
         df = df.merge(raw[['id', 'subject', 'speaker', 'job', 'state', 'party', 'context']].drop_duplicates('id'), on='id', how='left').fillna('')
-        df['second'] = ('speaker: ' + df.speaker.str.replace('-', ' ') + '; party: ' + df.party + '; state: ' + df.state + '; job: ' + df.job +
-                        '; context: ' + df.context + '; subject: ' + df.subject.str.replace(',', ', ')) if kind == 'liar_meta' else None
+        meta = ('speaker: ' + df.speaker.str.replace('-', ' ') + '; party: ' + df.party + '; state: ' + df.state + '; job: ' + df.job +
+                '; context: ' + df.context + '; subject: ' + df.subject.str.replace(',', ', '))
+        df['second'] = meta if kind == 'liar_meta' else None
+        if kind == 'liar_plus':
+            from .liar_plus_stage6 import load as load_plus
+            justification = load_plus().set_index('id').justification
+            df['second'] = meta + ' || justification: ' + df.id.map(justification).fillna('')
     return [df[df.split == s].reset_index(drop=True) for s in ['train', 'valid', 'test']]
 
 
@@ -60,7 +67,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--dataset', choices=['fakenewsnet', 'liar'], default='fakenewsnet')
     ap.add_argument('--model', default='roberta-base')
-    ap.add_argument('--input', choices=['title', 'url_title', 'liar_meta'], default='title')
+    ap.add_argument('--input', choices=['title', 'url_title', 'liar_meta', 'liar_plus'], default='title')
     ap.add_argument('--tag', required=True)
     ap.add_argument('--epochs', type=int, default=4)
     ap.add_argument('--lr', type=float, default=2e-5)

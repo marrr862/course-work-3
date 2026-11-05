@@ -11,7 +11,13 @@ claim, so these models are not usable for brand-new claims. They measure how
 much the evidence text helps, like stage 5 does for social context.
 
     python -m fakenews.liar_plus_stage6     # writes reports/v6/
+
+Transformer variant (needs torch; run on a machine with Hugging Face access):
+
+    python -m fakenews.train_transformer --dataset liar --model roberta-base --input liar_plus --tag rb_plus --max-len 256 --batch 16
+    python -m fakenews.liar_plus_stage6 --transformer rb_plus
 """
+import argparse
 import json
 from pathlib import Path
 import numpy as np
@@ -100,5 +106,30 @@ def main():
     print(json.dumps({'coverage': coverage, 'selected': best}, indent=1))
 
 
+def evaluate_transformer(tag, reference='rb_meta'):
+    """Score a train_transformer run, alone and averaged with the stage-4 RoBERTa (weight chosen on validation)."""
+    folder = ROOT / 'reports/v4'
+    frame = load()
+    valid, test = frame[frame.split == 'valid'], frame[frame.split == 'test']
+    classes = np.array(json.loads((folder / f'liar_{tag}_history.json').read_text())['classes'])
+    pv, pt = np.load(folder / f'liar_{tag}_valid.npy'), np.load(folder / f'liar_{tag}_test.npy')
+    rows = [{'model': f'transformer {tag}', **{f'test_{k}': v for k, v in scores(test.label, classes[pt.argmax(1)]).items()},
+             'val_macro_f1': scores(valid.label, classes[pv.argmax(1)])['macro_f1']}]
+    ref_v, ref_t = folder / f'liar_{reference}_valid.npy', folder / f'liar_{reference}_test.npy'
+    if ref_v.exists() and ref_t.exists():
+        rv, rt = np.load(ref_v), np.load(ref_t)
+        weight = max(np.linspace(0, 1, 11), key=lambda w: f1_score(valid.label, classes[(w * pv + (1 - w) * rv).argmax(1)], average='macro'))
+        fused = classes[(weight * pt + (1 - weight) * rt).argmax(1)]
+        rows.append({'model': f'transformer {tag} + {reference} (w={weight:.1f})', **{f'test_{k}': v for k, v in scores(test.label, fused).items()},
+                     'val_macro_f1': scores(valid.label, classes[(weight * pv + (1 - weight) * rv).argmax(1)])['macro_f1']})
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / f'liar_plus_{tag}_results.json').write_text(json.dumps(rows, indent=2))
+    for row in rows:
+        print(row)
+
+
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--transformer', help='evaluate reports/v4/liar_<tag>_*.npy instead of running the TF-IDF models')
+    args = parser.parse_args()
+    evaluate_transformer(args.transformer) if args.transformer else main()

@@ -254,3 +254,20 @@ Reproduce after installing the original NLI and MiniLM assets:
 Use a fresh experiment output directory when changing weights or data: benchmark score files are cached. Official SciFact train is split into 659 training and 150 tuning claims. Official dev (300 claims) is reserved as this project's final holdout; it is public, and pretraining overlap is unknown. Reported claim-level scoring is not the official SciFact evidence-set leaderboard metric. Retrieval never receives gold evidence IDs. Assumed-neutral non-gold training passages may contain unannotated evidence.
 
 Context-window and refreshed-source experiments did not improve the small general-verifier test. They remain experimental and are not the default `/verify` path. Original source snapshots and models are preserved.
+
+### Փուլ 6՝ LIAR-PLUS հիմնավորումներ (հետազոտական, բացասական արդյունք)
+
+LIAR-PLUS-ը (Alhindi et al., 2018) յուրաքանչյուր LIAR պնդմանը կցում է PolitiFact-ի եզրակացության հոդվածից արտահանված հիմնավորումը։ Ներբեռնվել են նաև `val2.tsv` և `test2.tsv` ֆայլերը (`data/liar_plus/`), հիմնավորումը միացվել է ըստ պնդման id-ի, իսկ փուլ 1-ի մաքրված բաժանումները մնացել են անփոփոխ (հիմնավորում ունի գրառումների 99%-ից ավելին)։ Մոդելը՝ TF-IDF + լոգիստիկ ռեգրեսիա, C-ն ընտրված է միայն validation macro-F1-ով։
+
+| Մոդել | Validation macro-F1 | Test accuracy | Test macro-F1 |
+|---|---:|---:|---:|
+| Պնդում | 26.66% | 24.80% | 24.84% |
+| Պնդում + մետատվյալներ | 28.57% | 25.91% | 25.91% |
+| Պնդում + հիմնավորում | 26.32% | 25.36% | 25.12% |
+| Պնդում + մետատվյալներ + հիմնավորում | 28.37% | 26.39% | 26.56% |
+
+Բառային (TF-IDF) ներկայացմամբ հիմնավորումը գրեթե չի օգնում, և արդյունքը մնում է փուլ 4-ից (28.87%) ցածր, ուստի աշխատող մոդելը չի փոխվել։ Հիմնավորումը գրվում է փաստաստուգումից հետո, ուստի նոր պնդումների համար հասանելի չէ։
+
+```bash
+.venv/bin/python -m fakenews.liar_plus_stage6     # reports/v6/
+```

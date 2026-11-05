@@ -1,0 +1,106 @@
+{
+  "selected_on_validation": "claim + metadata",
+  "labels": [
+    "pants-fire",
+    "false",
+    "barely-true",
+    "half-true",
+    "mostly-true",
+    "true"
+  ],
+  "confusion_matrix_selected": [
+    [
+      37,
+      16,
+      14,
+      8,
+      5,
+      12
+    ],
+    [
+      52,
+      59,
+      37,
+      31,
+      25,
+      43
+    ],
+    [
+      33,
+      33,
+      45,
+      32,
+      31,
+      38
+    ],
+    [
+      24,
+      33,
+      38,
+      46,
+      69,
+      53
+    ],
+    [
+      12,
+      27,
+      31,
+      54,
+      63,
+      54
+    ],
+    [
+      16,
+      26,
+      15,
+      19,
+      54,
+      77
+    ]
+  ],
+  "justification_coverage": {
+    "train": 0.9912,
+    "valid": 0.9969,
+    "test": 0.9913
+  },
+  "rows": {
+    "train": 10212,
+    "valid": 1277,
+    "test": 1262
+  },
+  "results": [
+    {
+      "model": "claim",
+      "C": 4,
+      "val_macro_f1": 0.2666,
+      "test_accuracy": 0.248,
+      "test_macro_f1": 0.2484,
+      "test_binary_accuracy": 0.6149
+    },
+    {
+      "model": "claim + metadata",
+      "C": 0.5,
+      "val_macro_f1": 0.2857,
+      "test_accuracy": 0.2591,
+      "test_macro_f1": 0.2591,
+      "test_binary_accuracy": 0.6458
+    },
+    {
+      "model": "claim + justification",
+      "C": 0.25,
+      "val_macro_f1": 0.2632,
+      "test_accuracy": 0.2536,
+      "test_macro_f1": 0.2512,
+      "test_binary_accuracy": 0.6244
+    },
+    {
+      "model": "claim + metadata + justification",
+      "C": 0.5,
+      "val_macro_f1": 0.2837,
+      "test_accuracy": 0.2639,
+      "test_macro_f1": 0.2656,
+      "test_binary_accuracy": 0.6529
+    }
+  ],
+  "note": "Justifications come from the fact-check article; research result, not usable for new claims."
+}

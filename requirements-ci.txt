@@ -1,0 +1,13 @@
+# Light dependencies for the automated tests (no torch / large models).
+# Tests that need the large models are skipped automatically, see tests/conftest.py.
+beautifulsoup4==4.15.0
+fastapi==0.141.1
+httpx==0.28.1
+joblib==1.6.0
+matplotlib==3.11.2
+numpy==2.5.3
+pandas==3.0.6
+pydantic==2.13.5
+pytest==9.1.1
+scikit-learn==1.9.1
+scipy==1.18.1

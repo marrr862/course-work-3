@@ -1,11 +1,12 @@
 import copy
+from pathlib import Path
 import docx
 from docx.oxml.ns import qn
 from docx.text.paragraph import Paragraph
 from PIL import Image
 
-ROOT = '/Users/macbook/Desktop/FakeNewsNet-master/practical/'
-SRC = ROOT + 'deliverables/Կուրսային աշխատանք 3 (փուլ 4).docx'
+ROOT = str(Path(__file__).resolve().parents[1]) + '/'
+SRC = ROOT + 'deliverables/archive/Կուրսային աշխատանք 3 (փուլ 4).docx'
 DST = ROOT + 'deliverables/Կուրսային աշխատանք 3 (փուլ 5).docx'
 d = docx.Document(SRC)
 E = list(d.element.body.iterchildren())

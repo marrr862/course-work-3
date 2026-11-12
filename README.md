@@ -255,7 +255,7 @@ Use a fresh experiment output directory when changing weights or data: benchmark
 
 Context-window and refreshed-source experiments did not improve the small general-verifier test. They remain experimental and are not the default `/verify` path. Original source snapshots and models are preserved.
 
-### Փուլ 6՝ LIAR-PLUS հիմնավորումներ (հետազոտական, բացասական արդյունք)
+### Փուլ 6՝ LIAR-PLUS հիմնավորումներ (հետազոտական)
 
 LIAR-PLUS-ը (Alhindi et al., 2018) յուրաքանչյուր LIAR պնդմանը կցում է PolitiFact-ի եզրակացության հոդվածից արտահանված հիմնավորումը։ Ներբեռնվել են նաև `val2.tsv` և `test2.tsv` ֆայլերը (`data/liar_plus/`), հիմնավորումը միացվել է ըստ պնդման id-ի, իսկ փուլ 1-ի մաքրված բաժանումները մնացել են անփոփոխ (հիմնավորում ունի գրառումների 99%-ից ավելին)։ Մոդելը՝ TF-IDF + լոգիստիկ ռեգրեսիա, C-ն ընտրված է միայն validation macro-F1-ով։
 
@@ -272,11 +272,19 @@ LIAR-PLUS-ը (Alhindi et al., 2018) յուրաքանչյուր LIAR պնդման
 .venv/bin/python -m fakenews.liar_plus_stage6     # reports/v6/
 ```
 
-Հիմնավորումը, հավանաբար, օգտակար կլինի միայն նեյրոնային մոդելով։ RoBERTa-base-ը «պնդում + մետատվյալներ + հիմնավորում» մուտքով ուսուցանելու և գնահատելու համար (անհրաժեշտ են torch և Hugging Face հասանելիություն, M-սերիայի Mac-ի վրա՝ մոտ 1–2 ժամ)՝
+Նեյրոնային մոդելով հիմնավորումն արդեն օգնում է։ RoBERTa-base-ը ուսուցանվել է «պնդում + մետատվյալներ + հիմնավորում» մուտքով (MacBook Air, MPS, 3 epoch, մոտ 2 ժամ)։ Առաջին փորձը (lr=2e-5, seed=42) չի զուգամիտել (validation macro-F1՝ 14.95%), ուստի կրկնվել է ավելի փոքր ուսուցման արագությամբ (lr=1e-5, seed=7)՝
 
 ```bash
-.venv/bin/python -m fakenews.train_transformer --dataset liar --model roberta-base --input liar_plus --tag rb_plus --max-len 256 --batch 16
+.venv/bin/python -m fakenews.train_transformer --dataset liar --model roberta-base --input liar_plus --tag rb_plus --max-len 192 --batch 8 --epochs 3 --lr 1e-5 --seed 7
 .venv/bin/python -m fakenews.liar_plus_stage6 --transformer rb_plus   # reports/v6/liar_plus_rb_plus_results.json
 ```
 
 Երկրորդ հրամանը ցույց է տալիս մոդելը առանձին և փուլ 4-ի RoBERTa-ի հետ միջինացված (կշիռն ընտրվում է validation-ով)։
+
+| Մոդել (LIAR, 6 դաս) | Validation macro-F1 | Test accuracy | Test macro-F1 |
+|---|---:|---:|---:|
+| Փուլ 4 (աշխատող մոդել, առանց հիմնավորման) | — | 28.61% | 28.87% |
+| RoBERTa + հիմնավորում | 30.32% | 29.87% | 29.68% |
+| RoBERTa + հիմնավորում և փուլ 4-ի RoBERTa (w=0.7, ընտրված validation-ով) | 31.42% | 29.08% | 29.03% |
+
+Validation-ով ընտրված տարբերակը համադրությունն է (test macro-F1՝ 29.03%), որը փուլ 4-ից բարձր է 0.16 տոկոսային կետով, իսկ առանձին RoBERTa-ն՝ 0.81 կետով։ Աճը փոքր է և, հավանաբար, թեստային նմուշի փոփոխականության սահմաններում (փուլ 1-ի bootstrap միջակայքի լայնությունը մոտ ±2.4 կետ է)։ Բացի այդ, հիմնավորումը նոր պնդումների համար հասանելի չէ, ուստի աշխատող մոդելը չի փոխվել։ Էպոխների պատմությունը՝ `reports/v4/liar_rb_plus_history.json`, արդյունքները՝ `reports/v6/liar_plus_rb_plus_results.json`։

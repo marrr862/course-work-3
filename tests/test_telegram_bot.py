@@ -20,7 +20,7 @@ class StubClient:
             pred = 'fake' if json['dataset'] == 'fakenewsnet' else 'half-true'
             return Resp(200, {'model_prediction': pred, 'model_scores': {pred: .83}, 'evidence': {'status': 'insufficient_evidence'},
                               'model_version': 'stage2_domain' if json.get('source_url') else 'stage2_text', 'seen_in_training': False})
-        return Resp(200, {'status': 'correction_proposed', 'claims': [{'correction': 'Mars has two small moons, Phobos and Deimos.',
+        return Resp(200, {'status': 'correction_proposed', 'claims': [{'status': 'refuted_by_sources', 'correction': 'Mars has two small moons, Phobos and Deimos.',
                           'evidence': [{'source': {'title': 'Mars: Facts', 'url': 'https://science.nasa.gov/mars/facts/'}}]}]})
 
 
@@ -95,3 +95,30 @@ def test_influential_words_are_shown_and_escaped():
             return r
     answer = reply_for('BREAKING: Senate passes <b> bill', Analyzer(Explaining()))
     assert 'BREAKING:' in answer and '(+21)' in answer and '&lt;b&gt;' in answer and 'Senate</code>' not in answer
+
+
+def test_unconfirmed_search_hit_is_not_shown_as_source():
+    from fakenews.telegram_bot import format_verification
+    result = {'status': 'needs_review', 'claims': [{'status': 'insufficient_evidence', 'correction': None,
+              'evidence': [{'source': {'title': 'Unrelated page', 'url': 'https://en.wikipedia.org/wiki/Unrelated'}}]}]}
+    text = format_verification(result)
+    assert 'Unrelated page' not in text and 'wikipedia.org' not in text
+
+
+def test_recent_news_section_lists_articles_and_escapes():
+    from fakenews.telegram_bot import format_news
+    found = {'available': True, 'articles': [{'title': 'NASA <delays> Artemis', 'publisher': 'Reuters',
+             'url': 'https://news.google.com/rss/articles/x', 'published': '2026-11-19', 'relevance': 1.0}]}
+    text = format_news(found)
+    assert 'Reuters' in text and '2026-11-19' in text and '&lt;delays&gt;' in text
+    assert 'չի գտնվել' in format_news({'available': True, 'articles': []})
+    assert format_news({'available': False, 'articles': []}) == ''
+
+
+def test_bot_passes_english_text_to_news_search():
+    seen = []
+    def fake_search(text):
+        seen.append(text)
+        return {'available': True, 'articles': []}
+    reply_for('Mars has no moons.', Analyzer(StubClient(), news_search=fake_search))
+    assert seen == ['Mars has no moons.']

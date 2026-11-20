@@ -95,17 +95,38 @@ def format_classification(result):
     return '\n'.join(lines)
 
 
+DECISIVE = {'refuted_by_sources', 'supported_by_sources'}
+
+
 def format_verification(result):
     lines = [f"<b>Աղբյուրներով ստուգում</b>\n{VERIFY.get(result.get('status'), result.get('status'))}"]
     for claim in result.get('claims', [])[:3]:
         if claim.get('correction'):
             lines.append(f"Ուղղում՝ <i>{html.escape(claim['correction'])}</i>")
         evidence = claim.get('evidence') or []
-        if evidence:
+        # Name a source only when it actually confirmed or refuted the claim; otherwise the first
+        # retrieved page is just a search hit and can be about something else.
+        if evidence and claim.get('status') in DECISIVE:
             src = evidence[0].get('source', {})
             title, url = html.escape(src.get('title', 'աղբյուր')), src.get('url', '')
             if url.startswith('https://'):
                 lines.append(f'Աղբյուր՝ <a href="{html.escape(url)}">{title}</a>')
+    return '\n'.join(lines)
+
+
+def format_news(found):
+    if not found.get('available'):
+        return ''
+    articles = found.get('articles') or []
+    if not articles:
+        return ('<b>Վերջին լուրեր</b>\nԱյս բառերով թարմ հրապարակում չի գտնվել։ '
+                'Սա չի ապացուցում, որ լուրը կեղծ է, բայց արժե ստուգել այլ աղբյուրներով։')
+    lines = ['<b>Վերջին լուրեր այս թեմայով</b>']
+    for a in articles:
+        date = f" · {a['published']}" if a.get('published') else ''
+        who = html.escape(a.get('publisher') or 'աղբյուր')
+        lines.append(f"• <a href=\"{html.escape(a['url'])}\">{html.escape(a['title'])}</a> ({who}{date})")
+    lines.append('<i>Սա որոնման արդյունք է, ոչ թե ստուգում․ լրատվամիջոցը նույնպես կարող է սխալվել։</i>')
     return '\n'.join(lines)
 
 
@@ -119,12 +140,15 @@ def archive_line(result):
 class Analyzer:
     """Calls the project API in-process (no running server needed)."""
 
-    def __init__(self, client=None):
+    def __init__(self, client=None, news_search=None):
         if client is None:
             from fastapi.testclient import TestClient
             from .app import app
             client = TestClient(app)
+        if news_search is None:
+            from .news_search import recent_news as news_search
         self.client = client
+        self.news_search = news_search
 
     def news(self, headline, url=None):
         body = {'text': headline, 'dataset': 'fakenewsnet', 'explain': True}
@@ -141,6 +165,7 @@ class Analyzer:
         parts = [format_classification(cls)]
         if v.status_code == 200:
             parts.append(format_verification(v.json()))
+        parts.append(format_news(self.news_search(cls.get('analyzed_text', headline))))
         parts.append(archive_line(cls))
         parts.append('<i>Արդյունքը մոդելի գնահատական է, ոչ թե վերջնական փաստ։</i>')
         return '\n\n'.join(p for p in parts if p)

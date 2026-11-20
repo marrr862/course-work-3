@@ -63,3 +63,9 @@ def pytest_collection_modifyitems(config, items):
             item.add_marker(pytest.mark.heavy)
             if skip:
                 item.add_marker(skip)
+
+
+@pytest.fixture(autouse=True)
+def no_live_news_search(monkeypatch):
+    """Keep tests offline: the bot's recent-news search is off unless a test turns it on."""
+    monkeypatch.setenv('NEWS_SEARCH', '0')

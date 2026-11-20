@@ -1,6 +1,6 @@
 """Recent-news search: feed parsing and the relevance filter (no network)."""
 import pytest
-from fakenews.news_search import key_terms, parse_feed, recent_news
+from fakenews.news_search import distinctive_terms, key_terms, parse_feed, recent_news
 
 FEED = """<?xml version="1.0" encoding="UTF-8"?><rss><channel>
 <item><title>NASA delays Artemis III moon landing to 2028 - Reuters</title><link>https://news.google.com/rss/articles/a</link>
@@ -22,8 +22,8 @@ class Resp:
 
 
 class Client:
-    def __init__(self, resp): self.resp, self.params = resp, None
-    def get(self, url, params): self.params = params; return self.resp
+    def __init__(self, resp): self.resp, self.queries = resp, []
+    def get(self, url, params): self.queries.append(params['q']); return self.resp
 
 
 @pytest.fixture(autouse=True)
@@ -48,15 +48,31 @@ def test_only_relevant_articles_are_kept():
     titles = [a['title'] for a in found['articles']]
     assert found['available'] and 'Best moon photos of the year' not in titles
     assert titles[0].startswith('Artemis moon mission delayed') or titles[0].startswith('NASA delays')
-    assert client.params['q'] == 'nasa delays artemis moon mission'
+    assert client.queries == ['nasa delays artemis moon mission', 'nasa delays artemis mission']
 
 
 def test_network_failure_is_not_available():
     found = recent_news('NASA delays Artemis moon mission', client=Client(Resp('', 503)))
-    assert found == {'available': False, 'articles': [], 'query': 'nasa delays artemis moon mission'}
+    assert found['available'] is False and found['articles'] == [] and found['error'] == 'HTTPStatusError'
 
 
 def test_disabled_or_too_short(monkeypatch):
     assert recent_news('Hello')['available'] is False
     monkeypatch.setenv('NEWS_SEARCH', '0')
     assert recent_news('NASA delays Artemis moon mission')['available'] is False
+
+
+def test_cut_off_first_word_and_acronyms():
+    h = '...ens of thousands of UK fridges secured from hackers in secret nationwide operation'
+    assert key_terms(h)[:3] == ['thousand', 'uk', 'fridge']
+    assert distinctive_terms(h) == ['uk', 'fridges', 'secured', 'hackers']
+
+
+def test_reworded_article_still_matches():
+    feed = FEED.replace('Best moon photos of the year - Some Blog', 'Thousands of UK smart fridges protected from hackers - BBC').replace('>Some Blog<', '>BBC<')
+    found = recent_news('...ens of thousands of UK fridges secured from hackers in secret nationwide operation', client=Client(Resp(feed)))
+    assert [a['publisher'] for a in found['articles']] == ['BBC']
+
+
+def test_all_caps_headline_is_not_read_as_acronyms():
+    assert key_terms('BREAKING: MARS HAS NO MOONS') == ['mar', 'moon']

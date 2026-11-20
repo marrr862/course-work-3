@@ -112,7 +112,8 @@ def test_recent_news_section_lists_articles_and_escapes():
     text = format_news(found)
     assert 'Reuters' in text and '2026-11-19' in text and '&lt;delays&gt;' in text
     assert 'չի գտնվել' in format_news({'available': True, 'articles': []})
-    assert format_news({'available': False, 'articles': []}) == ''
+    assert format_news({'available': False, 'articles': [], 'error': 'disabled'}) == ''
+    assert 'հասանելի չէ' in format_news({'available': False, 'articles': [], 'error': 'ConnectError'})
 
 
 def test_bot_passes_english_text_to_news_search():

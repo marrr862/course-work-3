@@ -116,7 +116,9 @@ def format_verification(result):
 
 def format_news(found):
     if not found.get('available'):
-        return ''
+        if found.get('error') in (None, 'disabled', 'too_few_words'):
+            return ''
+        return '<b>Վերջին լուրեր</b>\nԹարմ լուրերի որոնումը այս պահին հասանելի չէ։'
     articles = found.get('articles') or []
     if not articles:
         return ('<b>Վերջին լուրեր</b>\nԱյս բառերով թարմ հրապարակում չի գտնվել։ '
@@ -165,7 +167,10 @@ class Analyzer:
         parts = [format_classification(cls)]
         if v.status_code == 200:
             parts.append(format_verification(v.json()))
-        parts.append(format_news(self.news_search(cls.get('analyzed_text', headline))))
+        found = self.news_search(cls.get('analyzed_text', headline))
+        if found.get('error') not in (None, 'disabled'):
+            print('news search:', found.get('error'), '| query:', found.get('query'), flush=True)
+        parts.append(format_news(found))
         parts.append(archive_line(cls))
         parts.append('<i>Արդյունքը մոդելի գնահատական է, ոչ թե վերջնական փաստ։</i>')
         return '\n\n'.join(p for p in parts if p)

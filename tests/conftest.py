@@ -69,3 +69,4 @@ def pytest_collection_modifyitems(config, items):
 def no_live_news_search(monkeypatch):
     """Keep tests offline: the bot's recent-news search is off unless a test turns it on."""
     monkeypatch.setenv('NEWS_SEARCH', '0')
+    monkeypatch.setenv('FACTCHECK_SEARCH', '0')

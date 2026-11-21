@@ -114,6 +114,33 @@ def format_verification(result):
     return '\n'.join(lines)
 
 
+FACTCHECK_RATING = {'false': 'կեղծ', 'mixed': 'մասամբ ճիշտ կամ ապակողմնորոշիչ', 'true': 'ճիշտ'}
+FACTCHECK_SUMMARY = {'false': 'Փաստաստուգողները նման պնդումը գնահատել են որպես <b>կեղծ</b>։',
+                     'mixed': 'Փաստաստուգողները նման պնդումը գնահատել են որպես <b>մասամբ ճիշտ կամ ապակողմնորոշիչ</b>։',
+                     'true': 'Փաստաստուգողները նման պնդումը գնահատել են որպես <b>ճիշտ</b>։',
+                     'disagree': 'Փաստաստուգողների գնահատականները տարբեր են։'}
+
+
+def format_factchecks(found):
+    """Published fact-checks (Google Fact Check Tools); empty when the API key is not set."""
+    if not found.get('available'):
+        return ''
+    reviews = found.get('reviews') or []
+    if not reviews:
+        return '<b>Փաստաստուգողներ</b>\nԱյս պնդման հրապարակված ստուգում չի գտնվել։'
+    lines = ['<b>Փաստաստուգողների եզրակացություններ</b>']
+    if found.get('summary') in FACTCHECK_SUMMARY:
+        lines.append(FACTCHECK_SUMMARY[found['summary']])
+    for r in reviews:
+        cls = FACTCHECK_RATING.get(r.get('rating_class'), '')
+        rating = html.escape(r.get('rating') or '') + (f' ({cls})' if cls else '')
+        date = f" · {html.escape(r['date'])}" if r.get('date') else ''
+        lines.append(f"• <a href=\"{html.escape(r['url'])}\">{html.escape(r.get('publisher') or 'աղբյուր')}</a>՝ "
+                     f"<b>{rating}</b>{date}\n  <i>{html.escape(r.get('claim') or '')[:200]}</i>")
+    lines.append('<i>Ստուգված պնդումը կարող է մի փոքր տարբերվել քո տեքստից․ բացիր հղումը։</i>')
+    return '\n'.join(lines)
+
+
 def format_news(found):
     if not found.get('available'):
         if found.get('error') in (None, 'disabled', 'too_few_words'):
@@ -142,15 +169,18 @@ def archive_line(result):
 class Analyzer:
     """Calls the project API in-process (no running server needed)."""
 
-    def __init__(self, client=None, news_search=None):
+    def __init__(self, client=None, news_search=None, factcheck=None):
         if client is None:
             from fastapi.testclient import TestClient
             from .app import app
             client = TestClient(app)
         if news_search is None:
             from .news_search import recent_news as news_search
+        if factcheck is None:
+            from .factcheck_search import factcheck_search as factcheck
         self.client = client
         self.news_search = news_search
+        self.factcheck = factcheck
 
     def news(self, headline, url=None):
         body = {'text': headline, 'dataset': 'fakenewsnet', 'explain': True}
@@ -167,6 +197,10 @@ class Analyzer:
         parts = [format_classification(cls)]
         if v.status_code == 200:
             parts.append(format_verification(v.json()))
+        checks = self.factcheck(cls.get('analyzed_text', headline))
+        if checks.get('error') not in (None, 'api_key_missing', 'too_few_words', 'disabled'):
+            print('fact-check search:', checks.get('error'), flush=True)
+        parts.append(format_factchecks(checks))
         found = self.news_search(cls.get('analyzed_text', headline))
         if found.get('error') not in (None, 'disabled'):
             print('news search:', found.get('error'), '| query:', found.get('query'), flush=True)
@@ -181,7 +215,8 @@ class Analyzer:
             return 'Տեքստը մշակել չհաջողվեց՝ ' + html.escape(str(r.json().get('detail', '')))[:300]
         r.raise_for_status()
         res = r.json()
-        return '\n\n'.join(p for p in [format_classification(res), archive_line(res)] if p) + '\n\n<i>LIAR՝ 6 աստիճան, ճշգրտությունը մոտ 28% է․ օգտագործիր միայն որպես ցուցիչ։</i>'
+        checks = format_factchecks(self.factcheck(res.get('analyzed_text', claim)))
+        return '\n\n'.join(p for p in [format_classification(res), checks, archive_line(res)] if p) + '\n\n<i>LIAR՝ 6 աստիճան, ճշգրտությունը մոտ 28% է․ օգտագործիր միայն որպես ցուցիչ։</i>'
 
 
 def reply_for(text, analyzer):

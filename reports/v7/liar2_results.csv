@@ -1,0 +1,11 @@
+experiment,features,training,C,train_rows,test_rows,val_macro_f1,test_accuracy,test_macro_f1,test_binary_accuracy
+E1 original LIAR test,-,majority class,,10212,1262,,0.2084,0.0575,0.5634
+E1 original LIAR test,claim,LIAR train,4.0,10212,1262,0.2666,0.248,0.2484,0.6149
+E1 original LIAR test,claim,LIAR train + LIAR2 new,0.5,20634,1262,0.2601,0.2266,0.2266,0.6006
+E1 original LIAR test,claim + metadata,LIAR train,0.5,10212,1262,0.2739,0.248,0.2478,0.6371
+E1 original LIAR test,claim + metadata,LIAR train + LIAR2 new,4.0,20634,1262,0.2728,0.229,0.2321,0.6284
+E2 recent claims 2022-07..2023-07,-,majority class (LIAR2 until 2021),,20419,1611,,0.5642,0.1202,0.869
+E2 recent claims 2022-07..2023-07,claim,old LIAR only (2007-2016),1.0,10206,1611,0.1792,0.2272,0.1851,0.6605
+E2 recent claims 2022-07..2023-07,claim,LIAR2 until 2021,2.0,20419,1611,0.3038,0.4221,0.2938,0.8312
+E2 recent claims 2022-07..2023-07,claim + metadata,old LIAR only (2007-2016),0.25,10206,1611,0.1856,0.2458,0.201,0.779
+E2 recent claims 2022-07..2023-07,claim + metadata,LIAR2 until 2021,4.0,20419,1611,0.344,0.5034,0.3216,0.879

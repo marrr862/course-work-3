@@ -5,5 +5,7 @@
 cd "$(dirname "$0")/.." || exit 1
 while true; do
   /usr/bin/caffeinate -i .venv/bin/python -u -m fakenews.telegram_bot
+  status=$?
+  if [ "$status" -eq 3 ]; then echo "another copy of the bot is already running; this window does not start a second one"; break; fi
   echo "bot stopped ($(date '+%H:%M')), restarting in 15 s"; sleep 15
 done

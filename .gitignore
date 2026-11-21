@@ -27,3 +27,4 @@ deliverables/versions/
 reports/v4/*.log
 !models/liar_v4.joblib
 ~$*
+.telegram_bot.lock

@@ -240,6 +240,20 @@ def verify(request: VerifyRequest):
     return {**verify_text(request.text, live=request.live, source_urls=request.source_urls), **language}
 
 
+@app.post('/current')
+def current(request: Request):
+    """Published fact-checks (Google Fact Check Tools, needs a key) and recent news (Google News) for the text.
+
+    Neither result is a verdict of this system: fact-checks carry each fact-checker's own rating,
+    and news results only show whether outlets report something with the same key words.
+    """
+    from .factcheck_search import factcheck_search
+    from .news_search import recent_news
+    request, language = english(request)
+    return {'factchecks': factcheck_search(request.text), 'news': recent_news(request.text),
+            'analyzed_text': request.text, **language}
+
+
 @app.get('/verification-metrics')
 def verification_metrics():
     import json

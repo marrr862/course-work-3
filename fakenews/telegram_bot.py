@@ -7,9 +7,11 @@
 The bot uses long polling (no public server or webhook needed) and calls the same
 FastAPI endpoints as the web interface, in-process. Messages are not stored.
 """
+import fcntl
 import html
 import os
 import re
+import sys
 import time
 from pathlib import Path
 import httpx
@@ -234,6 +236,26 @@ def reply_for(text, analyzer):
     return problem or analyzer.news(headline, url)
 
 
+ALREADY_RUNNING = 3  # exit code: tools/bot_forever.command stops restarting on it
+
+
+def single_instance_lock(path=None):
+    """Hold an exclusive lock for the bot's lifetime; None if another copy already holds it.
+
+    Two copies polling the same token both receive every message and both answer it.
+    The operating system releases the lock when the process ends, even after a crash.
+    """
+    handle = open(path or ROOT / '.telegram_bot.lock', 'w')
+    try:
+        fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        handle.close()
+        return None
+    handle.write(str(os.getpid()))
+    handle.flush()
+    return handle
+
+
 def load_token():
     token = os.environ.get('TELEGRAM_BOT_TOKEN')
     env = ROOT / '.env'
@@ -247,6 +269,11 @@ def load_token():
 
 
 def main():
+    lock = single_instance_lock()
+    if lock is None:
+        print('The bot is already running in another window. Close that copy first (Ctrl+C) '
+              'or keep using it; a second copy would answer every message twice.', flush=True)
+        sys.exit(ALREADY_RUNNING)
     token = load_token()
     api = f'https://api.telegram.org/bot{token}'
     http = httpx.Client(timeout=40)
@@ -267,9 +294,14 @@ def main():
     offset = None
     while True:
         try:
-            updates = http.get(f'{api}/getUpdates', params={'timeout': 30, 'offset': offset}).json().get('result', [])
-        except httpx.HTTPError:
+            reply = http.get(f'{api}/getUpdates', params={'timeout': 30, 'offset': offset}).json()
+        except (httpx.HTTPError, ValueError):
             time.sleep(3); continue
+        if reply.get('error_code') == 409:  # the same token is polled elsewhere, e.g. on another computer
+            print('Telegram reports another copy of this bot running (maybe on another computer). '
+                  'Stop it, otherwise messages are split between the copies.', flush=True)
+            time.sleep(10); continue
+        updates = reply.get('result', [])
         for upd in updates:
             offset = upd['update_id'] + 1
             msg = upd.get('message') or upd.get('edited_message')

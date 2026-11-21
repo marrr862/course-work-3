@@ -156,3 +156,17 @@ def test_malformed_online_response_is_safe(monkeypatch, payload):
     result = EvidenceLookup().search('A new unknown claim', online=True)
     assert result['correction'] is None
     assert result['online_status'] in ['service_unavailable', 'no_results']
+
+
+def test_current_endpoint_returns_factchecks_and_news(monkeypatch):
+    monkeypatch.setattr('fakenews.factcheck_search.factcheck_search', lambda text: {'available': True, 'reviews': [], 'summary': None, 'error': None, 'seen': text})
+    monkeypatch.setattr('fakenews.news_search.recent_news', lambda text: {'available': True, 'articles': [], 'query': text, 'error': None})
+    data = client.post('/current', json={'text': 'Mars has no moons.'}).json()
+    assert data['factchecks']['seen'] == 'Mars has no moons.' and data['news']['query'] == 'Mars has no moons.'
+    assert data['analyzed_text'] == 'Mars has no moons.'
+
+
+def test_page_has_fresh_data_section_and_hides_unconfirmed_sources():
+    page = client.get('/').text
+    assert 'id="currentResult"' in page and "fetch('/current'" in page
+    assert 'decisive.has(claim.status)' in page

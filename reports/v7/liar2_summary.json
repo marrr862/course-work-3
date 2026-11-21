@@ -1,0 +1,154 @@
+{
+  "results": [
+    {
+      "experiment": "E1 original LIAR test",
+      "features": "-",
+      "training": "majority class",
+      "C": null,
+      "train_rows": 10212,
+      "test_rows": 1262,
+      "val_macro_f1": null,
+      "test_accuracy": 0.2084,
+      "test_macro_f1": 0.0575,
+      "test_binary_accuracy": 0.5634
+    },
+    {
+      "experiment": "E1 original LIAR test",
+      "features": "claim",
+      "training": "LIAR train",
+      "C": 4,
+      "train_rows": 10212,
+      "test_rows": 1262,
+      "val_macro_f1": 0.2666,
+      "test_accuracy": 0.248,
+      "test_macro_f1": 0.2484,
+      "test_binary_accuracy": 0.6149
+    },
+    {
+      "experiment": "E1 original LIAR test",
+      "features": "claim",
+      "training": "LIAR train + LIAR2 new",
+      "C": 0.5,
+      "train_rows": 20634,
+      "test_rows": 1262,
+      "val_macro_f1": 0.2601,
+      "test_accuracy": 0.2266,
+      "test_macro_f1": 0.2266,
+      "test_binary_accuracy": 0.6006
+    },
+    {
+      "experiment": "E1 original LIAR test",
+      "features": "claim + metadata",
+      "training": "LIAR train",
+      "C": 0.5,
+      "train_rows": 10212,
+      "test_rows": 1262,
+      "val_macro_f1": 0.2739,
+      "test_accuracy": 0.248,
+      "test_macro_f1": 0.2478,
+      "test_binary_accuracy": 0.6371
+    },
+    {
+      "experiment": "E1 original LIAR test",
+      "features": "claim + metadata",
+      "training": "LIAR train + LIAR2 new",
+      "C": 4,
+      "train_rows": 20634,
+      "test_rows": 1262,
+      "val_macro_f1": 0.2728,
+      "test_accuracy": 0.229,
+      "test_macro_f1": 0.2321,
+      "test_binary_accuracy": 0.6284
+    },
+    {
+      "experiment": "E2 recent claims 2022-07..2023-07",
+      "features": "-",
+      "training": "majority class (LIAR2 until 2021)",
+      "C": null,
+      "train_rows": 20419,
+      "test_rows": 1611,
+      "val_macro_f1": null,
+      "test_accuracy": 0.5642,
+      "test_macro_f1": 0.1202,
+      "test_binary_accuracy": 0.869
+    },
+    {
+      "experiment": "E2 recent claims 2022-07..2023-07",
+      "features": "claim",
+      "training": "old LIAR only (2007-2016)",
+      "C": 1,
+      "train_rows": 10206,
+      "test_rows": 1611,
+      "val_macro_f1": 0.1792,
+      "test_accuracy": 0.2272,
+      "test_macro_f1": 0.1851,
+      "test_binary_accuracy": 0.6605
+    },
+    {
+      "experiment": "E2 recent claims 2022-07..2023-07",
+      "features": "claim",
+      "training": "LIAR2 until 2021",
+      "C": 2,
+      "train_rows": 20419,
+      "test_rows": 1611,
+      "val_macro_f1": 0.3038,
+      "test_accuracy": 0.4221,
+      "test_macro_f1": 0.2938,
+      "test_binary_accuracy": 0.8312
+    },
+    {
+      "experiment": "E2 recent claims 2022-07..2023-07",
+      "features": "claim + metadata",
+      "training": "old LIAR only (2007-2016)",
+      "C": 0.25,
+      "train_rows": 10206,
+      "test_rows": 1611,
+      "val_macro_f1": 0.1856,
+      "test_accuracy": 0.2458,
+      "test_macro_f1": 0.201,
+      "test_binary_accuracy": 0.779
+    },
+    {
+      "experiment": "E2 recent claims 2022-07..2023-07",
+      "features": "claim + metadata",
+      "training": "LIAR2 until 2021",
+      "C": 4,
+      "train_rows": 20419,
+      "test_rows": 1611,
+      "val_macro_f1": 0.344,
+      "test_accuracy": 0.5034,
+      "test_macro_f1": 0.3216,
+      "test_binary_accuracy": 0.879
+    }
+  ],
+  "notes": {
+    "E1": {
+      "liar2_rows_exactly_in_liar_heldout": 2491,
+      "liar2_near_duplicates_of_heldout_removed": 4,
+      "near_threshold": 0.6,
+      "liar2_new_claims_added": 10422
+    },
+    "E2": {
+      "train_until": "2021-12-31",
+      "valid": "2022-01..2022-06",
+      "test": "2022-07..2023-07",
+      "rows": {
+        "train": 20419,
+        "valid": 883,
+        "test": 1611
+      },
+      "near_duplicates_of_recent_removed": {
+        "liar2_train": 9,
+        "old_liar": 6
+      },
+      "test_label_share": {
+        "false": 0.564,
+        "pants-fire": 0.213,
+        "barely-true": 0.092,
+        "mostly-true": 0.056,
+        "half-true": 0.054,
+        "true": 0.021
+      }
+    }
+  }
+}

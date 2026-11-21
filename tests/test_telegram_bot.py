@@ -123,3 +123,14 @@ def test_bot_passes_english_text_to_news_search():
         return {'available': True, 'articles': []}
     reply_for('Mars has no moons.', Analyzer(StubClient(), news_search=fake_search))
     assert seen == ['Mars has no moons.']
+
+
+def test_second_bot_copy_cannot_take_the_lock(tmp_path):
+    from fakenews.telegram_bot import single_instance_lock
+    first = single_instance_lock(tmp_path / 'bot.lock')
+    assert first is not None
+    assert single_instance_lock(tmp_path / 'bot.lock') is None
+    first.close()  # the first copy exits
+    again = single_instance_lock(tmp_path / 'bot.lock')
+    assert again is not None
+    again.close()

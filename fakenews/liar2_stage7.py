@@ -36,12 +36,31 @@ OUT = ROOT / 'reports/v7'
 LABELS = ['pants-fire', 'false', 'barely-true', 'half-true', 'mostly-true', 'true']
 TRUEISH = {'half-true', 'mostly-true', 'true'}
 C_GRID = [0.25, 0.5, 1, 2, 4]
+NEAR = 0.6  # near-duplicate threshold (TF-IDF cosine) for keeping held-out claims out of training
 LIAR_COLUMNS = ['id', 'label', 'statement', 'subject', 'speaker', 'job', 'state', 'party',
                 'bt', 'f', 'ht', 'mt', 'pof', 'context']
 
 
 def norm_key(text):
-    return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]', ' ', str(text).lower())).strip()
+    # Letters and digits only: LIAR dropped apostrophes ("Hes") where LIAR2 kept them ("He's").
+    return re.sub(r'[^a-z0-9]', '', str(text).lower())
+
+
+def drop_near(pool, reference, threshold=NEAR):
+    """Remove pool claims whose TF-IDF cosine to any reference claim is >= threshold."""
+    if pool.empty or reference.empty:
+        return pool, 0
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2), sublinear_tf=True).fit(pd.concat([pool.text, reference.text]))
+    similarity = vectorizer.transform(pool.text) @ vectorizer.transform(reference.text).T
+    nearest = np.asarray(similarity.max(axis=1).todense()).ravel()
+    keep = nearest < threshold
+    return pool[keep], int((~keep).sum())
+
+
+def majority(train, test):
+    label = train.label.value_counts().idxmax()
+    return {'C': None, 'train_rows': len(train), 'test_rows': len(test), 'val': {'macro_f1': None},
+            'test': scores(test.label, [label] * len(test))}
 
 
 def load_liar():
@@ -109,8 +128,11 @@ def experiments():
     train_l = liar[liar.split == 'train']
     valid_l, test_l = liar[liar.split == 'valid'], liar[liar.split == 'test']
     extra = liar2[~liar2.key.isin(known)]                       # claims LIAR does not have at all
-    notes['E1'] = {'liar2_rows_removed_as_heldout_overlap': int(liar2.key.isin(heldout).sum()),
+    extra, near_removed = drop_near(extra, liar[liar.split != 'train'])
+    notes['E1'] = {'liar2_rows_exactly_in_liar_heldout': int(liar2.key.isin(heldout).sum()),
+                   'liar2_near_duplicates_of_heldout_removed': near_removed, 'near_threshold': NEAR,
                    'liar2_new_claims_added': len(extra)}
+    results.append({'experiment': 'E1 original LIAR test', 'features': '-', 'training': 'majority class', **flat(majority(train_l, test_l))})
     for with_meta in (False, True):
         name = 'claim + metadata' if with_meta else 'claim'
         base, _, _ = fit_select(train_l, valid_l, test_l, with_meta)
@@ -124,9 +146,15 @@ def experiments():
     train_r = dated[dated.date < '2022-01-01']
     valid_r = dated[(dated.date >= '2022-01-01') & (dated.date < '2022-07-01')]
     test_r = dated[dated.date >= '2022-07-01']
-    old_only = liar[(liar.split == 'train') & ~liar.key.isin(set(valid_r.key) | set(test_r.key))]
+    recent = pd.concat([valid_r, test_r])
+    train_r, near_recent = drop_near(train_r, recent)
+    old_only, near_old = drop_near(liar[liar.split == 'train'], recent)
+    results.append({'experiment': 'E2 recent claims 2022-07..2023-07', 'features': '-', 'training': 'majority class (LIAR2 until 2021)',
+                    **flat(majority(train_r, test_r))})
     notes['E2'] = {'train_until': '2021-12-31', 'valid': '2022-01..2022-06', 'test': '2022-07..2023-07',
-                   'rows': {'train': len(train_r), 'valid': len(valid_r), 'test': len(test_r)}}
+                   'rows': {'train': len(train_r), 'valid': len(valid_r), 'test': len(test_r)},
+                   'near_duplicates_of_recent_removed': {'liar2_train': near_recent, 'old_liar': near_old},
+                   'test_label_share': test_r.label.value_counts(normalize=True).round(3).to_dict()}
     for with_meta in (False, True):
         name = 'claim + metadata' if with_meta else 'claim'
         old, _, _ = fit_select(old_only, valid_r, test_r, with_meta)
@@ -139,13 +167,13 @@ def experiments():
 
 def flat(run):
     return {'C': run['C'], 'train_rows': run['train_rows'], 'test_rows': run['test_rows'],
-            'val_macro_f1': run['val']['macro_f1'], **{f'test_{k}': v for k, v in run['test'].items()}}
+            'val_macro_f1': run['val'].get('macro_f1'), **{f'test_{k}': v for k, v in run['test'].items()}}
 
 
 def build(data):
     """Deployable model: claim text only, trained on every claim outside our LIAR validation/test."""
     liar, liar2, extra, heldout = data
-    pool = pd.concat([liar[liar.split == 'train'], extra])
+    pool = pd.concat([liar[liar.split == 'train'], extra])  # extra is already free of near-duplicates of LIAR valid/test
     valid = liar[liar.split == 'valid']
     run, model, vectorizers = fit_select(pool, valid, liar[liar.split == 'test'], with_meta=False)
     artifact = {'vectorizer': vectorizers[0], 'model': model, 'labels': list(model.classes_),
